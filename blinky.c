@@ -21,13 +21,18 @@
     #define LED_PORT_CLK_ENABLE     __HAL_RCC_GPIOD_CLK_ENABLE
 #endif
 
+#include "toggle.h"
+// #include "lib/gpio/toggle.h"
+
 void SysTick_Handler(void)
 {
     HAL_IncTick();
 
     // 1 Hz blinking
-    if ((HAL_GetTick() % 250) == 0)
-        HAL_GPIO_TogglePin(LED_PORT, LED_PIN);
+    if ((HAL_GetTick() % 250) == 0){
+        TogglePin();
+    }
+        // HAL_GPIO_TogglePin(LED_PORT, LED_PIN);
 }
 
 void initGPIO()
