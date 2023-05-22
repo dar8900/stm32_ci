@@ -27,6 +27,7 @@ find_package(HAL COMPONENTS "${HAL_COMP_LIST}" REQUIRED)
 # find_package(HAL REQUIRED)
 
 include_directories(
+    src
     inc
 )
 
@@ -34,7 +35,7 @@ add_subdirectory(lib)
 
 
 set(SOURCES
-    blinky.c
+    src/main.c
 )
 
 add_executable("${EXECUTABLE_NAME}" "${SOURCES}" "${HEADERS}")
