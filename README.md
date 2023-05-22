@@ -33,5 +33,5 @@ This project is licensed under the MIT License. Please see the LICENSE file for 
 Special thanks to **ObKo** for providing the STM32 CMake library, which simplifies the build process for STM32 embedded applications.
 
 ## Resources
-[STM32 Cube FW](https://github.com/STMicroelectronics)
-[ObKo's CMake Library](https://github.com/ObKo/stm32-cmake)
+- [STM32 Cube FW](https://github.com/STMicroelectronics)
+- [ObKo's CMake Library](https://github.com/ObKo/stm32-cmake)
