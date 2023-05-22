@@ -1,13 +1,15 @@
 
+set(LIBRARY_NAME "gpio_manager")
+
 include_directories(
 	../../inc
 )
 
-add_library(toggle STATIC
-	toggle.c
+add_library("${LIBRARY_NAME}" STATIC
+	gpio_manager.c
 )
 
-target_link_libraries(toggle PUBLIC
+target_link_libraries("${LIBRARY_NAME}" PUBLIC
     HAL::STM32::${STM32_FAMILY}::GPIO
     CMSIS::STM32::${STM32_TYPE}
 )

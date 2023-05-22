@@ -35,6 +35,7 @@ add_subdirectory(lib)
 
 
 set(SOURCES
+    src/stm32f1xx_it.c
     src/main.c
 )
 
@@ -46,7 +47,7 @@ target_link_libraries("${EXECUTABLE_NAME}" PUBLIC
     HAL::STM32::${STM32_FAMILY}::CORTEX
     CMSIS::STM32::${STM32_TYPE}
     STM32::Nano
-    toggle
+    gpio_manager
 )
 
 set(INCLUEDES_DIRECTORY
