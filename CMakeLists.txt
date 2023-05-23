@@ -12,8 +12,8 @@ set(HAL_COMP_LIST RCC GPIO CORTEX)
 set(CMSIS_COMP_LIST "")
 
 # set(STM32_CUBE_F1_PATH "/home/deo/Documenti/STM32/STM32CubeF1")
-list(APPEND CMSIS_COMP_LIST STM32F1)
-list(APPEND HAL_COMP_LIST STM32F1)
+list(APPEND CMSIS_COMP_LIST STM32${STM32_FAMILY})
+list(APPEND HAL_COMP_LIST STM32${STM32_FAMILY})
 
 
 find_package(CMSIS COMPONENTS "${CMSIS_COMP_LIST}" REQUIRED)
@@ -35,9 +35,10 @@ include_directories(
 
 add_subdirectory(hmt_hal)
 
+string(TOLOWER ${STM32_FAMILY} STM32_FAMILY_LOWER)
 
 set(SOURCES
-    src/stm32f1xx_it.c
+    src/stm32${STM32_FAMILY_LOWER}xx_it.c
     src/main.c
 )
 
