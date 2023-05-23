@@ -32,7 +32,10 @@ test_url()
 
 CONF_FILE=$1
 CONTRIB_FOLDER="contrib"
+OBKO_GIT_REPO="https://github.com/ObKo/stm32-cmake"
+OBKO_CMAKE_DIR="./$CONTRIB_FOLDER/obko_stm32cmake"
 ST_CUBE_DIR="st_cube"
+SRC_DIR="$PWD"
 
 if [ ! -z "$CONF_FILE" ] && [ -f "$CONF_FILE" ];then
 	source "$CONF_FILE"
@@ -41,6 +44,23 @@ if [ ! -z "$CONF_FILE" ] && [ -f "$CONF_FILE" ];then
 else
 	print_message "Config file not present" error
 	exit 1
+fi
+
+if [ ! -d "$OBKO_CMAKE_DIR" ];then
+	test_url "$OBKO_GIT_REPO"
+	URL_RET=$?
+	if [ "$URL_RET" -ne 0 ];then
+		print_message "Obko url not valid" error
+		exit 1
+	fi
+	print_message "Cloning repo $OBKO_GIT_REPO to $OBKO_CMAKE_DIR..." info
+	git clone "$OBKO_GIT_REPO" "$OBKO_CMAKE_DIR" 1>/dev/null 2>/dev/null
+	cd "$OBKO_CMAKE_DIR"
+	# Get latest tag name
+	latestTag=$(git describe --tags `git rev-list --tags --max-count=1`)
+	# Checkout latest tag
+	git checkout $latestTag 1>/dev/null 2>/dev/null
+	cd "$SRC_DIR"	
 fi
 
 if [ ! -d "./$ST_CUBE_DIR/STM32Cube$STM_FAMILY" ];then
@@ -57,10 +77,16 @@ if [ ! -d "./$ST_CUBE_DIR/STM32Cube$STM_FAMILY" ];then
 	fi
 
 	print_message "Cloning repo $CUBE_GIT_REPO to $ST_CUBE_DIR/STM32Cube$STM_FAMILY..." info
-	git clone "$CUBE_GIT_REPO" "./$ST_CUBE_DIR/STM32Cube$STM_FAMILY"
+	git clone "$CUBE_GIT_REPO" "./$ST_CUBE_DIR/STM32Cube$STM_FAMILY" 1>/dev/null 2>/dev/null
+	cd "./$ST_CUBE_DIR/STM32Cube$STM_FAMILY"
+	# Get latest tag name
+	latestTag=$(git describe --tags `git rev-list --tags --max-count=1`)
+	# Checkout latest tag
+	git checkout $latestTag 1>/dev/null 2>/dev/null
+	cd "$SRC_DIR"
 fi
 
-CMAKE_TOOLCHAIN="./$CONTRIB_FOLDER/obko_stm32cmake/cmake/stm32_gcc.cmake"
+CMAKE_TOOLCHAIN="$OBKO_CMAKE_DIR/cmake/stm32_gcc.cmake"
 CUBE_DRIVERS="./$ST_CUBE_DIR/STM32Cube$STM_FAMILY"
 
 if [ -z "$BUILD_TYPE" ];then
@@ -91,7 +117,6 @@ print_message "Build folder is \"$BUILD_DIR\"" info
 
 mkdir -p "$BUILD_DIR"
 
-SRC_DIR="$PWD"
 
 cd "$BUILD_DIR"	
 
