@@ -13,15 +13,20 @@ Before getting started, ensure you have the following prerequisites:
 
 ## Getting Started
 To begin using this project, follow these steps:
-
+- Write your configuration file **build_conf.conf** using the template file under the **template** dir
+- Launch the build with the script **launch_cmake.sh**
 
 
 
 ## Customization
 This project is structured to provide a basic template for STM32 development. You can customize it to fit your specific requirements:
+- Add STCube HAL drivers for your application in **st_cube** dir
 - Modify the CMakeLists.txt file to include additional source files, libraries, or configuration settings.
 - Add your source code files to the src directory.
 - Adjust the project-specific settings
+	* Add your `stm32<family>xx_hal_conf.h` under **inc** folder
+	* Add your `stm32<family>xx_it.h` under **inc** folder and your `stm32<family>xx_it.c` under **src** folder
+	* In `main.h` add the `#include <stm32<family>xx_hal.h>` for your application
 
 ## Contributing
 Contributions to this project are welcome! If you find any issues or have suggestions for improvements, please submit them via GitHub's issue tracker. Feel free to fork the repository and submit pull requests with your enhancements.

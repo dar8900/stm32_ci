@@ -25,4 +25,6 @@
     #define LED_PORT_CLK_ENABLE     __HAL_RCC_GPIOD_CLK_ENABLE
 #endif
 
+#include "gpio_manager.h"
+
 #endif

@@ -1,5 +1,5 @@
 #include "main.h"
-#include "gpio_manager.h"
+
 
 void initGPIO()
 {

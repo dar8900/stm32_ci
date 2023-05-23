@@ -3,6 +3,8 @@ cmake_minimum_required(VERSION 3.16)
 
 set(EXECUTABLE_NAME "simple_blinky")
 
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+
 project(stm32-blinky C ASM)
 set(CMAKE_INCLUDE_CURRENT_DIR TRUE)
 
@@ -31,7 +33,7 @@ include_directories(
     inc
 )
 
-add_subdirectory(lib)
+add_subdirectory(hmt_hal)
 
 
 set(SOURCES
@@ -52,8 +54,8 @@ target_link_libraries("${EXECUTABLE_NAME}" PUBLIC
 
 set(INCLUEDES_DIRECTORY
     "${PROJECT_BINARY_DIR}"
-    "${PROJECT_SOURCE_DIR}/lib"
-    "${PROJECT_SOURCE_DIR}/lib/gpio"  
+    "${PROJECT_SOURCE_DIR}/hmt_hal"
+    "${PROJECT_SOURCE_DIR}/hmt_hal/gpio"  
 )
 
 target_include_directories("${EXECUTABLE_NAME}" PUBLIC
