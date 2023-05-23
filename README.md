@@ -7,7 +7,7 @@ Before getting started, ensure you have the following prerequisites:
 - STM32 microcontroller board
 - Toolchain for STM32 development (e.g., GCC Arm Embedded)
 	* For **debian** based distro, install with `sudo apt install gcc-arm-none-eabi`
-	* For **arch linux** based distro, install with `sudo pacman -Sy arm-none-eabi-gcc`, or with **yay**: `yay -Sy arm-none-eabi-gcc`
+	* For **arch linux** based distro, install with `sudo pacman -Sy arm-none-eabi-gcc`, or with **yay**: `yay -Sy arm-none-eabi-gcc`. Maybe you have to install eather `arm-none-eabi-gcc-newlib`
 - CMake (version 3.20 or higher)
 - ObKo's CMake library (included as a submodule in this repository)
 - STCube Hal and CMSIS firmware git repo (automatic cloning after updating configuration file)
