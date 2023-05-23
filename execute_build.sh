@@ -30,12 +30,35 @@ test_url()
 	return 1
 }
 
+clone_repo()
+{
+	GIT_URL=$1
+	DEST_FOLDER=$2
+	ACTUAL_DIR="$PWD"
+	test_url "$GIT_URL"
+	URL_RET=$?
+	if [ "$URL_RET" -ne 0 ];then
+		print_message "Repo url $GIT_URL not valid" error
+		return 1
+	fi
+	print_message "Cloning repo $GIT_URL to $DEST_FOLDER..." info
+	git clone "$GIT_URL" "$DEST_FOLDER" 1>/dev/null 2>/dev/null
+	cd "$DEST_FOLDER"
+	# Get latest tag name
+	latestTag=$(git describe --tags `git rev-list --tags --max-count=1`)
+	# Checkout latest tag
+	git checkout $latestTag 1>/dev/null 2>/dev/null
+	cd "$ACTUAL_DIR"
+	return 0
+}
+
 CONF_FILE=$1
 CONTRIB_FOLDER="contrib"
+ST_CUBE_DIR="st_cube"
 OBKO_GIT_REPO="https://github.com/ObKo/stm32-cmake"
 OBKO_CMAKE_DIR="./$CONTRIB_FOLDER/obko_stm32cmake"
-ST_CUBE_DIR="st_cube"
 SRC_DIR="$PWD"
+CMAKE_TOOLCHAIN="$OBKO_CMAKE_DIR/cmake/stm32_gcc.cmake"
 
 if [ ! -z "$CONF_FILE" ] && [ -f "$CONF_FILE" ];then
 	source "$CONF_FILE"
@@ -46,48 +69,32 @@ else
 	exit 1
 fi
 
+print_message "Checking Obko stm32_cmake repo" info
 if [ ! -d "$OBKO_CMAKE_DIR" ];then
-	test_url "$OBKO_GIT_REPO"
-	URL_RET=$?
-	if [ "$URL_RET" -ne 0 ];then
-		print_message "Obko url not valid" error
+	clone_repo "$OBKO_GIT_REPO" "$OBKO_CMAKE_DIR"
+	RET=$?
+	if [ "$RET" -eq 1 ];then
 		exit 1
 	fi
-	print_message "Cloning repo $OBKO_GIT_REPO to $OBKO_CMAKE_DIR..." info
-	git clone "$OBKO_GIT_REPO" "$OBKO_CMAKE_DIR" 1>/dev/null 2>/dev/null
-	cd "$OBKO_CMAKE_DIR"
-	# Get latest tag name
-	latestTag=$(git describe --tags `git rev-list --tags --max-count=1`)
-	# Checkout latest tag
-	git checkout $latestTag 1>/dev/null 2>/dev/null
-	cd "$SRC_DIR"	
 fi
 
-if [ ! -d "./$ST_CUBE_DIR/STM32Cube$STM_FAMILY" ];then
+ST_CUBE_DIR="./$ST_CUBE_DIR/STM32Cube$STM_FAMILY"
+
+if [ ! -d "$ST_CUBE_DIR" ];then
 	print_message "Checking ST Cube Driver repo for family $STM_FAMILY" info
 	if [ -z "$CUBE_GIT_REPO" ]; then
 		print_message "Insert a url for STCube Driver" error
 		exit 1
 	fi
-	test_url "$CUBE_GIT_REPO"
-	URL_RET=$?
-	if [ "$URL_RET" -ne 0 ];then
-		print_message "Insert a valid url for STCube Driver" error
+
+	ST_CUBE_DIR="./$ST_CUBE_DIR/STM32Cube$STM_FAMILY"
+
+	clone_repo "$CUBE_GIT_REPO" "$ST_CUBE_DIR"
+	RET=$?
+	if [ "$RET" -eq 1 ];then
 		exit 1
 	fi
-
-	print_message "Cloning repo $CUBE_GIT_REPO to $ST_CUBE_DIR/STM32Cube$STM_FAMILY..." info
-	git clone "$CUBE_GIT_REPO" "./$ST_CUBE_DIR/STM32Cube$STM_FAMILY" 1>/dev/null 2>/dev/null
-	cd "./$ST_CUBE_DIR/STM32Cube$STM_FAMILY"
-	# Get latest tag name
-	latestTag=$(git describe --tags `git rev-list --tags --max-count=1`)
-	# Checkout latest tag
-	git checkout $latestTag 1>/dev/null 2>/dev/null
-	cd "$SRC_DIR"
 fi
-
-CMAKE_TOOLCHAIN="$OBKO_CMAKE_DIR/cmake/stm32_gcc.cmake"
-CUBE_DRIVERS="./$ST_CUBE_DIR/STM32Cube$STM_FAMILY"
 
 if [ -z "$BUILD_TYPE" ];then
 	BUILD_DIR=build_Debug
@@ -121,7 +128,7 @@ mkdir -p "$BUILD_DIR"
 cd "$BUILD_DIR"	
 
 print_message "Run cmake" info
-cmake -DCMAKE_TOOLCHAIN_FILE="$CMAKE_TOOLCHAIN" -DSTM32_CUBE_"$STM_FAMILY"_PATH="$CUBE_DRIVERS" -DSTM32_FAMILY="$STM_FAMILY" -DSTM32_TYPE="$STM_TYPE" -DCMAKE_BUILD_TYPE="$BUILD_TYPE" "$SRC_DIR" #../
+cmake -DCMAKE_TOOLCHAIN_FILE="$CMAKE_TOOLCHAIN" -DSTM32_CUBE_"$STM_FAMILY"_PATH="$ST_CUBE_DIR" -DSTM32_FAMILY="$STM_FAMILY" -DSTM32_TYPE="$STM_TYPE" -DCMAKE_BUILD_TYPE="$BUILD_TYPE" "$SRC_DIR" #../
 
 print_message "Run make" info
 make
