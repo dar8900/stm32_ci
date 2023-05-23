@@ -56,7 +56,7 @@ if [ ! -d "./$ST_CUBE_DIR/STM32Cube$STM_FAMILY" ];then
 		exit 1
 	fi
 
-	print_message "Adding submodule..." info
+	print_message "Cloning repo $CUBE_GIT_REPO to $ST_CUBE_DIR/STM32Cube$STM_FAMILY..." info
 	git clone "$CUBE_GIT_REPO" "./$ST_CUBE_DIR/STM32Cube$STM_FAMILY"
 fi
 

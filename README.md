@@ -6,21 +6,20 @@ Before getting started, ensure you have the following prerequisites:
 
 - STM32 microcontroller board
 - Toolchain for STM32 development (e.g., GCC Arm Embedded)
-	* For **debian** user: install with `sudo apt install gcc-arm-none-eabi`
+	* For **debian** based distro, install with `sudo apt install gcc-arm-none-eabi`
+	* For **arch linux** based distro, install with `sudo pacman -Sy arm-none-eabi-gcc`, or with **yay**: `yay -Sy arm-none-eabi-gcc`
 - CMake (version 3.20 or higher)
 - ObKo's CMake library (included as a submodule in this repository)
-- STCube Hal and CMSIS firmware
+- STCube Hal and CMSIS firmware git repo (automatic cloning after updating configuration file)
 
 ## Getting Started
 To begin using this project, follow these steps:
 - Write your configuration file **build_conf.conf** using the template file under the **template** dir
-- Launch the build with the script **launch_cmake.sh**
-
-
+- Launch the build with the script **launch_cmake.sh** adding the type of your build <debug or release> (default __debug__)
 
 ## Customization
 This project is structured to provide a basic template for STM32 development. You can customize it to fit your specific requirements:
-- Add STCube HAL drivers for your application in **st_cube** dir
+- Add STCube git repo in **build_conf.conf** for your application using your stm family.
 - Modify the CMakeLists.txt file to include additional source files, libraries, or configuration settings.
 - Add your source code files to the src directory.
 - Adjust the project-specific settings
