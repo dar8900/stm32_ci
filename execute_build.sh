@@ -69,8 +69,8 @@ else
 	exit 1
 fi
 
-print_message "Checking Obko stm32_cmake repo" info
 if [ ! -d "$OBKO_CMAKE_DIR" ];then
+	print_message "Checking Obko stm32_cmake repo" info
 	clone_repo "$OBKO_GIT_REPO" "$OBKO_CMAKE_DIR"
 	RET=$?
 	if [ "$RET" -eq 1 ];then
@@ -78,18 +78,18 @@ if [ ! -d "$OBKO_CMAKE_DIR" ];then
 	fi
 fi
 
-ST_CUBE_DIR="./$ST_CUBE_DIR/STM32Cube$STM_FAMILY"
+ST_CUBE_PATH="./$ST_CUBE_DIR/STM32Cube$STM_FAMILY"
 
-if [ ! -d "$ST_CUBE_DIR" ];then
+if [ ! -d "$ST_CUBE_PATH" ];then
 	print_message "Checking ST Cube Driver repo for family $STM_FAMILY" info
 	if [ -z "$CUBE_GIT_REPO" ]; then
 		print_message "Insert a url for STCube Driver" error
 		exit 1
 	fi
 
-	ST_CUBE_DIR="./$ST_CUBE_DIR/STM32Cube$STM_FAMILY"
+	ST_CUBE_PATH="./$ST_CUBE_DIR/STM32Cube$STM_FAMILY"
 
-	clone_repo "$CUBE_GIT_REPO" "$ST_CUBE_DIR"
+	clone_repo "$CUBE_GIT_REPO" "$ST_CUBE_PATH"
 	RET=$?
 	if [ "$RET" -eq 1 ];then
 		exit 1
@@ -99,7 +99,6 @@ fi
 if [ -z "$BUILD_TYPE" ];then
 	BUILD_DIR=build_Debug
 	BUILD_TYPE=Debug
-
 else
 	if [ "$BUILD_TYPE" == "debug" ];then
 		BUILD_DIR=build_Debug
@@ -114,6 +113,7 @@ else
 fi
 
 if [ -d "$BUILD_DIR" ];then
+	print_message "Clean build dir" info
 	rm -rf "$BUILD_DIR"
 fi
 
@@ -128,7 +128,7 @@ mkdir -p "$BUILD_DIR"
 cd "$BUILD_DIR"	
 
 print_message "Run cmake" info
-cmake -DCMAKE_TOOLCHAIN_FILE="$CMAKE_TOOLCHAIN" -DSTM32_CUBE_"$STM_FAMILY"_PATH="$ST_CUBE_DIR" -DSTM32_FAMILY="$STM_FAMILY" -DSTM32_TYPE="$STM_TYPE" -DCMAKE_BUILD_TYPE="$BUILD_TYPE" "$SRC_DIR" #../
+cmake -DCMAKE_TOOLCHAIN_FILE="$CMAKE_TOOLCHAIN" -DSTM32_CUBE_"$STM_FAMILY"_PATH="$ST_CUBE_PATH" -DSTM32_FAMILY="$STM_FAMILY" -DSTM32_TYPE="$STM_TYPE" -DCMAKE_BUILD_TYPE="$BUILD_TYPE" "$SRC_DIR" #../
 
 print_message "Run make" info
 make
