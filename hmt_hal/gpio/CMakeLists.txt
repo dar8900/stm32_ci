@@ -5,7 +5,7 @@ include_directories(
 	../../inc
 )
 
-add_library("${LIBRARY_NAME}" STATIC
+add_library("${LIBRARY_NAME}" 
 	gpio_manager.c
 )
 
