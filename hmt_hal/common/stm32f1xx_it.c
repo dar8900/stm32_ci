@@ -18,7 +18,7 @@
 /* USER CODE END Header */
 
 /* Includes ------------------------------------------------------------------*/
-#include "main.h"
+#include "hmt_common.h"
 #include "stm32f1xx_it.h"
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
@@ -193,7 +193,7 @@ void SysTick_Handler(void)
     Gpio.pinDef.Pin = 13;
     // 1 Hz blinking
     if ((HAL_GetTick() % 250) == 0){
-        hmt_togglePin(&Gpio);
+        hmt_TogglePin(&Gpio);
     }
   /* USER CODE END SysTick_IRQn 1 */
 }

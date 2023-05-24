@@ -8,23 +8,6 @@ typedef enum gpio_value
     LOW = GPIO_PIN_RESET,
     HIGH = GPIO_PIN_SET
 }gpio_value;
-// typedef enum
-// {
-//     PORT_A = GPIOA,
-//     PORT_B = GPIOB,
-//     PORT_C = GPIOC,
-//     PORT_D = GPIOD,
-//     PORT_E = GPIOE,
-// #ifdef GPIOF
-//     PORT_F = GPIOF,
-// #endif
-// #ifdef GPIOG
-//     PORT_G = GPIOG,
-// #endif    
-// #ifdef GPIOH
-//     PORT_H = GPIOH    
-// #endif
-// }gpio_port;
 
 typedef enum gpio_pin
 {
@@ -57,6 +40,6 @@ typedef struct
 
 
 
-bool hmt_togglePin(gpio_def *Gpio);
+bool hmt_TogglePin(gpio_def *Gpio);
 
 #endif
