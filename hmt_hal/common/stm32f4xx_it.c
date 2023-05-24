@@ -191,9 +191,12 @@ void SysTick_Handler(void)
   /* USER CODE BEGIN SysTick_IRQn 1 */
     HAL_IncTick();
 
+    gpio_def Gpio;
+    Gpio.port = GPIOC;
+    Gpio.pinDef.Pin = 13;
     // 1 Hz blinking
     if ((HAL_GetTick() % 250) == 0){
-        TogglePin(GPIOC, GPIO_PIN_13);
+        hmt_togglePin(&Gpio);
     }
   /* USER CODE END SysTick_IRQn 1 */
 }

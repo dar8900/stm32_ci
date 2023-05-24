@@ -9,29 +9,15 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 project(stm32-blinky C ASM)
 set(CMAKE_INCLUDE_CURRENT_DIR TRUE)
 
-set(HAL_COMP_LIST RCC GPIO CORTEX)
-set(CMSIS_COMP_LIST "")
-
-# set(STM32_CUBE_F1_PATH "/home/deo/Documenti/STM32/STM32CubeF1")
-list(APPEND CMSIS_COMP_LIST STM32${STM32_FAMILY})
-list(APPEND HAL_COMP_LIST STM32${STM32_FAMILY})
-
-
-find_package(CMSIS COMPONENTS "${CMSIS_COMP_LIST}" REQUIRED)
-find_package(HAL COMPONENTS "${HAL_COMP_LIST}" REQUIRED)
-
 add_compile_definitions("USE_FULL_LL_DRIVER")
 
 # Find all device specific drivers:
-#find_package(HAL COMPONENTS STM32L0 STM32F1 STM32F4 REQUIRED)
-# Find drivers for all families:
-#find_package(HAL COMPONENTS RCC GPIO CORTEX REQUIRED)
-# Find LL driver:
-# find_package(HAL COMPONENTS LL_GPIO REQUIRED)
-# Find everything:
-# find_package(HAL REQUIRED)
+find_package(CMSIS COMPONENTS STM32${STM32_FAMILY} REQUIRED)
+find_package(HAL COMPONENTS STM32${STM32_FAMILY} REQUIRED)
+
 
 include_directories(
+    hmt_hal/common
     src
     inc
 )
@@ -41,7 +27,7 @@ add_subdirectory(hmt_hal)
 string(TOLOWER ${STM32_FAMILY} STM32_FAMILY_LOWER)
 
 set(SOURCES
-    src/stm32${STM32_FAMILY_LOWER}xx_it.c
+    hmt_hal/common/stm32${STM32_FAMILY_LOWER}xx_it.c
     src/main.c
 )
 

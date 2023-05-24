@@ -1,15 +1,7 @@
 #ifndef GPIO_MANAGER_H
 #define GPIO_MANAGER_H
 
-#if defined STM32F1
-    #include <stm32f1xx_hal.h>
-    #include <stm32f1xx_ll_gpio.h>
-#endif
-#if defined STM32F4
-    #include <stm32f4xx_hal.h>
-#endif
-#include <stdint.h>
-#include <stdbool.h>
+#include "hmt_common.h"
 
 typedef enum gpio_value
 {

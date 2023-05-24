@@ -2,7 +2,7 @@
 set(LIBRARY_NAME "gpio_manager")
 
 include_directories(
-	../../inc
+    ../common
 )
 
 add_library("${LIBRARY_NAME}" 

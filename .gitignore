@@ -1,6 +1,6 @@
 build
 build_Debug
 build_Release
-build_conf.conf
+build_*.conf
 .vscode
 compile_commands.json
