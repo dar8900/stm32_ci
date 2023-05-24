@@ -5,6 +5,7 @@ set(EXECUTABLE_NAME "simple_blinky")
 
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
+
 project(stm32-blinky C ASM)
 set(CMAKE_INCLUDE_CURRENT_DIR TRUE)
 
@@ -18,6 +19,8 @@ list(APPEND HAL_COMP_LIST STM32${STM32_FAMILY})
 
 find_package(CMSIS COMPONENTS "${CMSIS_COMP_LIST}" REQUIRED)
 find_package(HAL COMPONENTS "${HAL_COMP_LIST}" REQUIRED)
+
+add_compile_definitions("USE_FULL_LL_DRIVER")
 
 # Find all device specific drivers:
 #find_package(HAL COMPONENTS STM32L0 STM32F1 STM32F4 REQUIRED)
