@@ -190,7 +190,7 @@ void SysTick_Handler(void)
     HAL_IncTick();
     gpio_def Gpio;
     Gpio.port = GPIOC;
-    Gpio.pinDef.Pin = 13;
+    Gpio.pin = 13;
     // 1 Hz blinking
     if ((HAL_GetTick() % 250) == 0){
         hmt_TogglePin(&Gpio);
