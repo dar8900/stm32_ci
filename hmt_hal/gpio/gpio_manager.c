@@ -1,5 +1,8 @@
 #include "gpio_manager.h"
 
+
+
+
 static gpio_value ValueToDigital(uint32_t Val)
 {
     gpio_value NewVal = LOW;
@@ -11,6 +14,11 @@ static gpio_value ValueToDigital(uint32_t Val)
     return NewVal;
 }
 
+bool hmt_InitGpio(gpio_def *Gpio)
+{
+    LL_GPIO_Init(Gpio->port, &Gpio->pinDef);
+    
+}
 
 bool hmt_TogglePin(gpio_def *Gpio)
 {
