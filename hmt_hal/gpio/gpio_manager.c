@@ -16,6 +16,8 @@ static gpio_value ValueToDigital(uint32_t Val)
 
 bool hmt_InitGpio(gpio_def *Gpio)
 {
+    fo
+
     // LL_GPIO_Init(Gpio->port, &Gpio->pinDef);
     
 }

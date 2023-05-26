@@ -6,7 +6,8 @@ include_directories(
 )
 
 add_library("${LIBRARY_NAME}" 
-	gpio_manager.c
+	gpio_defs.c
+    gpio_manager.c
 )
 
 target_link_libraries("${LIBRARY_NAME}" PUBLIC

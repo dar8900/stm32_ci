@@ -41,22 +41,22 @@ typedef enum gpio_value
 
 typedef enum gpio_pin
 {
-    IO_PIN_0  =  LL_GPIO_PIN_0,
-    IO_PIN1   =  LL_GPIO_PIN_1,
-    IO_PIN2   =  LL_GPIO_PIN_2,
-    IO_PIN3   =  LL_GPIO_PIN_3,
-    IO_PIN4   =  LL_GPIO_PIN_4,
-    IO_PIN5   =  LL_GPIO_PIN_5,
-    IO_PIN6   =  LL_GPIO_PIN_6,
-    IO_PIN7   =  LL_GPIO_PIN_7,
-    IO_PIN8   =  LL_GPIO_PIN_8,
-    IO_PIN9   =  LL_GPIO_PIN_9,
-    IO_PIN10  =  LL_GPIO_PIN_10,
-    IO_PIN11  =  LL_GPIO_PIN_11,
-    IO_PIN12  =  LL_GPIO_PIN_12,
-    IO_PIN13  =  LL_GPIO_PIN_13,
-    IO_PIN14  =  LL_GPIO_PIN_14,
-    IO_PIN15  =  LL_GPIO_PIN_15,
+    IO_PIN_0   =  LL_GPIO_PIN_0,
+    IO_PIN_1   =  LL_GPIO_PIN_1,
+    IO_PIN_2   =  LL_GPIO_PIN_2,
+    IO_PIN_3   =  LL_GPIO_PIN_3,
+    IO_PIN_4   =  LL_GPIO_PIN_4,
+    IO_PIN_5   =  LL_GPIO_PIN_5,
+    IO_PIN_6   =  LL_GPIO_PIN_6,
+    IO_PIN_7   =  LL_GPIO_PIN_7,
+    IO_PIN_8   =  LL_GPIO_PIN_8,
+    IO_PIN_9   =  LL_GPIO_PIN_9,
+    IO_PIN_10  =  LL_GPIO_PIN_10,
+    IO_PIN_11  =  LL_GPIO_PIN_11,
+    IO_PIN_12  =  LL_GPIO_PIN_12,
+    IO_PIN_13  =  LL_GPIO_PIN_13,
+    IO_PIN_14  =  LL_GPIO_PIN_14,
+    IO_PIN_15  =  LL_GPIO_PIN_15,
     IO_MAX_PIN = 17
 }gpio_pin;
 
@@ -68,10 +68,21 @@ typedef struct
     uint32_t                speed;       
     uint32_t                outputType;  
     uint32_t                pull;
-    uint32_t                alternate;                 
+    uint32_t                alternate;
+    gpio_value              active_level;                 
     gpio_value              actualVal;
     gpio_value              oldVal;
 }gpio_def;
+
+
+#define N_PORT           8 /* A B C D E F G H */
+#define N_PIN_X_PORT    16
+#define MAX_GPIO        (N_PORT * N_PIN_X_PORT)
+
+#define ADD_GPIO_TO_TAB(port, pin)      {GPIO##port, P##port##_##pin##_PIN, \
+                                        P##port##_##pin##_MODE, P##port##_##pin##_SPEED,\
+                                        P##port##_##pin##_OUTPUT, P##port##_##pin##_PULL_TYPE, 0, \
+                                        HIGH, LOW, LOW}
 
 /* PORT A */
 
