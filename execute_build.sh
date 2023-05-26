@@ -130,10 +130,24 @@ cd "$BUILD_DIR"
 print_message "Run cmake" info
 cmake -DCMAKE_TOOLCHAIN_FILE="$CMAKE_TOOLCHAIN" -DSTM32_CUBE_"$STM_FAMILY"_PATH="$ST_CUBE_PATH" -DSTM32_FAMILY="$STM_FAMILY" -DSTM32_TYPE="$STM_TYPE" -DCMAKE_BUILD_TYPE="$BUILD_TYPE" "$SRC_DIR" #../
 
+CMAKE_RET=$?
+if [ "$CMAKE_RET" -ne 0 ]; then
+	print_message "CMake FAILED" error
+	exit 1
+else
+	print_message "CMake DONE!" ok
+fi
+
 print_message "Run make" info
 make
 
-print_message "All done!" ok
+MAKE_RET=$?
+if [ "$MAKE_RET" -ne 0 ]; then
+	print_message "Build FAILED" error
+	exit 1
+else
+	print_message "Build DONE!" ok
+fi
 
 print_message "Exporting compile_commands.json" info
 
@@ -142,7 +156,7 @@ mv "$BUILD_DIR/compile_commands.json" "$SRC_DIR" 2>/dev/null
 MV_RET=$?
 
 if [ "$MV_RET" -eq 0 ];then
-	print_message "Export done!" ok
+	print_message "Export DONE!" ok
 else
-	print_message "File not exported" error
+	print_message "Export FAILED" error
 fi
