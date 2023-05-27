@@ -18,6 +18,7 @@ find_package(HAL COMPONENTS STM32${STM32_FAMILY} REQUIRED)
 
 include_directories(
     hmt_hal/common
+    hmt_hal/gpio
     src
     inc
 )
@@ -39,6 +40,7 @@ target_link_libraries("${EXECUTABLE_NAME}" PUBLIC
     HAL::STM32::${STM32_FAMILY}::CORTEX
     CMSIS::STM32::${STM32_TYPE}
     STM32::Nano
+    common_func
     gpio_manager
 )
 
@@ -48,9 +50,9 @@ set(INCLUEDES_DIRECTORY
     "${PROJECT_SOURCE_DIR}/hmt_hal/gpio"  
 )
 
-target_include_directories("${EXECUTABLE_NAME}" PUBLIC
-    "${INCLUEDES_DIRECTORY}"
-)
+# target_include_directories("${EXECUTABLE_NAME}" PUBLIC
+#     "${INCLUEDES_DIRECTORY}"
+# )
 
 stm32_print_size_of_target("${EXECUTABLE_NAME}")
 

@@ -3,4 +3,7 @@
 
 
 
-const gpio_def GpioTab[MAX_GPIO];
+const gpio_def GpioTab[MAX_GPIO] = 
+{
+	
+};

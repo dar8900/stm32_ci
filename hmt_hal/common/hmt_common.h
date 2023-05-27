@@ -15,6 +15,11 @@
 #include <stdint.h>
 #include <stdbool.h>
 
+// #ifndef PROJECT_BOARD
+// #warning "project_board.h not defined, using default gpio configuration"
+// #else
+#include "project_board.h"
+// #endif
 
 
 #endif
