@@ -18,6 +18,7 @@ find_package(HAL COMPONENTS STM32${STM32_FAMILY} REQUIRED)
 
 include_directories(
     hmt_hal/common
+    hmt_hal/rcc
     hmt_hal/gpio
     src
     inc
@@ -41,6 +42,7 @@ target_link_libraries("${EXECUTABLE_NAME}" PUBLIC
     CMSIS::STM32::${STM32_TYPE}
     STM32::Nano
     common_func
+    rcc_manager
     gpio_manager
 )
 

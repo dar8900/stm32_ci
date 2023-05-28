@@ -14,11 +14,44 @@ static gpio_value ValueToDigital(uint32_t Val)
     return NewVal;
 }
 
-bool hmt_InitGpio(gpio_def *Gpio)
+bool hmt_InitGpio(const gpio_def *Gpio)
 {
-    
 
-    // LL_GPIO_Init(Gpio->port, &Gpio->pinDef);
+    LL_GPIO_InitTypeDef InitStruct = {0};
+    InitStruct.Pin = Gpio->pin;
+    InitStruct.Mode = Gpio->mode;
+    InitStruct.Speed = Gpio->speed;
+    InitStruct.OutputType = Gpio->outputType;
+    InitStruct.Pull = Gpio->pull;
+
+    if(Gpio->port == GPIOA){
+        __HAL_RCC_GPIOA_CLK_ENABLE();
+    } else if (Gpio->port == GPIOB){
+        __HAL_RCC_GPIOB_CLK_ENABLE();
+    } else if (Gpio->port == GPIOC){
+        __HAL_RCC_GPIOC_CLK_ENABLE();
+    } else if (Gpio->port == GPIOD){
+        __HAL_RCC_GPIOD_CLK_ENABLE();
+    } else if (Gpio->port == GPIOE){
+        __HAL_RCC_GPIOE_CLK_ENABLE();
+    } 
+#ifdef GPIOF
+    else if (Gpio->port == GPIOF){
+        __HAL_RCC_GPIOF_CLK_ENABLE();
+    } 
+#endif
+#ifdef GPIOG
+    else if (Gpio->port == GPIOG){
+        __HAL_RCC_GPIOG_CLK_ENABLE();
+    } 
+#endif    
+#ifdef GPIOH    
+    else if (Gpio->port == GPIOH){
+        __HAL_RCC_GPIOH_CLK_ENABLE();
+    }
+#endif
+
+    LL_GPIO_Init(Gpio->port, &InitStruct);
     
 }
 
@@ -42,10 +75,19 @@ bool hmt_WritePin(gpio_def *Gpio, gpio_value NewVal)
     }
     Gpio->oldVal = LL_GPIO_IsOutputPinSet(Gpio->port, Gpio->pin) == 1 ? HIGH : LOW;
     if(NewVal == HIGH){
-        LL_GPIO_SetOutputPin(Gpio->port, Gpio->pin);
+        if(Gpio->active_level == HIGH){
+            LL_GPIO_SetOutputPin(Gpio->port, Gpio->pin);
+        } else {
+            LL_GPIO_ResetOutputPin(Gpio->port, Gpio->pin);
+        }
         Writed = true;
-    } else if(NewVal == LOW) {
-        LL_GPIO_ResetOutputPin(Gpio->port, Gpio->pin);
+    } 
+    else {
+        if(Gpio->active_level == HIGH){
+            LL_GPIO_ResetOutputPin(Gpio->port, Gpio->pin);
+        } else {
+            LL_GPIO_SetOutputPin(Gpio->port, Gpio->pin);
+        }        
         Writed = true;
     }
     Gpio->actualVal = Writed ? NewVal : Gpio->oldVal;
@@ -60,5 +102,8 @@ bool hmt_ReadPin(gpio_def *Gpio)
     }
     Gpio->oldVal = Gpio->actualVal;
     Gpio->actualVal = LL_GPIO_IsInputPinSet(Gpio->port, Gpio->pin) == 1 ? HIGH : LOW;
+    if(Gpio->active_level == LOW){
+       Gpio->actualVal = Gpio->actualVal == HIGH ? LOW : HIGH;
+    }
     return Readed;
 }

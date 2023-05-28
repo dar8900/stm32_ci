@@ -3,78 +3,6 @@
 
 #include "hmt_common.h"
 
-typedef enum gpio_mode
-{
-    UNUSED = 0,
-    INPUT = LL_GPIO_MODE_INPUT,
-    OUTPUT = LL_GPIO_MODE_OUTPUT,
-    ANALOG = LL_GPIO_MODE_ANALOG,
-    ALTERNATE = LL_GPIO_MODE_ALTERNATE
-}gpio_mode;
-
-typedef enum gpio_output
-{
-    PUSH_PULL = LL_GPIO_OUTPUT_PUSHPULL,
-    OPEN_DRAIN = LL_GPIO_OUTPUT_OPENDRAIN
-}gpio_output;
-
-typedef enum gpio_input
-{
-    NO_PULL = LL_GPIO_PULL_NO,
-    PULL_UP = LL_GPIO_PULL_UP,
-    PULL_DOWN = LL_GPIO_PULL_DOWN
-}gpio_input;
-
-typedef enum gpio_speed
-{
-    SPEED_LOW = LL_GPIO_SPEED_FREQ_LOW,       
-    SPEED_MED = LL_GPIO_SPEED_FREQ_MEDIUM,    
-    SPEED_HIGH = LL_GPIO_SPEED_FREQ_HIGH,      
-    SPEED_V_HIGH = LL_GPIO_SPEED_FREQ_VERY_HIGH 
-}gpio_speed;
-
-typedef enum gpio_value
-{
-    LOW = GPIO_PIN_RESET,
-    HIGH = GPIO_PIN_SET
-}gpio_value;
-
-typedef enum gpio_pin
-{
-    IO_PIN_0   =  LL_GPIO_PIN_0,
-    IO_PIN_1   =  LL_GPIO_PIN_1,
-    IO_PIN_2   =  LL_GPIO_PIN_2,
-    IO_PIN_3   =  LL_GPIO_PIN_3,
-    IO_PIN_4   =  LL_GPIO_PIN_4,
-    IO_PIN_5   =  LL_GPIO_PIN_5,
-    IO_PIN_6   =  LL_GPIO_PIN_6,
-    IO_PIN_7   =  LL_GPIO_PIN_7,
-    IO_PIN_8   =  LL_GPIO_PIN_8,
-    IO_PIN_9   =  LL_GPIO_PIN_9,
-    IO_PIN_10  =  LL_GPIO_PIN_10,
-    IO_PIN_11  =  LL_GPIO_PIN_11,
-    IO_PIN_12  =  LL_GPIO_PIN_12,
-    IO_PIN_13  =  LL_GPIO_PIN_13,
-    IO_PIN_14  =  LL_GPIO_PIN_14,
-    IO_PIN_15  =  LL_GPIO_PIN_15,
-    IO_MAX_PIN = 17
-}gpio_pin;
-
-typedef struct 
-{
-    GPIO_TypeDef            *port;
-    uint32_t                pin;         
-    uint32_t                mode;        
-    uint32_t                speed;       
-    uint32_t                outputType;  
-    uint32_t                pull;
-    uint32_t                alternate;
-    gpio_value              active_level;                 
-    gpio_value              actualVal;
-    gpio_value              oldVal;
-}gpio_def;
-
-
 #define N_PORT           8 /* A B C D E F G H */
 #define N_PIN_X_PORT    16
 #define MAX_GPIO        (N_PORT * N_PIN_X_PORT)
@@ -89,7 +17,7 @@ typedef struct
 #define PA_0_PIN    IO_PIN_0
 
 #ifndef PA_0_MODE
-#define    PA_0_MODE    UNUSED
+#define    PA_0_MODE    NOT_USED
 #endif
 
 #ifndef PA_0_SPEED
@@ -107,7 +35,7 @@ typedef struct
 #define PA_1_PIN    IO_PIN_1
 
 #ifndef PA_1_MODE
-#define    PA_1_MODE    UNUSED
+#define    PA_1_MODE    NOT_USED
 #endif
 
 #ifndef PA_1_SPEED
@@ -125,7 +53,7 @@ typedef struct
 #define PA_2_PIN    IO_PIN_2
 
 #ifndef PA_2_MODE
-#define    PA_2_MODE    UNUSED
+#define    PA_2_MODE    NOT_USED
 #endif
 
 #ifndef PA_2_SPEED
@@ -143,7 +71,7 @@ typedef struct
 #define PA_3_PIN    IO_PIN_3
 
 #ifndef PA_3_MODE
-#define    PA_3_MODE    UNUSED
+#define    PA_3_MODE    NOT_USED
 #endif
 
 #ifndef PA_3_SPEED
@@ -161,7 +89,7 @@ typedef struct
 #define PA_4_PIN    IO_PIN_4
 
 #ifndef PA_4_MODE
-#define    PA_4_MODE    UNUSED
+#define    PA_4_MODE    NOT_USED
 #endif
 
 #ifndef PA_4_SPEED
@@ -179,7 +107,7 @@ typedef struct
 #define PA_5_PIN    IO_PIN_5
 
 #ifndef PA_5_MODE
-#define    PA_5_MODE    UNUSED
+#define    PA_5_MODE    NOT_USED
 #endif
 
 #ifndef PA_5_SPEED
@@ -197,7 +125,7 @@ typedef struct
 #define PA_6_PIN    IO_PIN_6
 
 #ifndef PA_6_MODE
-#define    PA_6_MODE    UNUSED
+#define    PA_6_MODE    NOT_USED
 #endif
 
 #ifndef PA_6_SPEED
@@ -215,7 +143,7 @@ typedef struct
 #define PA_7_PIN    IO_PIN_7
 
 #ifndef PA_7_MODE
-#define    PA_7_MODE    UNUSED
+#define    PA_7_MODE    NOT_USED
 #endif
 
 #ifndef PA_7_SPEED
@@ -233,7 +161,7 @@ typedef struct
 #define PA_8_PIN    IO_PIN_8
 
 #ifndef PA_8_MODE
-#define    PA_8_MODE    UNUSED
+#define    PA_8_MODE    NOT_USED
 #endif
 
 #ifndef PA_8_SPEED
@@ -251,7 +179,7 @@ typedef struct
 #define PA_9_PIN    IO_PIN_9
 
 #ifndef PA_9_MODE
-#define    PA_9_MODE    UNUSED
+#define    PA_9_MODE    NOT_USED
 #endif
 
 #ifndef PA_9_SPEED
@@ -269,7 +197,7 @@ typedef struct
 #define PA_10_PIN    IO_PIN_10
 
 #ifndef PA_10_MODE
-#define    PA_10_MODE    UNUSED
+#define    PA_10_MODE    NOT_USED
 #endif
 
 #ifndef PA_10_SPEED
@@ -287,7 +215,7 @@ typedef struct
 #define PA_11_PIN    IO_PIN_11
 
 #ifndef PA_11_MODE
-#define    PA_11_MODE    UNUSED
+#define    PA_11_MODE    NOT_USED
 #endif
 
 #ifndef PA_11_SPEED
@@ -305,7 +233,7 @@ typedef struct
 #define PA_12_PIN    IO_PIN_12
 
 #ifndef PA_12_MODE
-#define    PA_12_MODE    UNUSED
+#define    PA_12_MODE    NOT_USED
 #endif
 
 #ifndef PA_12_SPEED
@@ -323,7 +251,7 @@ typedef struct
 #define PA_13_PIN    IO_PIN_13
 
 #ifndef PA_13_MODE
-#define    PA_13_MODE    UNUSED
+#define    PA_13_MODE    NOT_USED
 #endif
 
 #ifndef PA_13_SPEED
@@ -341,7 +269,7 @@ typedef struct
 #define PA_14_PIN    IO_PIN_14
 
 #ifndef PA_14_MODE
-#define    PA_14_MODE    UNUSED
+#define    PA_14_MODE    NOT_USED
 #endif
 
 #ifndef PA_14_SPEED
@@ -359,7 +287,7 @@ typedef struct
 #define PA_15_PIN    IO_PIN_15
 
 #ifndef PA_15_MODE
-#define    PA_15_MODE    UNUSED
+#define    PA_15_MODE    NOT_USED
 #endif
 
 #ifndef PA_15_SPEED
@@ -379,7 +307,7 @@ typedef struct
 #define PA_0_PIN    IO_PIN_0
 
 #ifndef PB_0_MODE
-#define    PB_0_MODE    UNUSED
+#define    PB_0_MODE    NOT_USED
 #endif
 
 #ifndef PB_0_SPEED
@@ -397,7 +325,7 @@ typedef struct
 #define PA_1_PIN    IO_PIN_1
 
 #ifndef PB_1_MODE
-#define    PB_1_MODE    UNUSED
+#define    PB_1_MODE    NOT_USED
 #endif
 
 #ifndef PB_1_SPEED
@@ -415,7 +343,7 @@ typedef struct
 #define PA_2_PIN    IO_PIN_2
 
 #ifndef PB_2_MODE
-#define    PB_2_MODE    UNUSED
+#define    PB_2_MODE    NOT_USED
 #endif
 
 #ifndef PB_2_SPEED
@@ -433,7 +361,7 @@ typedef struct
 #define PA_3_PIN    IO_PIN_3
 
 #ifndef PB_3_MODE
-#define    PB_3_MODE    UNUSED
+#define    PB_3_MODE    NOT_USED
 #endif
 
 #ifndef PB_3_SPEED
@@ -451,7 +379,7 @@ typedef struct
 #define PA_4_PIN    IO_PIN_4
 
 #ifndef PB_4_MODE
-#define    PB_4_MODE    UNUSED
+#define    PB_4_MODE    NOT_USED
 #endif
 
 #ifndef PB_4_SPEED
@@ -469,7 +397,7 @@ typedef struct
 #define PA_5_PIN    IO_PIN_5
 
 #ifndef PB_5_MODE
-#define    PB_5_MODE    UNUSED
+#define    PB_5_MODE    NOT_USED
 #endif
 
 #ifndef PB_5_SPEED
@@ -487,7 +415,7 @@ typedef struct
 #define PA_6_PIN    IO_PIN_6
 
 #ifndef PB_6_MODE
-#define    PB_6_MODE    UNUSED
+#define    PB_6_MODE    NOT_USED
 #endif
 
 #ifndef PB_6_SPEED
@@ -505,7 +433,7 @@ typedef struct
 #define PA_7_PIN    IO_PIN_7
 
 #ifndef PB_7_MODE
-#define    PB_7_MODE    UNUSED
+#define    PB_7_MODE    NOT_USED
 #endif
 
 #ifndef PB_7_SPEED
@@ -523,7 +451,7 @@ typedef struct
 #define PA_8_PIN    IO_PIN_8
 
 #ifndef PB_8_MODE
-#define    PB_8_MODE    UNUSED
+#define    PB_8_MODE    NOT_USED
 #endif
 
 #ifndef PB_8_SPEED
@@ -541,7 +469,7 @@ typedef struct
 #define PA_9_PIN    IO_PIN_9
 
 #ifndef PB_9_MODE
-#define    PB_9_MODE    UNUSED
+#define    PB_9_MODE    NOT_USED
 #endif
 
 #ifndef PB_9_SPEED
@@ -559,7 +487,7 @@ typedef struct
 #define PA_10_PIN    IO_PIN_10
 
 #ifndef PB_10_MODE
-#define    PB_10_MODE    UNUSED
+#define    PB_10_MODE    NOT_USED
 #endif
 
 #ifndef PB_10_SPEED
@@ -577,7 +505,7 @@ typedef struct
 #define PA_11_PIN    IO_PIN_11
 
 #ifndef PB_11_MODE
-#define    PB_11_MODE    UNUSED
+#define    PB_11_MODE    NOT_USED
 #endif
 
 #ifndef PB_11_SPEED
@@ -595,7 +523,7 @@ typedef struct
 #define PA_12_PIN    IO_PIN_12
 
 #ifndef PB_12_MODE
-#define    PB_12_MODE    UNUSED
+#define    PB_12_MODE    NOT_USED
 #endif
 
 #ifndef PB_12_SPEED
@@ -613,7 +541,7 @@ typedef struct
 #define PA_13_PIN    IO_PIN_13
 
 #ifndef PB_13_MODE
-#define    PB_13_MODE    UNUSED
+#define    PB_13_MODE    NOT_USED
 #endif
 
 #ifndef PB_13_SPEED
@@ -631,7 +559,7 @@ typedef struct
 #define PA_14_PIN    IO_PIN_14
 
 #ifndef PB_14_MODE
-#define    PB_14_MODE    UNUSED
+#define    PB_14_MODE    NOT_USED
 #endif
 
 #ifndef PB_14_SPEED
@@ -649,7 +577,7 @@ typedef struct
 #define PA_15_PIN    IO_PIN_15
 
 #ifndef PB_15_MODE
-#define    PB_15_MODE    UNUSED
+#define    PB_15_MODE    NOT_USED
 #endif
 
 #ifndef PB_15_SPEED
@@ -669,7 +597,7 @@ typedef struct
 #define PA_0_PIN    IO_PIN_0
 
 #ifndef PC_0_MODE
-#define    PC_0_MODE    UNUSED
+#define    PC_0_MODE    NOT_USED
 #endif
 
 #ifndef PC_0_SPEED
@@ -687,7 +615,7 @@ typedef struct
 #define PA_1_PIN    IO_PIN_1
 
 #ifndef PC_1_MODE
-#define    PC_1_MODE    UNUSED
+#define    PC_1_MODE    NOT_USED
 #endif
 
 #ifndef PC_1_SPEED
@@ -705,7 +633,7 @@ typedef struct
 #define PA_2_PIN    IO_PIN_2
 
 #ifndef PC_2_MODE
-#define    PC_2_MODE    UNUSED
+#define    PC_2_MODE    NOT_USED
 #endif
 
 #ifndef PC_2_SPEED
@@ -723,7 +651,7 @@ typedef struct
 #define PA_3_PIN    IO_PIN_3
 
 #ifndef PC_3_MODE
-#define    PC_3_MODE    UNUSED
+#define    PC_3_MODE    NOT_USED
 #endif
 
 #ifndef PC_3_SPEED
@@ -741,7 +669,7 @@ typedef struct
 #define PA_4_PIN    IO_PIN_4
 
 #ifndef PC_4_MODE
-#define    PC_4_MODE    UNUSED
+#define    PC_4_MODE    NOT_USED
 #endif
 
 #ifndef PC_4_SPEED
@@ -759,7 +687,7 @@ typedef struct
 #define PA_5_PIN    IO_PIN_5
 
 #ifndef PC_5_MODE
-#define    PC_5_MODE    UNUSED
+#define    PC_5_MODE    NOT_USED
 #endif
 
 #ifndef PC_5_SPEED
@@ -777,7 +705,7 @@ typedef struct
 #define PA_6_PIN    IO_PIN_6
 
 #ifndef PC_6_MODE
-#define    PC_6_MODE    UNUSED
+#define    PC_6_MODE    NOT_USED
 #endif
 
 #ifndef PC_6_SPEED
@@ -795,7 +723,7 @@ typedef struct
 #define PA_7_PIN    IO_PIN_7
 
 #ifndef PC_7_MODE
-#define    PC_7_MODE    UNUSED
+#define    PC_7_MODE    NOT_USED
 #endif
 
 #ifndef PC_7_SPEED
@@ -813,7 +741,7 @@ typedef struct
 #define PA_8_PIN    IO_PIN_8
 
 #ifndef PC_8_MODE
-#define    PC_8_MODE    UNUSED
+#define    PC_8_MODE    NOT_USED
 #endif
 
 #ifndef PC_8_SPEED
@@ -831,7 +759,7 @@ typedef struct
 #define PA_9_PIN    IO_PIN_9
 
 #ifndef PC_9_MODE
-#define    PC_9_MODE    UNUSED
+#define    PC_9_MODE    NOT_USED
 #endif
 
 #ifndef PC_9_SPEED
@@ -849,7 +777,7 @@ typedef struct
 #define PA_10_PIN    IO_PIN_10
 
 #ifndef PC_10_MODE
-#define    PC_10_MODE    UNUSED
+#define    PC_10_MODE    NOT_USED
 #endif
 
 #ifndef PC_10_SPEED
@@ -867,7 +795,7 @@ typedef struct
 #define PA_11_PIN    IO_PIN_11
 
 #ifndef PC_11_MODE
-#define    PC_11_MODE    UNUSED
+#define    PC_11_MODE    NOT_USED
 #endif
 
 #ifndef PC_11_SPEED
@@ -885,7 +813,7 @@ typedef struct
 #define PA_12_PIN    IO_PIN_12
 
 #ifndef PC_12_MODE
-#define    PC_12_MODE    UNUSED
+#define    PC_12_MODE    NOT_USED
 #endif
 
 #ifndef PC_12_SPEED
@@ -903,7 +831,7 @@ typedef struct
 #define PA_13_PIN    IO_PIN_13
 
 #ifndef PC_13_MODE
-#define    PC_13_MODE    UNUSED
+#define    PC_13_MODE    NOT_USED
 #endif
 
 #ifndef PC_13_SPEED
@@ -921,7 +849,7 @@ typedef struct
 #define PA_14_PIN    IO_PIN_14
 
 #ifndef PC_14_MODE
-#define    PC_14_MODE    UNUSED
+#define    PC_14_MODE    NOT_USED
 #endif
 
 #ifndef PC_14_SPEED
@@ -939,7 +867,7 @@ typedef struct
 #define PA_15_PIN    IO_PIN_15
 
 #ifndef PC_15_MODE
-#define    PC_15_MODE    UNUSED
+#define    PC_15_MODE    NOT_USED
 #endif
 
 #ifndef PC_15_SPEED
@@ -959,7 +887,7 @@ typedef struct
 #define PA_0_PIN    IO_PIN_0
 
 #ifndef PD_0_MODE
-#define    PD_0_MODE    UNUSED
+#define    PD_0_MODE    NOT_USED
 #endif
 
 #ifndef PD_0_SPEED
@@ -977,7 +905,7 @@ typedef struct
 #define PA_1_PIN    IO_PIN_1
 
 #ifndef PD_1_MODE
-#define    PD_1_MODE    UNUSED
+#define    PD_1_MODE    NOT_USED
 #endif
 
 #ifndef PD_1_SPEED
@@ -995,7 +923,7 @@ typedef struct
 #define PA_2_PIN    IO_PIN_2
 
 #ifndef PD_2_MODE
-#define    PD_2_MODE    UNUSED
+#define    PD_2_MODE    NOT_USED
 #endif
 
 #ifndef PD_2_SPEED
@@ -1013,7 +941,7 @@ typedef struct
 #define PA_3_PIN    IO_PIN_3
 
 #ifndef PD_3_MODE
-#define    PD_3_MODE    UNUSED
+#define    PD_3_MODE    NOT_USED
 #endif
 
 #ifndef PD_3_SPEED
@@ -1031,7 +959,7 @@ typedef struct
 #define PA_4_PIN    IO_PIN_4
 
 #ifndef PD_4_MODE
-#define    PD_4_MODE    UNUSED
+#define    PD_4_MODE    NOT_USED
 #endif
 
 #ifndef PD_4_SPEED
@@ -1049,7 +977,7 @@ typedef struct
 #define PA_5_PIN    IO_PIN_5
 
 #ifndef PD_5_MODE
-#define    PD_5_MODE    UNUSED
+#define    PD_5_MODE    NOT_USED
 #endif
 
 #ifndef PD_5_SPEED
@@ -1067,7 +995,7 @@ typedef struct
 #define PA_6_PIN    IO_PIN_6
 
 #ifndef PD_6_MODE
-#define    PD_6_MODE    UNUSED
+#define    PD_6_MODE    NOT_USED
 #endif
 
 #ifndef PD_6_SPEED
@@ -1085,7 +1013,7 @@ typedef struct
 #define PA_7_PIN    IO_PIN_7
 
 #ifndef PD_7_MODE
-#define    PD_7_MODE    UNUSED
+#define    PD_7_MODE    NOT_USED
 #endif
 
 #ifndef PD_7_SPEED
@@ -1103,7 +1031,7 @@ typedef struct
 #define PA_8_PIN    IO_PIN_8
 
 #ifndef PD_8_MODE
-#define    PD_8_MODE    UNUSED
+#define    PD_8_MODE    NOT_USED
 #endif
 
 #ifndef PD_8_SPEED
@@ -1121,7 +1049,7 @@ typedef struct
 #define PA_9_PIN    IO_PIN_9
 
 #ifndef PD_9_MODE
-#define    PD_9_MODE    UNUSED
+#define    PD_9_MODE    NOT_USED
 #endif
 
 #ifndef PD_9_SPEED
@@ -1139,7 +1067,7 @@ typedef struct
 #define PA_10_PIN    IO_PIN_10
 
 #ifndef PD_10_MODE
-#define    PD_10_MODE    UNUSED
+#define    PD_10_MODE    NOT_USED
 #endif
 
 #ifndef PD_10_SPEED
@@ -1157,7 +1085,7 @@ typedef struct
 #define PA_11_PIN    IO_PIN_11
 
 #ifndef PD_11_MODE
-#define    PD_11_MODE    UNUSED
+#define    PD_11_MODE    NOT_USED
 #endif
 
 #ifndef PD_11_SPEED
@@ -1175,7 +1103,7 @@ typedef struct
 #define PA_12_PIN    IO_PIN_12
 
 #ifndef PD_12_MODE
-#define    PD_12_MODE    UNUSED
+#define    PD_12_MODE    NOT_USED
 #endif
 
 #ifndef PD_12_SPEED
@@ -1193,7 +1121,7 @@ typedef struct
 #define PA_13_PIN    IO_PIN_13
 
 #ifndef PD_13_MODE
-#define    PD_13_MODE    UNUSED
+#define    PD_13_MODE    NOT_USED
 #endif
 
 #ifndef PD_13_SPEED
@@ -1211,7 +1139,7 @@ typedef struct
 #define PA_14_PIN    IO_PIN_14
 
 #ifndef PD_14_MODE
-#define    PD_14_MODE    UNUSED
+#define    PD_14_MODE    NOT_USED
 #endif
 
 #ifndef PD_14_SPEED
@@ -1229,7 +1157,7 @@ typedef struct
 #define PA_15_PIN    IO_PIN_15
 
 #ifndef PD_15_MODE
-#define    PD_15_MODE    UNUSED
+#define    PD_15_MODE    NOT_USED
 #endif
 
 #ifndef PD_15_SPEED
@@ -1249,7 +1177,7 @@ typedef struct
 #define PA_0_PIN    IO_PIN_0
 
 #ifndef PE_0_MODE
-#define    PE_0_MODE    UNUSED
+#define    PE_0_MODE    NOT_USED
 #endif
 
 #ifndef PE_0_SPEED
@@ -1267,7 +1195,7 @@ typedef struct
 #define PA_1_PIN    IO_PIN_1
 
 #ifndef PE_1_MODE
-#define    PE_1_MODE    UNUSED
+#define    PE_1_MODE    NOT_USED
 #endif
 
 #ifndef PE_1_SPEED
@@ -1285,7 +1213,7 @@ typedef struct
 #define PA_2_PIN    IO_PIN_2
 
 #ifndef PE_2_MODE
-#define    PE_2_MODE    UNUSED
+#define    PE_2_MODE    NOT_USED
 #endif
 
 #ifndef PE_2_SPEED
@@ -1303,7 +1231,7 @@ typedef struct
 #define PA_3_PIN    IO_PIN_3
 
 #ifndef PE_3_MODE
-#define    PE_3_MODE    UNUSED
+#define    PE_3_MODE    NOT_USED
 #endif
 
 #ifndef PE_3_SPEED
@@ -1321,7 +1249,7 @@ typedef struct
 #define PA_4_PIN    IO_PIN_4
 
 #ifndef PE_4_MODE
-#define    PE_4_MODE    UNUSED
+#define    PE_4_MODE    NOT_USED
 #endif
 
 #ifndef PE_4_SPEED
@@ -1339,7 +1267,7 @@ typedef struct
 #define PA_5_PIN    IO_PIN_5
 
 #ifndef PE_5_MODE
-#define    PE_5_MODE    UNUSED
+#define    PE_5_MODE    NOT_USED
 #endif
 
 #ifndef PE_5_SPEED
@@ -1357,7 +1285,7 @@ typedef struct
 #define PA_6_PIN    IO_PIN_6
 
 #ifndef PE_6_MODE
-#define    PE_6_MODE    UNUSED
+#define    PE_6_MODE    NOT_USED
 #endif
 
 #ifndef PE_6_SPEED
@@ -1375,7 +1303,7 @@ typedef struct
 #define PA_7_PIN    IO_PIN_7
 
 #ifndef PE_7_MODE
-#define    PE_7_MODE    UNUSED
+#define    PE_7_MODE    NOT_USED
 #endif
 
 #ifndef PE_7_SPEED
@@ -1393,7 +1321,7 @@ typedef struct
 #define PA_8_PIN    IO_PIN_8
 
 #ifndef PE_8_MODE
-#define    PE_8_MODE    UNUSED
+#define    PE_8_MODE    NOT_USED
 #endif
 
 #ifndef PE_8_SPEED
@@ -1411,7 +1339,7 @@ typedef struct
 #define PA_9_PIN    IO_PIN_9
 
 #ifndef PE_9_MODE
-#define    PE_9_MODE    UNUSED
+#define    PE_9_MODE    NOT_USED
 #endif
 
 #ifndef PE_9_SPEED
@@ -1429,7 +1357,7 @@ typedef struct
 #define PA_10_PIN    IO_PIN_10
 
 #ifndef PE_10_MODE
-#define    PE_10_MODE    UNUSED
+#define    PE_10_MODE    NOT_USED
 #endif
 
 #ifndef PE_10_SPEED
@@ -1447,7 +1375,7 @@ typedef struct
 #define PA_11_PIN    IO_PIN_11
 
 #ifndef PE_11_MODE
-#define    PE_11_MODE    UNUSED
+#define    PE_11_MODE    NOT_USED
 #endif
 
 #ifndef PE_11_SPEED
@@ -1465,7 +1393,7 @@ typedef struct
 #define PA_12_PIN    IO_PIN_12
 
 #ifndef PE_12_MODE
-#define    PE_12_MODE    UNUSED
+#define    PE_12_MODE    NOT_USED
 #endif
 
 #ifndef PE_12_SPEED
@@ -1483,7 +1411,7 @@ typedef struct
 #define PA_13_PIN    IO_PIN_13
 
 #ifndef PE_13_MODE
-#define    PE_13_MODE    UNUSED
+#define    PE_13_MODE    NOT_USED
 #endif
 
 #ifndef PE_13_SPEED
@@ -1501,7 +1429,7 @@ typedef struct
 #define PA_14_PIN    IO_PIN_14
 
 #ifndef PE_14_MODE
-#define    PE_14_MODE    UNUSED
+#define    PE_14_MODE    NOT_USED
 #endif
 
 #ifndef PE_14_SPEED
@@ -1519,7 +1447,7 @@ typedef struct
 #define PA_15_PIN    IO_PIN_15
 
 #ifndef PE_15_MODE
-#define    PE_15_MODE    UNUSED
+#define    PE_15_MODE    NOT_USED
 #endif
 
 #ifndef PE_15_SPEED
@@ -1540,7 +1468,7 @@ typedef struct
 #define PA_0_PIN    IO_PIN_0
 
 #ifndef PF_0_MODE
-#define    PF_0_MODE    UNUSED
+#define    PF_0_MODE    NOT_USED
 #endif
 
 #ifndef PF_0_SPEED
@@ -1558,7 +1486,7 @@ typedef struct
 #define PA_1_PIN    IO_PIN_1
 
 #ifndef PF_1_MODE
-#define    PF_1_MODE    UNUSED
+#define    PF_1_MODE    NOT_USED
 #endif
 
 #ifndef PF_1_SPEED
@@ -1576,7 +1504,7 @@ typedef struct
 #define PA_2_PIN    IO_PIN_2
 
 #ifndef PF_2_MODE
-#define    PF_2_MODE    UNUSED
+#define    PF_2_MODE    NOT_USED
 #endif
 
 #ifndef PF_2_SPEED
@@ -1594,7 +1522,7 @@ typedef struct
 #define PA_3_PIN    IO_PIN_3
 
 #ifndef PF_3_MODE
-#define    PF_3_MODE    UNUSED
+#define    PF_3_MODE    NOT_USED
 #endif
 
 #ifndef PF_3_SPEED
@@ -1612,7 +1540,7 @@ typedef struct
 #define PA_4_PIN    IO_PIN_4
 
 #ifndef PF_4_MODE
-#define    PF_4_MODE    UNUSED
+#define    PF_4_MODE    NOT_USED
 #endif
 
 #ifndef PF_4_SPEED
@@ -1630,7 +1558,7 @@ typedef struct
 #define PA_5_PIN    IO_PIN_5
 
 #ifndef PF_5_MODE
-#define    PF_5_MODE    UNUSED
+#define    PF_5_MODE    NOT_USED
 #endif
 
 #ifndef PF_5_SPEED
@@ -1648,7 +1576,7 @@ typedef struct
 #define PA_6_PIN    IO_PIN_6
 
 #ifndef PF_6_MODE
-#define    PF_6_MODE    UNUSED
+#define    PF_6_MODE    NOT_USED
 #endif
 
 #ifndef PF_6_SPEED
@@ -1666,7 +1594,7 @@ typedef struct
 #define PA_7_PIN    IO_PIN_7
 
 #ifndef PF_7_MODE
-#define    PF_7_MODE    UNUSED
+#define    PF_7_MODE    NOT_USED
 #endif
 
 #ifndef PF_7_SPEED
@@ -1684,7 +1612,7 @@ typedef struct
 #define PA_8_PIN    IO_PIN_8
 
 #ifndef PF_8_MODE
-#define    PF_8_MODE    UNUSED
+#define    PF_8_MODE    NOT_USED
 #endif
 
 #ifndef PF_8_SPEED
@@ -1702,7 +1630,7 @@ typedef struct
 #define PA_9_PIN    IO_PIN_9
 
 #ifndef PF_9_MODE
-#define    PF_9_MODE    UNUSED
+#define    PF_9_MODE    NOT_USED
 #endif
 
 #ifndef PF_9_SPEED
@@ -1720,7 +1648,7 @@ typedef struct
 #define PA_10_PIN    IO_PIN_10
 
 #ifndef PF_10_MODE
-#define    PF_10_MODE    UNUSED
+#define    PF_10_MODE    NOT_USED
 #endif
 
 #ifndef PF_10_SPEED
@@ -1738,7 +1666,7 @@ typedef struct
 #define PA_11_PIN    IO_PIN_11
 
 #ifndef PF_11_MODE
-#define    PF_11_MODE    UNUSED
+#define    PF_11_MODE    NOT_USED
 #endif
 
 #ifndef PF_11_SPEED
@@ -1756,7 +1684,7 @@ typedef struct
 #define PA_12_PIN    IO_PIN_12
 
 #ifndef PF_12_MODE
-#define    PF_12_MODE    UNUSED
+#define    PF_12_MODE    NOT_USED
 #endif
 
 #ifndef PF_12_SPEED
@@ -1774,7 +1702,7 @@ typedef struct
 #define PA_13_PIN    IO_PIN_13
 
 #ifndef PF_13_MODE
-#define    PF_13_MODE    UNUSED
+#define    PF_13_MODE    NOT_USED
 #endif
 
 #ifndef PF_13_SPEED
@@ -1792,7 +1720,7 @@ typedef struct
 #define PA_14_PIN    IO_PIN_14
 
 #ifndef PF_14_MODE
-#define    PF_14_MODE    UNUSED
+#define    PF_14_MODE    NOT_USED
 #endif
 
 #ifndef PF_14_SPEED
@@ -1810,7 +1738,7 @@ typedef struct
 #define PA_15_PIN    IO_PIN_15
 
 #ifndef PF_15_MODE
-#define    PF_15_MODE    UNUSED
+#define    PF_15_MODE    NOT_USED
 #endif
 
 #ifndef PF_15_SPEED
@@ -1831,7 +1759,7 @@ typedef struct
 #define PA_0_PIN    IO_PIN_0
 
 #ifndef PG_0_MODE
-#define    PG_0_MODE    UNUSED
+#define    PG_0_MODE    NOT_USED
 #endif
 
 #ifndef PG_0_SPEED
@@ -1849,7 +1777,7 @@ typedef struct
 #define PA_1_PIN    IO_PIN_1
 
 #ifndef PG_1_MODE
-#define    PG_1_MODE    UNUSED
+#define    PG_1_MODE    NOT_USED
 #endif
 
 #ifndef PG_1_SPEED
@@ -1867,7 +1795,7 @@ typedef struct
 #define PA_2_PIN    IO_PIN_2
 
 #ifndef PG_2_MODE
-#define    PG_2_MODE    UNUSED
+#define    PG_2_MODE    NOT_USED
 #endif
 
 #ifndef PG_2_SPEED
@@ -1885,7 +1813,7 @@ typedef struct
 #define PA_3_PIN    IO_PIN_3
 
 #ifndef PG_3_MODE
-#define    PG_3_MODE    UNUSED
+#define    PG_3_MODE    NOT_USED
 #endif
 
 #ifndef PG_3_SPEED
@@ -1903,7 +1831,7 @@ typedef struct
 #define PA_4_PIN    IO_PIN_4
 
 #ifndef PG_4_MODE
-#define    PG_4_MODE    UNUSED
+#define    PG_4_MODE    NOT_USED
 #endif
 
 #ifndef PG_4_SPEED
@@ -1921,7 +1849,7 @@ typedef struct
 #define PA_5_PIN    IO_PIN_5
 
 #ifndef PG_5_MODE
-#define    PG_5_MODE    UNUSED
+#define    PG_5_MODE    NOT_USED
 #endif
 
 #ifndef PG_5_SPEED
@@ -1939,7 +1867,7 @@ typedef struct
 #define PA_6_PIN    IO_PIN_6
 
 #ifndef PG_6_MODE
-#define    PG_6_MODE    UNUSED
+#define    PG_6_MODE    NOT_USED
 #endif
 
 #ifndef PG_6_SPEED
@@ -1957,7 +1885,7 @@ typedef struct
 #define PA_7_PIN    IO_PIN_7
 
 #ifndef PG_7_MODE
-#define    PG_7_MODE    UNUSED
+#define    PG_7_MODE    NOT_USED
 #endif
 
 #ifndef PG_7_SPEED
@@ -1975,7 +1903,7 @@ typedef struct
 #define PA_8_PIN    IO_PIN_8
 
 #ifndef PG_8_MODE
-#define    PG_8_MODE    UNUSED
+#define    PG_8_MODE    NOT_USED
 #endif
 
 #ifndef PG_8_SPEED
@@ -1993,7 +1921,7 @@ typedef struct
 #define PA_9_PIN    IO_PIN_9
 
 #ifndef PG_9_MODE
-#define    PG_9_MODE    UNUSED
+#define    PG_9_MODE    NOT_USED
 #endif
 
 #ifndef PG_9_SPEED
@@ -2011,7 +1939,7 @@ typedef struct
 #define PA_10_PIN    IO_PIN_10
 
 #ifndef PG_10_MODE
-#define    PG_10_MODE    UNUSED
+#define    PG_10_MODE    NOT_USED
 #endif
 
 #ifndef PG_10_SPEED
@@ -2029,7 +1957,7 @@ typedef struct
 #define PA_11_PIN    IO_PIN_11
 
 #ifndef PG_11_MODE
-#define    PG_11_MODE    UNUSED
+#define    PG_11_MODE    NOT_USED
 #endif
 
 #ifndef PG_11_SPEED
@@ -2047,7 +1975,7 @@ typedef struct
 #define PA_12_PIN    IO_PIN_12
 
 #ifndef PG_12_MODE
-#define    PG_12_MODE    UNUSED
+#define    PG_12_MODE    NOT_USED
 #endif
 
 #ifndef PG_12_SPEED
@@ -2065,7 +1993,7 @@ typedef struct
 #define PA_13_PIN    IO_PIN_13
 
 #ifndef PG_13_MODE
-#define    PG_13_MODE    UNUSED
+#define    PG_13_MODE    NOT_USED
 #endif
 
 #ifndef PG_13_SPEED
@@ -2083,7 +2011,7 @@ typedef struct
 #define PA_14_PIN    IO_PIN_14
 
 #ifndef PG_14_MODE
-#define    PG_14_MODE    UNUSED
+#define    PG_14_MODE    NOT_USED
 #endif
 
 #ifndef PG_14_SPEED
@@ -2101,7 +2029,7 @@ typedef struct
 #define PA_15_PIN    IO_PIN_15
 
 #ifndef PG_15_MODE
-#define    PG_15_MODE    UNUSED
+#define    PG_15_MODE    NOT_USED
 #endif
 
 #ifndef PG_15_SPEED
@@ -2122,7 +2050,7 @@ typedef struct
 #define PA_0_PIN    IO_PIN_0
 
 #ifndef PH_0_MODE
-#define    PH_0_MODE    UNUSED
+#define    PH_0_MODE    NOT_USED
 #endif
 
 #ifndef PH_0_SPEED
@@ -2140,7 +2068,7 @@ typedef struct
 #define PA_1_PIN    IO_PIN_1
 
 #ifndef PH_1_MODE
-#define    PH_1_MODE    UNUSED
+#define    PH_1_MODE    NOT_USED
 #endif
 
 #ifndef PH_1_SPEED
@@ -2158,7 +2086,7 @@ typedef struct
 #define PA_2_PIN    IO_PIN_2
 
 #ifndef PH_2_MODE
-#define    PH_2_MODE    UNUSED
+#define    PH_2_MODE    NOT_USED
 #endif
 
 #ifndef PH_2_SPEED
@@ -2176,7 +2104,7 @@ typedef struct
 #define PA_3_PIN    IO_PIN_3
 
 #ifndef PH_3_MODE
-#define    PH_3_MODE    UNUSED
+#define    PH_3_MODE    NOT_USED
 #endif
 
 #ifndef PH_3_SPEED
@@ -2194,7 +2122,7 @@ typedef struct
 #define PA_4_PIN    IO_PIN_4
 
 #ifndef PH_4_MODE
-#define    PH_4_MODE    UNUSED
+#define    PH_4_MODE    NOT_USED
 #endif
 
 #ifndef PH_4_SPEED
@@ -2212,7 +2140,7 @@ typedef struct
 #define PA_5_PIN    IO_PIN_5
 
 #ifndef PH_5_MODE
-#define    PH_5_MODE    UNUSED
+#define    PH_5_MODE    NOT_USED
 #endif
 
 #ifndef PH_5_SPEED
@@ -2230,7 +2158,7 @@ typedef struct
 #define PA_6_PIN    IO_PIN_6
 
 #ifndef PH_6_MODE
-#define    PH_6_MODE    UNUSED
+#define    PH_6_MODE    NOT_USED
 #endif
 
 #ifndef PH_6_SPEED
@@ -2248,7 +2176,7 @@ typedef struct
 #define PA_7_PIN    IO_PIN_7
 
 #ifndef PH_7_MODE
-#define    PH_7_MODE    UNUSED
+#define    PH_7_MODE    NOT_USED
 #endif
 
 #ifndef PH_7_SPEED
@@ -2266,7 +2194,7 @@ typedef struct
 #define PA_8_PIN    IO_PIN_8
 
 #ifndef PH_8_MODE
-#define    PH_8_MODE    UNUSED
+#define    PH_8_MODE    NOT_USED
 #endif
 
 #ifndef PH_8_SPEED
@@ -2284,7 +2212,7 @@ typedef struct
 #define PA_9_PIN    IO_PIN_9
 
 #ifndef PH_9_MODE
-#define    PH_9_MODE    UNUSED
+#define    PH_9_MODE    NOT_USED
 #endif
 
 #ifndef PH_9_SPEED
@@ -2302,7 +2230,7 @@ typedef struct
 #define PA_10_PIN    IO_PIN_10
 
 #ifndef PH_10_MODE
-#define    PH_10_MODE    UNUSED
+#define    PH_10_MODE    NOT_USED
 #endif
 
 #ifndef PH_10_SPEED
@@ -2320,7 +2248,7 @@ typedef struct
 #define PA_11_PIN    IO_PIN_11
 
 #ifndef PH_11_MODE
-#define    PH_11_MODE    UNUSED
+#define    PH_11_MODE    NOT_USED
 #endif
 
 #ifndef PH_11_SPEED
@@ -2338,7 +2266,7 @@ typedef struct
 #define PA_12_PIN    IO_PIN_12
 
 #ifndef PH_12_MODE
-#define    PH_12_MODE    UNUSED
+#define    PH_12_MODE    NOT_USED
 #endif
 
 #ifndef PH_12_SPEED
@@ -2356,7 +2284,7 @@ typedef struct
 #define PA_13_PIN    IO_PIN_13
 
 #ifndef PH_13_MODE
-#define    PH_13_MODE    UNUSED
+#define    PH_13_MODE    NOT_USED
 #endif
 
 #ifndef PH_13_SPEED
@@ -2374,7 +2302,7 @@ typedef struct
 #define PA_14_PIN    IO_PIN_14
 
 #ifndef PH_14_MODE
-#define    PH_14_MODE    UNUSED
+#define    PH_14_MODE    NOT_USED
 #endif
 
 #ifndef PH_14_SPEED
@@ -2392,7 +2320,7 @@ typedef struct
 #define PA_15_PIN    IO_PIN_15
 
 #ifndef PH_15_MODE
-#define    PH_15_MODE    UNUSED
+#define    PH_15_MODE    NOT_USED
 #endif
 
 #ifndef PH_15_SPEED
