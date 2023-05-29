@@ -1,5 +1,6 @@
 #include "rcc_manager.h"
 
+#define SYSYEM_CLOCK(mhz)		(mhz * 1000000)
 
 void hmt_RccInit()
 {	
@@ -50,8 +51,8 @@ void hmt_RccInit()
 	{
 
 	}
-	LL_Init1msTick(72000000);
-	LL_SetSystemCoreClock(72000000);
+	LL_Init1msTick(SYSYEM_CLOCK(72));
+	LL_SetSystemCoreClock(SYSYEM_CLOCK(72));
 #endif
 
 #ifdef STM32F4
@@ -96,10 +97,89 @@ void hmt_RccInit()
 	{
 
 	}
-	LL_Init1msTick(100000000);
-	LL_SetSystemCoreClock(100000000);
+	LL_Init1msTick(SYSYEM_CLOCK(100));
+	LL_SetSystemCoreClock(SYSYEM_CLOCK(100));
 	LL_RCC_SetTIMPrescaler(LL_RCC_TIM_PRESCALER_TWICE);
 
 #endif
 
+}
+
+/* I2C RCC */
+void hmt_Rcc_I2C_Enable(I2C_TypeDef *i2c_periph)
+{
+	if(i2c_periph == I2C1){
+		__HAL_RCC_I2C1_CLK_ENABLE();
+	} 
+	else if (i2c_periph == I2C2){
+		__HAL_RCC_I2C2_CLK_ENABLE();
+	}
+#ifdef I2C3 
+	else if (i2c_periph == I2C3) {
+		__HAL_RCC_I2C3_CLK_ENABLE();
+	}
+#endif	
+}
+
+/* SPI RCC */
+void hmt_Rcc_SPI_Enable(SPI_TypeDef *spi_periph)
+{
+	if(spi_periph == SPI1){
+		__HAL_RCC_SPI1_CLK_ENABLE();
+	} 
+	else if (spi_periph == SPI2){
+		__HAL_RCC_SPI2_CLK_ENABLE();
+	}
+#ifdef SPI3 
+	else if (spi_periph == SPI3) {
+		__HAL_RCC_SPI3_CLK_ENABLE();
+	}
+#endif	
+}
+
+/* USART RCC */
+void hmt_Rcc_USART_Enable(USART_TypeDef *usart_periph)
+{
+	if(usart_periph == USART1){
+		__HAL_RCC_USART1_CLK_ENABLE();
+	} 
+	else if (usart_periph == USART2){
+		__HAL_RCC_USART2_CLK_ENABLE();
+	}
+#ifdef USART3
+	else if (usart_periph == USART3) {
+		__HAL_RCC_USART3_CLK_ENABLE();
+	}
+#endif		
+}
+
+/* ADC RCC */
+void hmt_Rcc_ADC_Enable(ADC_TypeDef *adc_periph)
+{
+	if(adc_periph == ADC1){
+		__HAL_RCC_ADC1_CLK_ENABLE();
+	}
+#ifdef ADC2
+	else if(adc_periph == ADC2){
+		__HAL_RCC_ADC2_CLK_ENABLE();
+	}
+#endif
+}
+
+/* DMA RCC */
+void hmt_Rcc_DMA_Enable(DMA_TypeDef *dma_periph)
+{
+	if(dma_periph == DMA1){
+		__HAL_RCC_DMA1_CLK_DISABLE();
+	}
+#ifdef DMA2
+	else if(dma_periph == DMA2){
+		__HAL_RCC_DMA2_CLK_DISABLE();
+	}
+#endif
+#ifdef DMA3
+	else if(dma_periph == DMA3){
+		__HAL_RCC_DMA3_CLK_DISABLE();
+	}
+#endif
 }
