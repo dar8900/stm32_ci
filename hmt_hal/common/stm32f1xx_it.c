@@ -182,20 +182,11 @@ void PendSV_Handler(void)
   */
 void SysTick_Handler(void)
 {
-  /* USER CODE BEGIN SysTick_IRQn 0 */
-
-  /* USER CODE END SysTick_IRQn 0 */
-  HAL_IncTick();
-  /* USER CODE BEGIN SysTick_IRQn 1 */
-    HAL_IncTick();
-    gpio_def Gpio;
-    Gpio.port = GPIOC;
-    Gpio.pin = 13;
-    // 1 Hz blinking
-    if ((HAL_GetTick() % 250) == 0){
-        hmt_TogglePin(&Gpio);
-    }
-  /* USER CODE END SysTick_IRQn 1 */
+    // if(Tick1Ms < UINT32_MAX){
+    //     Tick1Ms++;
+    // } else {
+    //     Tick1Ms = 0;
+    // }
 }
 
 /******************************************************************************/
