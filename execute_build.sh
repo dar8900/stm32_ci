@@ -10,6 +10,8 @@ print_message()
 			MSG_COLOR='\e[31m'
 	elif [ "$LEVEL" == "info" ] || [ "$LEVEL" == "INFO" ] ;then
 			MSG_COLOR='\e[33m'
+	elif [ "$LEVEL" == "warning" ] || [ "$LEVEL" == "WARNING" ] ;then
+			MSG_COLOR='\e[1;33m'			
 	elif [ "$LEVEL" == "ok" ] || [ "$LEVEL" == "OK" ] ;then
 			MSG_COLOR='\e[32m'
 	fi
@@ -53,6 +55,7 @@ clone_repo()
 }
 
 CONF_FILE=$1
+CLEAN_BUILD=$2
 CONTRIB_FOLDER="contrib"
 ST_CUBE_DIR="st_cube"
 OBKO_GIT_REPO="https://github.com/ObKo/stm32-cmake"
@@ -81,6 +84,7 @@ fi
 ST_CUBE_PATH="./$ST_CUBE_DIR/STM32Cube$STM_FAMILY"
 
 if [ ! -d "$ST_CUBE_PATH" ];then
+	CUBE_GIT_REPO="https://github.com/STMicroelectronics/STM32Cube$STM_FAMILY.git"
 	print_message "Checking ST Cube Driver repo for family $STM_FAMILY" info
 	if [ -z "$CUBE_GIT_REPO" ]; then
 		print_message "Insert a url for STCube Driver" error
@@ -97,32 +101,37 @@ if [ ! -d "$ST_CUBE_PATH" ];then
 fi
 
 if [ -z "$BUILD_TYPE" ];then
-	BUILD_DIR=build_Debug
+	BUILD_DIR="build_Debug_$STM_FAMILY"
 	BUILD_TYPE=Debug
 else
 	if [ "$BUILD_TYPE" == "debug" ];then
-		BUILD_DIR=build_Debug
+		BUILD_DIR="build_Debug_$STM_FAMILY"
 		BUILD_TYPE=Debug
 	elif [ "$BUILD_TYPE" == "release" ]; then
-		BUILD_DIR=build_Release
+		BUILD_DIR="build_Release_$STM_FAMILY"
 		BUILD_TYPE=Release
 	else
-		BUILD_DIR=build_Debug
+		BUILD_DIR="build_Debug_$STM_FAMILY"
 		BUILD_TYPE=Debug
 	fi
 fi
 
 if [ -d "$BUILD_DIR" ];then
-	print_message "Clean build dir" info
-	rm -rf "$BUILD_DIR"
+	if [ ! -z "$CLEAN_BUILD" ] && [ "$CLEAN_BUILD" == "clean" ];then
+		print_message "Clean build dir" warning
+		rm -rf "$BUILD_DIR"
+		mkdir -p "$BUILD_DIR"
+	else
+		print_message "Build folder present" info	
+	fi
+else
+	mkdir -p "$BUILD_DIR"
 fi
 
 
 print_message "Build target in \"$BUILD_TYPE\" mode" info
 
 print_message "Build folder is \"$BUILD_DIR\"" info
-
-mkdir -p "$BUILD_DIR"
 
 
 cd "$BUILD_DIR"	
