@@ -112,12 +112,11 @@ typedef struct
 }gpio_def;
 
 
-#include "project_board.h"
-
-
-
 extern volatile uint32_t Tick1Ms;
 
 void hmt_Delay(uint32_t DelayMs);
+
+#include "project_board.h"
+
 
 #endif

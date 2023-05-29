@@ -182,11 +182,11 @@ void PendSV_Handler(void)
   */
 void SysTick_Handler(void)
 {
-    // if(Tick1Ms < UINT32_MAX){
-    //     Tick1Ms++;
-    // } else {
-    //     Tick1Ms = 0;
-    // }
+    if(Tick1Ms < UINT32_MAX){
+        Tick1Ms++;
+    } else {
+        Tick1Ms = 0;
+    }
 }
 
 /******************************************************************************/
