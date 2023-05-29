@@ -14,7 +14,7 @@ static gpio_value ValueToDigital(uint32_t Val)
     return NewVal;
 }
 
-bool hmt_InitGpio(const gpio_def *Gpio)
+bool hmt_GpioInit(const gpio_def *Gpio)
 {
 
     LL_GPIO_InitTypeDef InitStruct = {0};
@@ -55,7 +55,7 @@ bool hmt_InitGpio(const gpio_def *Gpio)
     
 }
 
-bool hmt_TogglePin(gpio_def *Gpio)
+bool hmt_GpioTogglePin(gpio_def *Gpio)
 {
     bool Toggled = false;
     uint32_t TmpVal = 0;
@@ -67,7 +67,7 @@ bool hmt_TogglePin(gpio_def *Gpio)
     return Toggled;
 }
 
-bool hmt_WritePin(gpio_def *Gpio, gpio_value NewVal)
+bool hmt_GpioWritePin(gpio_def *Gpio, gpio_value NewVal)
 {
     bool Writed = false;
     if(LL_GPIO_GetPinMode(Gpio->port, Gpio->pin) != LL_GPIO_MODE_OUTPUT){
@@ -94,7 +94,7 @@ bool hmt_WritePin(gpio_def *Gpio, gpio_value NewVal)
     return Writed;
 }
 
-bool hmt_ReadPin(gpio_def *Gpio)
+bool hmt_GpioReadPin(gpio_def *Gpio)
 {
     bool Readed = true;
     if(LL_GPIO_GetPinMode(Gpio->port, Gpio->pin) != LL_GPIO_MODE_INPUT){

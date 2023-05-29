@@ -12,6 +12,7 @@ add_library("${LIBRARY_NAME}"
 )
 
 target_link_libraries("${LIBRARY_NAME}" PUBLIC
+    HAL::STM32::${STM32_FAMILY}::LL_GPIO
     HAL::STM32::${STM32_FAMILY}::GPIO
     CMSIS::STM32::${STM32_TYPE}
 )
