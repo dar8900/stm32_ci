@@ -5,7 +5,6 @@ set(EXECUTABLE_NAME "simple_blinky")
 
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
-
 project(stm32-blinky C ASM)
 set(CMAKE_INCLUDE_CURRENT_DIR TRUE)
 
@@ -29,11 +28,13 @@ add_subdirectory(hmt_hal)
 string(TOLOWER ${STM32_FAMILY} STM32_FAMILY_LOWER)
 
 set(SOURCES
-    hmt_hal/common/stm32${STM32_FAMILY_LOWER}xx_it.c
+    src/stm32${STM32_FAMILY_LOWER}xx_it.c
+    inc/stm32${STM32_FAMILY_LOWER}xx_it.h
+    inc/stm32${STM32_FAMILY_LOWER}xx_hal_conf.h
     src/main.c
 )
 
-add_executable("${EXECUTABLE_NAME}" "${SOURCES}" "${HEADERS}")
+add_executable("${EXECUTABLE_NAME}" "${SOURCES}")
 
 target_link_libraries("${EXECUTABLE_NAME}" PUBLIC
     HAL::STM32::${STM32_FAMILY}::RCC
@@ -57,4 +58,6 @@ set(INCLUEDES_DIRECTORY
 # )
 
 stm32_print_size_of_target("${EXECUTABLE_NAME}")
+
+stm32_generate_hex_file("${EXECUTABLE_NAME}")
 
