@@ -9,8 +9,7 @@
 
 #define ADD_GPIO_TO_TAB(port, pin)      {GPIO##port, P##port##_##pin##_PIN, \
                                         P##port##_##pin##_MODE, P##port##_##pin##_SPEED,\
-                                        P##port##_##pin##_OUTPUT, P##port##_##pin##_PULL_TYPE, 0, \
-                                        HIGH, LOW, LOW}
+                                        P##port##_##pin##_OUTPUT, P##port##_##pin##_PULL_TYPE, 0}
 
 /* PORT A */
 
@@ -304,7 +303,7 @@
 
 /* PORT B */
 
-#define PA_0_PIN    IO_PIN_0
+#define PB_0_PIN    IO_PIN_0
 
 #ifndef PB_0_MODE
 #define    PB_0_MODE    NOT_USED
@@ -322,7 +321,7 @@
 #define    PB_0_PULL_TYPE    NO_PULL
 #endif
 
-#define PA_1_PIN    IO_PIN_1
+#define PB_1_PIN    IO_PIN_1
 
 #ifndef PB_1_MODE
 #define    PB_1_MODE    NOT_USED
@@ -340,7 +339,7 @@
 #define    PB_1_PULL_TYPE    NO_PULL
 #endif
 
-#define PA_2_PIN    IO_PIN_2
+#define PB_2_PIN    IO_PIN_2
 
 #ifndef PB_2_MODE
 #define    PB_2_MODE    NOT_USED
@@ -358,7 +357,7 @@
 #define    PB_2_PULL_TYPE    NO_PULL
 #endif
 
-#define PA_3_PIN    IO_PIN_3
+#define PB_3_PIN    IO_PIN_3
 
 #ifndef PB_3_MODE
 #define    PB_3_MODE    NOT_USED
@@ -376,7 +375,7 @@
 #define    PB_3_PULL_TYPE    NO_PULL
 #endif
 
-#define PA_4_PIN    IO_PIN_4
+#define PB_4_PIN    IO_PIN_4
 
 #ifndef PB_4_MODE
 #define    PB_4_MODE    NOT_USED
@@ -394,7 +393,7 @@
 #define    PB_4_PULL_TYPE    NO_PULL
 #endif
 
-#define PA_5_PIN    IO_PIN_5
+#define PB_5_PIN    IO_PIN_5
 
 #ifndef PB_5_MODE
 #define    PB_5_MODE    NOT_USED
@@ -412,7 +411,7 @@
 #define    PB_5_PULL_TYPE    NO_PULL
 #endif
 
-#define PA_6_PIN    IO_PIN_6
+#define PB_6_PIN    IO_PIN_6
 
 #ifndef PB_6_MODE
 #define    PB_6_MODE    NOT_USED
@@ -430,7 +429,7 @@
 #define    PB_6_PULL_TYPE    NO_PULL
 #endif
 
-#define PA_7_PIN    IO_PIN_7
+#define PB_7_PIN    IO_PIN_7
 
 #ifndef PB_7_MODE
 #define    PB_7_MODE    NOT_USED
@@ -448,7 +447,7 @@
 #define    PB_7_PULL_TYPE    NO_PULL
 #endif
 
-#define PA_8_PIN    IO_PIN_8
+#define PB_8_PIN    IO_PIN_8
 
 #ifndef PB_8_MODE
 #define    PB_8_MODE    NOT_USED
@@ -466,7 +465,7 @@
 #define    PB_8_PULL_TYPE    NO_PULL
 #endif
 
-#define PA_9_PIN    IO_PIN_9
+#define PB_9_PIN    IO_PIN_9
 
 #ifndef PB_9_MODE
 #define    PB_9_MODE    NOT_USED
@@ -484,7 +483,7 @@
 #define    PB_9_PULL_TYPE    NO_PULL
 #endif
 
-#define PA_10_PIN    IO_PIN_10
+#define PB_10_PIN    IO_PIN_10
 
 #ifndef PB_10_MODE
 #define    PB_10_MODE    NOT_USED
@@ -502,7 +501,7 @@
 #define    PB_10_PULL_TYPE    NO_PULL
 #endif
 
-#define PA_11_PIN    IO_PIN_11
+#define PB_11_PIN    IO_PIN_11
 
 #ifndef PB_11_MODE
 #define    PB_11_MODE    NOT_USED
@@ -520,7 +519,7 @@
 #define    PB_11_PULL_TYPE    NO_PULL
 #endif
 
-#define PA_12_PIN    IO_PIN_12
+#define PB_12_PIN    IO_PIN_12
 
 #ifndef PB_12_MODE
 #define    PB_12_MODE    NOT_USED
@@ -538,7 +537,7 @@
 #define    PB_12_PULL_TYPE    NO_PULL
 #endif
 
-#define PA_13_PIN    IO_PIN_13
+#define PB_13_PIN    IO_PIN_13
 
 #ifndef PB_13_MODE
 #define    PB_13_MODE    NOT_USED
@@ -556,7 +555,7 @@
 #define    PB_13_PULL_TYPE    NO_PULL
 #endif
 
-#define PA_14_PIN    IO_PIN_14
+#define PB_14_PIN    IO_PIN_14
 
 #ifndef PB_14_MODE
 #define    PB_14_MODE    NOT_USED
@@ -574,7 +573,7 @@
 #define    PB_14_PULL_TYPE    NO_PULL
 #endif
 
-#define PA_15_PIN    IO_PIN_15
+#define PB_15_PIN    IO_PIN_15
 
 #ifndef PB_15_MODE
 #define    PB_15_MODE    NOT_USED
@@ -594,7 +593,7 @@
 
 /* PORT C */
 
-#define PA_0_PIN    IO_PIN_0
+#define PC_0_PIN    IO_PIN_0
 
 #ifndef PC_0_MODE
 #define    PC_0_MODE    NOT_USED
@@ -612,7 +611,7 @@
 #define    PC_0_PULL_TYPE    NO_PULL
 #endif
 
-#define PA_1_PIN    IO_PIN_1
+#define PC_1_PIN    IO_PIN_1
 
 #ifndef PC_1_MODE
 #define    PC_1_MODE    NOT_USED
@@ -630,7 +629,7 @@
 #define    PC_1_PULL_TYPE    NO_PULL
 #endif
 
-#define PA_2_PIN    IO_PIN_2
+#define PC_2_PIN    IO_PIN_2
 
 #ifndef PC_2_MODE
 #define    PC_2_MODE    NOT_USED
@@ -648,7 +647,7 @@
 #define    PC_2_PULL_TYPE    NO_PULL
 #endif
 
-#define PA_3_PIN    IO_PIN_3
+#define PC_3_PIN    IO_PIN_3
 
 #ifndef PC_3_MODE
 #define    PC_3_MODE    NOT_USED
@@ -666,7 +665,7 @@
 #define    PC_3_PULL_TYPE    NO_PULL
 #endif
 
-#define PA_4_PIN    IO_PIN_4
+#define PC_4_PIN    IO_PIN_4
 
 #ifndef PC_4_MODE
 #define    PC_4_MODE    NOT_USED
@@ -684,7 +683,7 @@
 #define    PC_4_PULL_TYPE    NO_PULL
 #endif
 
-#define PA_5_PIN    IO_PIN_5
+#define PC_5_PIN    IO_PIN_5
 
 #ifndef PC_5_MODE
 #define    PC_5_MODE    NOT_USED
@@ -702,7 +701,7 @@
 #define    PC_5_PULL_TYPE    NO_PULL
 #endif
 
-#define PA_6_PIN    IO_PIN_6
+#define PC_6_PIN    IO_PIN_6
 
 #ifndef PC_6_MODE
 #define    PC_6_MODE    NOT_USED
@@ -720,7 +719,7 @@
 #define    PC_6_PULL_TYPE    NO_PULL
 #endif
 
-#define PA_7_PIN    IO_PIN_7
+#define PC_7_PIN    IO_PIN_7
 
 #ifndef PC_7_MODE
 #define    PC_7_MODE    NOT_USED
@@ -738,7 +737,7 @@
 #define    PC_7_PULL_TYPE    NO_PULL
 #endif
 
-#define PA_8_PIN    IO_PIN_8
+#define PC_8_PIN    IO_PIN_8
 
 #ifndef PC_8_MODE
 #define    PC_8_MODE    NOT_USED
@@ -756,7 +755,7 @@
 #define    PC_8_PULL_TYPE    NO_PULL
 #endif
 
-#define PA_9_PIN    IO_PIN_9
+#define PC_9_PIN    IO_PIN_9
 
 #ifndef PC_9_MODE
 #define    PC_9_MODE    NOT_USED
@@ -774,7 +773,7 @@
 #define    PC_9_PULL_TYPE    NO_PULL
 #endif
 
-#define PA_10_PIN    IO_PIN_10
+#define PC_10_PIN    IO_PIN_10
 
 #ifndef PC_10_MODE
 #define    PC_10_MODE    NOT_USED
@@ -792,7 +791,7 @@
 #define    PC_10_PULL_TYPE    NO_PULL
 #endif
 
-#define PA_11_PIN    IO_PIN_11
+#define PC_11_PIN    IO_PIN_11
 
 #ifndef PC_11_MODE
 #define    PC_11_MODE    NOT_USED
@@ -810,7 +809,7 @@
 #define    PC_11_PULL_TYPE    NO_PULL
 #endif
 
-#define PA_12_PIN    IO_PIN_12
+#define PC_12_PIN    IO_PIN_12
 
 #ifndef PC_12_MODE
 #define    PC_12_MODE    NOT_USED
@@ -828,7 +827,7 @@
 #define    PC_12_PULL_TYPE    NO_PULL
 #endif
 
-#define PA_13_PIN    IO_PIN_13
+#define PC_13_PIN    IO_PIN_13
 
 #ifndef PC_13_MODE
 #define    PC_13_MODE    NOT_USED
@@ -846,7 +845,7 @@
 #define    PC_13_PULL_TYPE    NO_PULL
 #endif
 
-#define PA_14_PIN    IO_PIN_14
+#define PC_14_PIN    IO_PIN_14
 
 #ifndef PC_14_MODE
 #define    PC_14_MODE    NOT_USED
@@ -864,7 +863,7 @@
 #define    PC_14_PULL_TYPE    NO_PULL
 #endif
 
-#define PA_15_PIN    IO_PIN_15
+#define PC_15_PIN    IO_PIN_15
 
 #ifndef PC_15_MODE
 #define    PC_15_MODE    NOT_USED
@@ -884,7 +883,7 @@
 
 /* PORT D */
 
-#define PA_0_PIN    IO_PIN_0
+#define PD_0_PIN    IO_PIN_0
 
 #ifndef PD_0_MODE
 #define    PD_0_MODE    NOT_USED
@@ -902,7 +901,7 @@
 #define    PD_0_PULL_TYPE    NO_PULL
 #endif
 
-#define PA_1_PIN    IO_PIN_1
+#define PD_1_PIN    IO_PIN_1
 
 #ifndef PD_1_MODE
 #define    PD_1_MODE    NOT_USED
@@ -920,7 +919,7 @@
 #define    PD_1_PULL_TYPE    NO_PULL
 #endif
 
-#define PA_2_PIN    IO_PIN_2
+#define PD_2_PIN    IO_PIN_2
 
 #ifndef PD_2_MODE
 #define    PD_2_MODE    NOT_USED
@@ -938,7 +937,7 @@
 #define    PD_2_PULL_TYPE    NO_PULL
 #endif
 
-#define PA_3_PIN    IO_PIN_3
+#define PD_3_PIN    IO_PIN_3
 
 #ifndef PD_3_MODE
 #define    PD_3_MODE    NOT_USED
@@ -956,7 +955,7 @@
 #define    PD_3_PULL_TYPE    NO_PULL
 #endif
 
-#define PA_4_PIN    IO_PIN_4
+#define PD_4_PIN    IO_PIN_4
 
 #ifndef PD_4_MODE
 #define    PD_4_MODE    NOT_USED
@@ -974,7 +973,7 @@
 #define    PD_4_PULL_TYPE    NO_PULL
 #endif
 
-#define PA_5_PIN    IO_PIN_5
+#define PD_5_PIN    IO_PIN_5
 
 #ifndef PD_5_MODE
 #define    PD_5_MODE    NOT_USED
@@ -992,7 +991,7 @@
 #define    PD_5_PULL_TYPE    NO_PULL
 #endif
 
-#define PA_6_PIN    IO_PIN_6
+#define PD_6_PIN    IO_PIN_6
 
 #ifndef PD_6_MODE
 #define    PD_6_MODE    NOT_USED
@@ -1010,7 +1009,7 @@
 #define    PD_6_PULL_TYPE    NO_PULL
 #endif
 
-#define PA_7_PIN    IO_PIN_7
+#define PD_7_PIN    IO_PIN_7
 
 #ifndef PD_7_MODE
 #define    PD_7_MODE    NOT_USED
@@ -1028,7 +1027,7 @@
 #define    PD_7_PULL_TYPE    NO_PULL
 #endif
 
-#define PA_8_PIN    IO_PIN_8
+#define PD_8_PIN    IO_PIN_8
 
 #ifndef PD_8_MODE
 #define    PD_8_MODE    NOT_USED
@@ -1046,7 +1045,7 @@
 #define    PD_8_PULL_TYPE    NO_PULL
 #endif
 
-#define PA_9_PIN    IO_PIN_9
+#define PD_9_PIN    IO_PIN_9
 
 #ifndef PD_9_MODE
 #define    PD_9_MODE    NOT_USED
@@ -1064,7 +1063,7 @@
 #define    PD_9_PULL_TYPE    NO_PULL
 #endif
 
-#define PA_10_PIN    IO_PIN_10
+#define PD_10_PIN    IO_PIN_10
 
 #ifndef PD_10_MODE
 #define    PD_10_MODE    NOT_USED
@@ -1082,7 +1081,7 @@
 #define    PD_10_PULL_TYPE    NO_PULL
 #endif
 
-#define PA_11_PIN    IO_PIN_11
+#define PD_11_PIN    IO_PIN_11
 
 #ifndef PD_11_MODE
 #define    PD_11_MODE    NOT_USED
@@ -1100,7 +1099,7 @@
 #define    PD_11_PULL_TYPE    NO_PULL
 #endif
 
-#define PA_12_PIN    IO_PIN_12
+#define PD_12_PIN    IO_PIN_12
 
 #ifndef PD_12_MODE
 #define    PD_12_MODE    NOT_USED
@@ -1118,7 +1117,7 @@
 #define    PD_12_PULL_TYPE    NO_PULL
 #endif
 
-#define PA_13_PIN    IO_PIN_13
+#define PD_13_PIN    IO_PIN_13
 
 #ifndef PD_13_MODE
 #define    PD_13_MODE    NOT_USED
@@ -1136,7 +1135,7 @@
 #define    PD_13_PULL_TYPE    NO_PULL
 #endif
 
-#define PA_14_PIN    IO_PIN_14
+#define PD_14_PIN    IO_PIN_14
 
 #ifndef PD_14_MODE
 #define    PD_14_MODE    NOT_USED
@@ -1154,7 +1153,7 @@
 #define    PD_14_PULL_TYPE    NO_PULL
 #endif
 
-#define PA_15_PIN    IO_PIN_15
+#define PD_15_PIN    IO_PIN_15
 
 #ifndef PD_15_MODE
 #define    PD_15_MODE    NOT_USED
@@ -1174,7 +1173,7 @@
 
 /* PORT E */
 
-#define PA_0_PIN    IO_PIN_0
+#define PE_0_PIN    IO_PIN_0
 
 #ifndef PE_0_MODE
 #define    PE_0_MODE    NOT_USED
@@ -1192,7 +1191,7 @@
 #define    PE_0_PULL_TYPE    NO_PULL
 #endif
 
-#define PA_1_PIN    IO_PIN_1
+#define PE_1_PIN    IO_PIN_1
 
 #ifndef PE_1_MODE
 #define    PE_1_MODE    NOT_USED
@@ -1210,7 +1209,7 @@
 #define    PE_1_PULL_TYPE    NO_PULL
 #endif
 
-#define PA_2_PIN    IO_PIN_2
+#define PE_2_PIN    IO_PIN_2
 
 #ifndef PE_2_MODE
 #define    PE_2_MODE    NOT_USED
@@ -1228,7 +1227,7 @@
 #define    PE_2_PULL_TYPE    NO_PULL
 #endif
 
-#define PA_3_PIN    IO_PIN_3
+#define PE_3_PIN    IO_PIN_3
 
 #ifndef PE_3_MODE
 #define    PE_3_MODE    NOT_USED
@@ -1246,7 +1245,7 @@
 #define    PE_3_PULL_TYPE    NO_PULL
 #endif
 
-#define PA_4_PIN    IO_PIN_4
+#define PE_4_PIN    IO_PIN_4
 
 #ifndef PE_4_MODE
 #define    PE_4_MODE    NOT_USED
@@ -1264,7 +1263,7 @@
 #define    PE_4_PULL_TYPE    NO_PULL
 #endif
 
-#define PA_5_PIN    IO_PIN_5
+#define PE_5_PIN    IO_PIN_5
 
 #ifndef PE_5_MODE
 #define    PE_5_MODE    NOT_USED
@@ -1282,7 +1281,7 @@
 #define    PE_5_PULL_TYPE    NO_PULL
 #endif
 
-#define PA_6_PIN    IO_PIN_6
+#define PE_6_PIN    IO_PIN_6
 
 #ifndef PE_6_MODE
 #define    PE_6_MODE    NOT_USED
@@ -1300,7 +1299,7 @@
 #define    PE_6_PULL_TYPE    NO_PULL
 #endif
 
-#define PA_7_PIN    IO_PIN_7
+#define PE_7_PIN    IO_PIN_7
 
 #ifndef PE_7_MODE
 #define    PE_7_MODE    NOT_USED
@@ -1318,7 +1317,7 @@
 #define    PE_7_PULL_TYPE    NO_PULL
 #endif
 
-#define PA_8_PIN    IO_PIN_8
+#define PE_8_PIN    IO_PIN_8
 
 #ifndef PE_8_MODE
 #define    PE_8_MODE    NOT_USED
@@ -1336,7 +1335,7 @@
 #define    PE_8_PULL_TYPE    NO_PULL
 #endif
 
-#define PA_9_PIN    IO_PIN_9
+#define PE_9_PIN    IO_PIN_9
 
 #ifndef PE_9_MODE
 #define    PE_9_MODE    NOT_USED
@@ -1354,7 +1353,7 @@
 #define    PE_9_PULL_TYPE    NO_PULL
 #endif
 
-#define PA_10_PIN    IO_PIN_10
+#define PE_10_PIN    IO_PIN_10
 
 #ifndef PE_10_MODE
 #define    PE_10_MODE    NOT_USED
@@ -1372,7 +1371,7 @@
 #define    PE_10_PULL_TYPE    NO_PULL
 #endif
 
-#define PA_11_PIN    IO_PIN_11
+#define PE_11_PIN    IO_PIN_11
 
 #ifndef PE_11_MODE
 #define    PE_11_MODE    NOT_USED
@@ -1390,7 +1389,7 @@
 #define    PE_11_PULL_TYPE    NO_PULL
 #endif
 
-#define PA_12_PIN    IO_PIN_12
+#define PE_12_PIN    IO_PIN_12
 
 #ifndef PE_12_MODE
 #define    PE_12_MODE    NOT_USED
@@ -1408,7 +1407,7 @@
 #define    PE_12_PULL_TYPE    NO_PULL
 #endif
 
-#define PA_13_PIN    IO_PIN_13
+#define PE_13_PIN    IO_PIN_13
 
 #ifndef PE_13_MODE
 #define    PE_13_MODE    NOT_USED
@@ -1426,7 +1425,7 @@
 #define    PE_13_PULL_TYPE    NO_PULL
 #endif
 
-#define PA_14_PIN    IO_PIN_14
+#define PE_14_PIN    IO_PIN_14
 
 #ifndef PE_14_MODE
 #define    PE_14_MODE    NOT_USED
@@ -1444,7 +1443,7 @@
 #define    PE_14_PULL_TYPE    NO_PULL
 #endif
 
-#define PA_15_PIN    IO_PIN_15
+#define PE_15_PIN    IO_PIN_15
 
 #ifndef PE_15_MODE
 #define    PE_15_MODE    NOT_USED
@@ -1465,7 +1464,7 @@
 
 /* PORT F */
 
-#define PA_0_PIN    IO_PIN_0
+#define PF_0_PIN    IO_PIN_0
 
 #ifndef PF_0_MODE
 #define    PF_0_MODE    NOT_USED
@@ -1483,7 +1482,7 @@
 #define    PF_0_PULL_TYPE    NO_PULL
 #endif
 
-#define PA_1_PIN    IO_PIN_1
+#define PF_1_PIN    IO_PIN_1
 
 #ifndef PF_1_MODE
 #define    PF_1_MODE    NOT_USED
@@ -1501,7 +1500,7 @@
 #define    PF_1_PULL_TYPE    NO_PULL
 #endif
 
-#define PA_2_PIN    IO_PIN_2
+#define PF_2_PIN    IO_PIN_2
 
 #ifndef PF_2_MODE
 #define    PF_2_MODE    NOT_USED
@@ -1519,7 +1518,7 @@
 #define    PF_2_PULL_TYPE    NO_PULL
 #endif
 
-#define PA_3_PIN    IO_PIN_3
+#define PF_3_PIN    IO_PIN_3
 
 #ifndef PF_3_MODE
 #define    PF_3_MODE    NOT_USED
@@ -1537,7 +1536,7 @@
 #define    PF_3_PULL_TYPE    NO_PULL
 #endif
 
-#define PA_4_PIN    IO_PIN_4
+#define PF_4_PIN    IO_PIN_4
 
 #ifndef PF_4_MODE
 #define    PF_4_MODE    NOT_USED
@@ -1555,7 +1554,7 @@
 #define    PF_4_PULL_TYPE    NO_PULL
 #endif
 
-#define PA_5_PIN    IO_PIN_5
+#define PF_5_PIN    IO_PIN_5
 
 #ifndef PF_5_MODE
 #define    PF_5_MODE    NOT_USED
@@ -1573,7 +1572,7 @@
 #define    PF_5_PULL_TYPE    NO_PULL
 #endif
 
-#define PA_6_PIN    IO_PIN_6
+#define PF_6_PIN    IO_PIN_6
 
 #ifndef PF_6_MODE
 #define    PF_6_MODE    NOT_USED
@@ -1591,7 +1590,7 @@
 #define    PF_6_PULL_TYPE    NO_PULL
 #endif
 
-#define PA_7_PIN    IO_PIN_7
+#define PF_7_PIN    IO_PIN_7
 
 #ifndef PF_7_MODE
 #define    PF_7_MODE    NOT_USED
@@ -1609,7 +1608,7 @@
 #define    PF_7_PULL_TYPE    NO_PULL
 #endif
 
-#define PA_8_PIN    IO_PIN_8
+#define PF_8_PIN    IO_PIN_8
 
 #ifndef PF_8_MODE
 #define    PF_8_MODE    NOT_USED
@@ -1627,7 +1626,7 @@
 #define    PF_8_PULL_TYPE    NO_PULL
 #endif
 
-#define PA_9_PIN    IO_PIN_9
+#define PF_9_PIN    IO_PIN_9
 
 #ifndef PF_9_MODE
 #define    PF_9_MODE    NOT_USED
@@ -1645,7 +1644,7 @@
 #define    PF_9_PULL_TYPE    NO_PULL
 #endif
 
-#define PA_10_PIN    IO_PIN_10
+#define PF_10_PIN    IO_PIN_10
 
 #ifndef PF_10_MODE
 #define    PF_10_MODE    NOT_USED
@@ -1663,7 +1662,7 @@
 #define    PF_10_PULL_TYPE    NO_PULL
 #endif
 
-#define PA_11_PIN    IO_PIN_11
+#define PF_11_PIN    IO_PIN_11
 
 #ifndef PF_11_MODE
 #define    PF_11_MODE    NOT_USED
@@ -1681,7 +1680,7 @@
 #define    PF_11_PULL_TYPE    NO_PULL
 #endif
 
-#define PA_12_PIN    IO_PIN_12
+#define PF_12_PIN    IO_PIN_12
 
 #ifndef PF_12_MODE
 #define    PF_12_MODE    NOT_USED
@@ -1699,7 +1698,7 @@
 #define    PF_12_PULL_TYPE    NO_PULL
 #endif
 
-#define PA_13_PIN    IO_PIN_13
+#define PF_13_PIN    IO_PIN_13
 
 #ifndef PF_13_MODE
 #define    PF_13_MODE    NOT_USED
@@ -1717,7 +1716,7 @@
 #define    PF_13_PULL_TYPE    NO_PULL
 #endif
 
-#define PA_14_PIN    IO_PIN_14
+#define PF_14_PIN    IO_PIN_14
 
 #ifndef PF_14_MODE
 #define    PF_14_MODE    NOT_USED
@@ -1735,7 +1734,7 @@
 #define    PF_14_PULL_TYPE    NO_PULL
 #endif
 
-#define PA_15_PIN    IO_PIN_15
+#define PF_15_PIN    IO_PIN_15
 
 #ifndef PF_15_MODE
 #define    PF_15_MODE    NOT_USED
@@ -1756,7 +1755,7 @@
 
 /* PORT G */
 
-#define PA_0_PIN    IO_PIN_0
+#define PG_0_PIN    IO_PIN_0
 
 #ifndef PG_0_MODE
 #define    PG_0_MODE    NOT_USED
@@ -1774,7 +1773,7 @@
 #define    PG_0_PULL_TYPE    NO_PULL
 #endif
 
-#define PA_1_PIN    IO_PIN_1
+#define PG_1_PIN    IO_PIN_1
 
 #ifndef PG_1_MODE
 #define    PG_1_MODE    NOT_USED
@@ -1792,7 +1791,7 @@
 #define    PG_1_PULL_TYPE    NO_PULL
 #endif
 
-#define PA_2_PIN    IO_PIN_2
+#define PG_2_PIN    IO_PIN_2
 
 #ifndef PG_2_MODE
 #define    PG_2_MODE    NOT_USED
@@ -1810,7 +1809,7 @@
 #define    PG_2_PULL_TYPE    NO_PULL
 #endif
 
-#define PA_3_PIN    IO_PIN_3
+#define PG_3_PIN    IO_PIN_3
 
 #ifndef PG_3_MODE
 #define    PG_3_MODE    NOT_USED
@@ -1828,7 +1827,7 @@
 #define    PG_3_PULL_TYPE    NO_PULL
 #endif
 
-#define PA_4_PIN    IO_PIN_4
+#define PG_4_PIN    IO_PIN_4
 
 #ifndef PG_4_MODE
 #define    PG_4_MODE    NOT_USED
@@ -1846,7 +1845,7 @@
 #define    PG_4_PULL_TYPE    NO_PULL
 #endif
 
-#define PA_5_PIN    IO_PIN_5
+#define PG_5_PIN    IO_PIN_5
 
 #ifndef PG_5_MODE
 #define    PG_5_MODE    NOT_USED
@@ -1864,7 +1863,7 @@
 #define    PG_5_PULL_TYPE    NO_PULL
 #endif
 
-#define PA_6_PIN    IO_PIN_6
+#define PG_6_PIN    IO_PIN_6
 
 #ifndef PG_6_MODE
 #define    PG_6_MODE    NOT_USED
@@ -1882,7 +1881,7 @@
 #define    PG_6_PULL_TYPE    NO_PULL
 #endif
 
-#define PA_7_PIN    IO_PIN_7
+#define PG_7_PIN    IO_PIN_7
 
 #ifndef PG_7_MODE
 #define    PG_7_MODE    NOT_USED
@@ -1900,7 +1899,7 @@
 #define    PG_7_PULL_TYPE    NO_PULL
 #endif
 
-#define PA_8_PIN    IO_PIN_8
+#define PG_8_PIN    IO_PIN_8
 
 #ifndef PG_8_MODE
 #define    PG_8_MODE    NOT_USED
@@ -1918,7 +1917,7 @@
 #define    PG_8_PULL_TYPE    NO_PULL
 #endif
 
-#define PA_9_PIN    IO_PIN_9
+#define PG_9_PIN    IO_PIN_9
 
 #ifndef PG_9_MODE
 #define    PG_9_MODE    NOT_USED
@@ -1936,7 +1935,7 @@
 #define    PG_9_PULL_TYPE    NO_PULL
 #endif
 
-#define PA_10_PIN    IO_PIN_10
+#define PG_10_PIN    IO_PIN_10
 
 #ifndef PG_10_MODE
 #define    PG_10_MODE    NOT_USED
@@ -1954,7 +1953,7 @@
 #define    PG_10_PULL_TYPE    NO_PULL
 #endif
 
-#define PA_11_PIN    IO_PIN_11
+#define PG_11_PIN    IO_PIN_11
 
 #ifndef PG_11_MODE
 #define    PG_11_MODE    NOT_USED
@@ -1972,7 +1971,7 @@
 #define    PG_11_PULL_TYPE    NO_PULL
 #endif
 
-#define PA_12_PIN    IO_PIN_12
+#define PG_12_PIN    IO_PIN_12
 
 #ifndef PG_12_MODE
 #define    PG_12_MODE    NOT_USED
@@ -1990,7 +1989,7 @@
 #define    PG_12_PULL_TYPE    NO_PULL
 #endif
 
-#define PA_13_PIN    IO_PIN_13
+#define PG_13_PIN    IO_PIN_13
 
 #ifndef PG_13_MODE
 #define    PG_13_MODE    NOT_USED
@@ -2008,7 +2007,7 @@
 #define    PG_13_PULL_TYPE    NO_PULL
 #endif
 
-#define PA_14_PIN    IO_PIN_14
+#define PG_14_PIN    IO_PIN_14
 
 #ifndef PG_14_MODE
 #define    PG_14_MODE    NOT_USED
@@ -2026,7 +2025,7 @@
 #define    PG_14_PULL_TYPE    NO_PULL
 #endif
 
-#define PA_15_PIN    IO_PIN_15
+#define PG_15_PIN    IO_PIN_15
 
 #ifndef PG_15_MODE
 #define    PG_15_MODE    NOT_USED
@@ -2047,7 +2046,7 @@
 
 /* PORT H */
 
-#define PA_0_PIN    IO_PIN_0
+#define PH_0_PIN    IO_PIN_0
 
 #ifndef PH_0_MODE
 #define    PH_0_MODE    NOT_USED
@@ -2065,7 +2064,7 @@
 #define    PH_0_PULL_TYPE    NO_PULL
 #endif
 
-#define PA_1_PIN    IO_PIN_1
+#define PH_1_PIN    IO_PIN_1
 
 #ifndef PH_1_MODE
 #define    PH_1_MODE    NOT_USED
@@ -2083,7 +2082,7 @@
 #define    PH_1_PULL_TYPE    NO_PULL
 #endif
 
-#define PA_2_PIN    IO_PIN_2
+#define PH_2_PIN    IO_PIN_2
 
 #ifndef PH_2_MODE
 #define    PH_2_MODE    NOT_USED
@@ -2101,7 +2100,7 @@
 #define    PH_2_PULL_TYPE    NO_PULL
 #endif
 
-#define PA_3_PIN    IO_PIN_3
+#define PH_3_PIN    IO_PIN_3
 
 #ifndef PH_3_MODE
 #define    PH_3_MODE    NOT_USED
@@ -2119,7 +2118,7 @@
 #define    PH_3_PULL_TYPE    NO_PULL
 #endif
 
-#define PA_4_PIN    IO_PIN_4
+#define PH_4_PIN    IO_PIN_4
 
 #ifndef PH_4_MODE
 #define    PH_4_MODE    NOT_USED
@@ -2137,7 +2136,7 @@
 #define    PH_4_PULL_TYPE    NO_PULL
 #endif
 
-#define PA_5_PIN    IO_PIN_5
+#define PH_5_PIN    IO_PIN_5
 
 #ifndef PH_5_MODE
 #define    PH_5_MODE    NOT_USED
@@ -2155,7 +2154,7 @@
 #define    PH_5_PULL_TYPE    NO_PULL
 #endif
 
-#define PA_6_PIN    IO_PIN_6
+#define PH_6_PIN    IO_PIN_6
 
 #ifndef PH_6_MODE
 #define    PH_6_MODE    NOT_USED
@@ -2173,7 +2172,7 @@
 #define    PH_6_PULL_TYPE    NO_PULL
 #endif
 
-#define PA_7_PIN    IO_PIN_7
+#define PH_7_PIN    IO_PIN_7
 
 #ifndef PH_7_MODE
 #define    PH_7_MODE    NOT_USED
@@ -2191,7 +2190,7 @@
 #define    PH_7_PULL_TYPE    NO_PULL
 #endif
 
-#define PA_8_PIN    IO_PIN_8
+#define PH_8_PIN    IO_PIN_8
 
 #ifndef PH_8_MODE
 #define    PH_8_MODE    NOT_USED
@@ -2209,7 +2208,7 @@
 #define    PH_8_PULL_TYPE    NO_PULL
 #endif
 
-#define PA_9_PIN    IO_PIN_9
+#define PH_9_PIN    IO_PIN_9
 
 #ifndef PH_9_MODE
 #define    PH_9_MODE    NOT_USED
@@ -2227,7 +2226,7 @@
 #define    PH_9_PULL_TYPE    NO_PULL
 #endif
 
-#define PA_10_PIN    IO_PIN_10
+#define PH_10_PIN    IO_PIN_10
 
 #ifndef PH_10_MODE
 #define    PH_10_MODE    NOT_USED
@@ -2245,7 +2244,7 @@
 #define    PH_10_PULL_TYPE    NO_PULL
 #endif
 
-#define PA_11_PIN    IO_PIN_11
+#define PH_11_PIN    IO_PIN_11
 
 #ifndef PH_11_MODE
 #define    PH_11_MODE    NOT_USED
@@ -2263,7 +2262,7 @@
 #define    PH_11_PULL_TYPE    NO_PULL
 #endif
 
-#define PA_12_PIN    IO_PIN_12
+#define PH_12_PIN    IO_PIN_12
 
 #ifndef PH_12_MODE
 #define    PH_12_MODE    NOT_USED
@@ -2281,7 +2280,7 @@
 #define    PH_12_PULL_TYPE    NO_PULL
 #endif
 
-#define PA_13_PIN    IO_PIN_13
+#define PH_13_PIN    IO_PIN_13
 
 #ifndef PH_13_MODE
 #define    PH_13_MODE    NOT_USED
@@ -2299,7 +2298,7 @@
 #define    PH_13_PULL_TYPE    NO_PULL
 #endif
 
-#define PA_14_PIN    IO_PIN_14
+#define PH_14_PIN    IO_PIN_14
 
 #ifndef PH_14_MODE
 #define    PH_14_MODE    NOT_USED
@@ -2317,7 +2316,7 @@
 #define    PH_14_PULL_TYPE    NO_PULL
 #endif
 
-#define PA_15_PIN    IO_PIN_15
+#define PH_15_PIN    IO_PIN_15
 
 #ifndef PH_15_MODE
 #define    PH_15_MODE    NOT_USED
@@ -2335,5 +2334,146 @@
 #define    PH_15_PULL_TYPE    NO_PULL
 #endif
 
+
+#define PA_0_ID             0
+#define PA_1_ID             1
+#define PA_2_ID             2
+#define PA_3_ID             3
+#define PA_4_ID             4
+#define PA_5_ID             5
+#define PA_6_ID             6
+#define PA_7_ID             7
+#define PA_8_ID             8
+#define PA_9_ID             9
+#define PA_10_ID           10
+#define PA_11_ID           11
+#define PA_12_ID           12
+#define PA_13_ID           13
+#define PA_14_ID           14
+#define PA_15_ID           15
+#define PB_0_ID           16
+#define PB_1_ID           17
+#define PB_2_ID           18
+#define PB_3_ID           19
+#define PB_4_ID           20
+#define PB_5_ID           21
+#define PB_6_ID           22
+#define PB_7_ID           23
+#define PB_8_ID           24
+#define PB_9_ID           25
+#define PB_10_ID           26
+#define PB_11_ID           27
+#define PB_12_ID           28
+#define PB_13_ID           29
+#define PB_14_ID           30
+#define PB_15_ID           31
+#define PC_0_ID           32
+#define PC_1_ID           33
+#define PC_2_ID           34
+#define PC_3_ID           35
+#define PC_4_ID           36
+#define PC_5_ID           37
+#define PC_6_ID           38
+#define PC_7_ID           39
+#define PC_8_ID           40
+#define PC_9_ID           41
+#define PC_10_ID           42
+#define PC_11_ID           43
+#define PC_12_ID           44
+#define PC_13_ID           45
+#define PC_14_ID           46
+#define PC_15_ID           47
+#define PD_0_ID           48
+#define PD_1_ID           49
+#define PD_2_ID           50
+#define PD_3_ID           51
+#define PD_4_ID           52
+#define PD_5_ID           53
+#define PD_6_ID           54
+#define PD_7_ID           55
+#define PD_8_ID           56
+#define PD_9_ID           57
+#define PD_10_ID           58
+#define PD_11_ID           59
+#define PD_12_ID           60
+#define PD_13_ID           61
+#define PD_14_ID           62
+#define PD_15_ID           63
+#define PE_0_ID           64
+#define PE_1_ID           65
+#define PE_2_ID           66
+#define PE_3_ID           67
+#define PE_4_ID           68
+#define PE_5_ID           69
+#define PE_6_ID           70
+#define PE_7_ID           71
+#define PE_8_ID           72
+#define PE_9_ID           73
+#define PE_10_ID           74
+#define PE_11_ID           75
+#define PE_12_ID           76
+#define PE_13_ID           77
+#define PE_14_ID           78
+#define PE_15_ID           79
+
+#ifdef GPIOF
+#define PF_0_ID           80
+#define PF_1_ID           81
+#define PF_2_ID           82
+#define PF_3_ID           83
+#define PF_4_ID           84
+#define PF_5_ID           85
+#define PF_6_ID           86
+#define PF_7_ID           87
+#define PF_8_ID           88
+#define PF_9_ID           89
+#define PF_10_ID           90
+#define PF_11_ID           91
+#define PF_12_ID           92
+#define PF_13_ID           93
+#define PF_14_ID           94
+#define PF_15_ID           95
+#endif
+
+#ifdef GPIOG
+#define PG_0_ID           96
+#define PG_1_ID           97
+#define PG_2_ID           98
+#define PG_3_ID           99
+#define PG_4_ID         100
+#define PG_5_ID         101
+#define PG_6_ID         102
+#define PG_7_ID         103
+#define PG_8_ID         104
+#define PG_9_ID         105
+#define PG_10_ID         106
+#define PG_11_ID         107
+#define PG_12_ID         108
+#define PG_13_ID         109
+#define PG_14_ID         110
+#define PG_15_ID         111
+#endif
+
+#ifdef GPIOH
+#define PH_0_ID         112
+#define PH_1_ID         113
+#define PH_2_ID         114
+#define PH_3_ID         115
+#define PH_4_ID         116
+#define PH_5_ID         117
+#define PH_6_ID         118
+#define PH_7_ID         119
+#define PH_8_ID         120
+#define PH_9_ID         121
+#define PH_10_ID         122
+#define PH_11_ID         123
+#define PH_12_ID         124
+#define PH_13_ID         125
+#define PH_14_ID         126
+#define PH_15_ID         127
+#endif
+
+extern const gpio_def GpioDefsTab[];
+extern gpio_val_s GpioValTab[MAX_GPIO];
 
 #endif

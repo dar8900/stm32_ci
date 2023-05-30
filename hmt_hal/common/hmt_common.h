@@ -39,6 +39,17 @@
 #include <stdint.h>
 #include <stdbool.h>
 
+typedef struct hmt_simple_timer
+{
+    bool start;
+    bool stop;
+    uint32_t counter;
+    uint32_t timeout;
+}simple_timer;
+
+
+#define P(port)      GPIO##port
+
 
 typedef enum gpio_mode
 {
@@ -106,14 +117,32 @@ typedef struct
     uint32_t                outputType;  
     uint32_t                pull;
     uint32_t                alternate;
+
+}gpio_def;
+
+typedef struct 
+{
     gpio_value              active_level;                 
     gpio_value              actualVal;
     gpio_value              oldVal;
-}gpio_def;
+}gpio_val_s;
+
 
 
 extern volatile uint32_t Tick1Ms;
 
+/**
+ * @brief Return ms elapsed
+ * 
+ * @return uint32_t MsTick
+ */
+uint32_t hmt_GetMsTick();
+
+/**
+ * @brief Delay in blocking mode for specify ms
+ * 
+ * @param uint32_t DelayMs 
+ */
 void hmt_Delay(uint32_t DelayMs);
 
 #include "project_board.h"

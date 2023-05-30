@@ -14,96 +14,118 @@ static gpio_value ValueToDigital(uint32_t Val)
     return NewVal;
 }
 
-bool hmt_GpioInit(const gpio_def *Gpio)
+void hmt_GpioInit()
 {
+    for(int i = 0; i < MAX_GPIO; i++)
+    {
+        gpio_def ActualGpio = GpioDefsTab[i];
+        if(ActualGpio.mode == NOT_USED){
+            continue;
+        }
+        LL_GPIO_InitTypeDef InitStruct = {0};
+        InitStruct.Pin = ActualGpio.pin;
+        InitStruct.Mode = ActualGpio.mode;
+        InitStruct.Speed = ActualGpio.speed;
+        InitStruct.OutputType = ActualGpio.outputType;
+        InitStruct.Pull = ActualGpio.pull;
 
-    LL_GPIO_InitTypeDef InitStruct = {0};
-    InitStruct.Pin = Gpio->pin;
-    InitStruct.Mode = Gpio->mode;
-    InitStruct.Speed = Gpio->speed;
-    InitStruct.OutputType = Gpio->outputType;
-    InitStruct.Pull = Gpio->pull;
+        if(ActualGpio.port == GPIOA && __HAL_RCC_GPIOA_IS_CLK_DISABLED()){
+            __HAL_RCC_GPIOA_CLK_ENABLE();
+        } else if (ActualGpio.port == GPIOB  && __HAL_RCC_GPIOB_IS_CLK_DISABLED()){
+            __HAL_RCC_GPIOB_CLK_ENABLE();
+        } else if (ActualGpio.port == GPIOC  && __HAL_RCC_GPIOC_IS_CLK_DISABLED()){
+            __HAL_RCC_GPIOC_CLK_ENABLE();
+        } else if (ActualGpio.port == GPIOD  && __HAL_RCC_GPIOD_IS_CLK_DISABLED()){
+            __HAL_RCC_GPIOD_CLK_ENABLE();
+        } else if (ActualGpio.port == GPIOE  && __HAL_RCC_GPIOE_IS_CLK_DISABLED()){
+            __HAL_RCC_GPIOE_CLK_ENABLE();
+        } 
+    #ifdef GPIOF
+        else if (ActualGpio.port == GPIOF  && __HAL_RCC_GPIOF_IS_CLK_DISABLED()){
+            __HAL_RCC_GPIOF_CLK_ENABLE();
+        } 
+    #endif
+    #ifdef GPIOG
+        else if (ActualGpio.port == GPIOG  && __HAL_RCC_GPIOG_IS_CLK_DISABLED()){
+            __HAL_RCC_GPIOG_CLK_ENABLE();
+        } 
+    #endif    
+    #ifdef GPIOH    
+        else if (ActualGpio.port == GPIOH  && __HAL_RCC_GPIOH_IS_CLK_DISABLED()){
+            __HAL_RCC_GPIOH_CLK_ENABLE();
+        }
+    #endif
 
-    if(Gpio->port == GPIOA){
-        __HAL_RCC_GPIOA_CLK_ENABLE();
-    } else if (Gpio->port == GPIOB){
-        __HAL_RCC_GPIOB_CLK_ENABLE();
-    } else if (Gpio->port == GPIOC){
-        __HAL_RCC_GPIOC_CLK_ENABLE();
-    } else if (Gpio->port == GPIOD){
-        __HAL_RCC_GPIOD_CLK_ENABLE();
-    } else if (Gpio->port == GPIOE){
-        __HAL_RCC_GPIOE_CLK_ENABLE();
-    } 
-#ifdef GPIOF
-    else if (Gpio->port == GPIOF){
-        __HAL_RCC_GPIOF_CLK_ENABLE();
-    } 
-#endif
-#ifdef GPIOG
-    else if (Gpio->port == GPIOG){
-        __HAL_RCC_GPIOG_CLK_ENABLE();
-    } 
-#endif    
-#ifdef GPIOH    
-    else if (Gpio->port == GPIOH){
-        __HAL_RCC_GPIOH_CLK_ENABLE();
+        LL_GPIO_Init(ActualGpio.port, &InitStruct);
+
+        GpioValTab[i].active_level = HIGH;
+        GpioValTab[i].actualVal = LOW;
+        GpioValTab[i].oldVal = LOW;
     }
-#endif
-
-    LL_GPIO_Init(Gpio->port, &InitStruct);
     
 }
 
-bool hmt_GpioTogglePin(gpio_def *Gpio)
+bool hmt_GpioTogglePin(uint16_t GpioId)
 {
     bool Toggled = false;
     uint32_t TmpVal = 0;
-    Gpio->oldVal = LL_GPIO_IsOutputPinSet(Gpio->port, Gpio->pin) == 1 ? HIGH : LOW;
-    LL_GPIO_TogglePin(Gpio->port, Gpio->pin);
-    TmpVal = LL_GPIO_IsOutputPinSet(Gpio->port, Gpio->pin);
-    Toggled = ValueToDigital(TmpVal) != Gpio->oldVal ? true : false;
-    Gpio->actualVal = ValueToDigital(TmpVal);
+    if(GpioId >= MAX_GPIO){
+        return false;
+    }
+    if(GpioDefsTab[GpioId].mode != OUTPUT){
+        return false;
+    }    
+    GpioValTab[GpioId].oldVal = LL_GPIO_IsOutputPinSet(GpioDefsTab[GpioId].port, GpioDefsTab[GpioId].pin) == 1 ? HIGH : LOW;
+    LL_GPIO_TogglePin(GpioDefsTab[GpioId].port, GpioDefsTab[GpioId].pin);
+    TmpVal = LL_GPIO_IsOutputPinSet(GpioDefsTab[GpioId].port, GpioDefsTab[GpioId].pin);
+    Toggled = ValueToDigital(TmpVal) != GpioValTab[GpioId].oldVal ? true : false;
+    GpioValTab[GpioId].actualVal = ValueToDigital(TmpVal);
     return Toggled;
 }
 
-bool hmt_GpioWritePin(gpio_def *Gpio, gpio_value NewVal)
+bool hmt_GpioWritePin(uint16_t GpioId, gpio_value NewVal)
 {
     bool Writed = false;
-    if(LL_GPIO_GetPinMode(Gpio->port, Gpio->pin) != LL_GPIO_MODE_OUTPUT){
+    if(GpioId >= MAX_GPIO){
+        return false;
+    }    
+    if(GpioDefsTab[GpioId].mode != OUTPUT){
         return false;
     }
-    Gpio->oldVal = LL_GPIO_IsOutputPinSet(Gpio->port, Gpio->pin) == 1 ? HIGH : LOW;
+    GpioValTab[GpioId].oldVal = LL_GPIO_IsOutputPinSet(GpioDefsTab[GpioId].port, GpioDefsTab[GpioId].pin) == 1 ? HIGH : LOW;
     if(NewVal == HIGH){
-        if(Gpio->active_level == HIGH){
-            LL_GPIO_SetOutputPin(Gpio->port, Gpio->pin);
+        if(GpioValTab[GpioId].active_level == HIGH){
+            LL_GPIO_SetOutputPin(GpioDefsTab[GpioId].port, GpioDefsTab[GpioId].pin);
         } else {
-            LL_GPIO_ResetOutputPin(Gpio->port, Gpio->pin);
+            LL_GPIO_ResetOutputPin(GpioDefsTab[GpioId].port, GpioDefsTab[GpioId].pin);
         }
         Writed = true;
     } 
     else {
-        if(Gpio->active_level == HIGH){
-            LL_GPIO_ResetOutputPin(Gpio->port, Gpio->pin);
+        if(GpioValTab[GpioId].active_level == HIGH){
+            LL_GPIO_ResetOutputPin(GpioDefsTab[GpioId].port, GpioDefsTab[GpioId].pin);
         } else {
-            LL_GPIO_SetOutputPin(Gpio->port, Gpio->pin);
+            LL_GPIO_SetOutputPin(GpioDefsTab[GpioId].port, GpioDefsTab[GpioId].pin);
         }        
         Writed = true;
     }
-    Gpio->actualVal = Writed ? NewVal : Gpio->oldVal;
+    GpioValTab[GpioId].actualVal = Writed ? NewVal : GpioValTab[GpioId].oldVal;
     return Writed;
 }
 
-bool hmt_GpioReadPin(gpio_def *Gpio)
+bool hmt_GpioReadPin(uint16_t GpioId)
 {
     bool Readed = true;
-    if(LL_GPIO_GetPinMode(Gpio->port, Gpio->pin) != LL_GPIO_MODE_INPUT){
+    if(GpioId >= MAX_GPIO){
+        return false;
+    }    
+    if(GpioDefsTab[GpioId].mode != INPUT){
         return false;
     }
-    Gpio->oldVal = Gpio->actualVal;
-    Gpio->actualVal = LL_GPIO_IsInputPinSet(Gpio->port, Gpio->pin) == 1 ? HIGH : LOW;
-    if(Gpio->active_level == LOW){
-       Gpio->actualVal = Gpio->actualVal == HIGH ? LOW : HIGH;
+    GpioValTab[GpioId].oldVal = GpioValTab[GpioId].actualVal;
+    GpioValTab[GpioId].actualVal = LL_GPIO_IsInputPinSet(GpioDefsTab[GpioId].port, GpioDefsTab[GpioId].pin) == 1 ? HIGH : LOW;
+    if(GpioValTab[GpioId].active_level == LOW){
+       GpioValTab[GpioId].actualVal = GpioValTab[GpioId].actualVal == HIGH ? LOW : HIGH;
     }
     return Readed;
 }
