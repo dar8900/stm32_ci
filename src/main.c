@@ -3,13 +3,22 @@
 
 int main(void)
 {
-    gpio_def LedPin = {.port = GPIOA, .pin = IO_PIN_5, .mode = OUTPUT, .pull = PUSH_PULL};
+    simple_timer ToggleTimer;
     hmt_RccInit();
-    hmt_GpioInit(&LedPin);
+    hmt_GpioInit();
+    hmt_SimpleTimerStart(&ToggleTimer, 500);
+    uint32_t PrevTick = Tick1Ms;
     for (;;)
     {
-        hmt_GpioTogglePin(&LedPin);
-        hmt_Delay(1000);
+        // if(hmt_SimpleTimerElapsed(&ToggleTimer, true, 0)){
+        //     hmt_GpioTogglePin(PA_5_ID);
+        // }
+        // hmt_GpioTogglePin(PA_5_ID);
+        // hmt_Delay(150);
+        if(PrevTick != Tick1Ms){
+            hmt_GpioTogglePin(PA_5_ID);
+            PrevTick = Tick1Ms;
+        }
     }
 
     return 0;
