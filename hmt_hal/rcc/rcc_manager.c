@@ -54,6 +54,7 @@ void hmt_RccInit()
 	}
 	LL_Init1msTick(SYSYEM_CLOCK(72));
 	LL_SetSystemCoreClock(SYSYEM_CLOCK(72));
+	LL_SYSTICK_EnableIT();
 #endif /* uUSE_HSE */
 
 #ifdef USE_HSI
@@ -104,6 +105,7 @@ void hmt_RccInit()
 	LL_Init1msTick(SYSYEM_CLOCK(64));
 	LL_SetSystemCoreClock(SYSYEM_CLOCK(64));
 	LL_RCC_SetADCClockSource(LL_RCC_ADC_CLKSRC_PCLK2_DIV_6);
+	LL_SYSTICK_EnableIT();
 #endif /* USE_HSI */
 
 #endif
@@ -153,6 +155,7 @@ void hmt_RccInit()
 	LL_Init1msTick(SYSYEM_CLOCK(100));
 	LL_SetSystemCoreClock(SYSYEM_CLOCK(100));
 	LL_RCC_SetTIMPrescaler(LL_RCC_TIM_PRESCALER_TWICE);
+	LL_SYSTICK_EnableIT();
 
 #endif
 
