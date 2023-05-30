@@ -6,18 +6,16 @@ int main(void)
     simple_timer ToggleTimer;
     hmt_RccInit();
     hmt_GpioInit();
-    hmt_SimpleTimerStart(&ToggleTimer, 500);
-    uint32_t PrevTick = Tick1Ms;
+    hmt_SimpleTimerStart(&ToggleTimer, 50);
+    uint32_t NewTimeout = 50;
     for (;;)
     {
-        // if(hmt_SimpleTimerElapsed(&ToggleTimer, true, 0)){
-        //     hmt_GpioTogglePin(PA_5_ID);
-        // }
-        // hmt_GpioTogglePin(PA_5_ID);
-        // hmt_Delay(150);
-        if(PrevTick != Tick1Ms){
+        if(hmt_SimpleTimerElapsed(&ToggleTimer, true, NewTimeout)){
             hmt_GpioTogglePin(PA_5_ID);
-            PrevTick = Tick1Ms;
+            if(NewTimeout < 500)
+                NewTimeout += 2;
+            else
+                NewTimeout = 50;
         }
     }
 
