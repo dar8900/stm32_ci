@@ -37,10 +37,6 @@ set(SOURCES
 add_executable("${EXECUTABLE_NAME}" "${SOURCES}")
 
 target_link_libraries("${EXECUTABLE_NAME}" PUBLIC
-    HAL::STM32::${STM32_FAMILY}::RCC
-    HAL::STM32::${STM32_FAMILY}::GPIO
-    HAL::STM32::${STM32_FAMILY}::CORTEX
-    CMSIS::STM32::${STM32_TYPE}
     STM32::Nano
     common_func
     rcc_manager
