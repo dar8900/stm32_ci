@@ -10,6 +10,8 @@ set(CMAKE_INCLUDE_CURRENT_DIR TRUE)
 
 add_compile_definitions("USE_FULL_LL_DRIVER")
 
+string(TOLOWER ${STM32_FAMILY} STM32_FAMILY_LOWER)
+
 # Find all device specific drivers:
 find_package(CMSIS COMPONENTS STM32${STM32_FAMILY} REQUIRED)
 find_package(HAL COMPONENTS STM32${STM32_FAMILY} REQUIRED)
@@ -17,15 +19,13 @@ find_package(HAL COMPONENTS STM32${STM32_FAMILY} REQUIRED)
 
 include_directories(
     hmt_hal/common
-    hmt_hal/rcc
+    hmt_hal/rcc/${STM32_FAMILY_LOWER}
     hmt_hal/gpio
     src
     inc
 )
 
 add_subdirectory(hmt_hal)
-
-string(TOLOWER ${STM32_FAMILY} STM32_FAMILY_LOWER)
 
 set(SOURCES
     src/stm32${STM32_FAMILY_LOWER}xx_it.c
@@ -53,9 +53,6 @@ set(INCLUEDES_DIRECTORY
     "${PROJECT_SOURCE_DIR}/hmt_hal/gpio"  
 )
 
-# target_include_directories("${EXECUTABLE_NAME}" PUBLIC
-#     "${INCLUEDES_DIRECTORY}"
-# )
 
 stm32_print_size_of_target("${EXECUTABLE_NAME}")
 
