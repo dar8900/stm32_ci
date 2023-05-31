@@ -9,7 +9,7 @@
 
 #define ADD_GPIO_TO_TAB(port, pin)      {GPIO##port, P##port##_##pin##_PIN, \
                                         P##port##_##pin##_MODE, P##port##_##pin##_SPEED,\
-                                        P##port##_##pin##_OUTPUT, P##port##_##pin##_PULL_TYPE, 0}
+                                        P##port##_##pin##_OUTPUT, P##port##_##pin##_PULL_TYPE, P##port##_##pin##_AF_TYPE}
 
 /* PORT A */
 
@@ -2333,6 +2333,534 @@
 #ifndef PH_15_PULL_TYPE
 #define    PH_15_PULL_TYPE    NO_PULL
 #endif
+
+/* ALTERNATE DEFINITIONS */
+
+/* PORT A */
+#ifndef PA_0_AF_TYPE
+#define    PA_0_AF_TYPE    AF_NOT_USED
+#endif
+
+#ifndef PA_1_AF_TYPE
+#define    PA_1_AF_TYPE    AF_NOT_USED
+#endif
+
+#ifndef PA_2_AF_TYPE
+#define    PA_2_AF_TYPE    AF_NOT_USED
+#endif
+
+#ifndef PA_3_AF_TYPE
+#define    PA_3_AF_TYPE    AF_NOT_USED
+#endif
+
+#ifndef PA_4_AF_TYPE
+#define    PA_4_AF_TYPE    AF_NOT_USED
+#endif
+
+#ifndef PA_5_AF_TYPE
+#define    PA_5_AF_TYPE    AF_NOT_USED
+#endif
+
+#ifndef PA_6_AF_TYPE
+#define    PA_6_AF_TYPE    AF_NOT_USED
+#endif
+
+#ifndef PA_7_AF_TYPE
+#define    PA_7_AF_TYPE    AF_NOT_USED
+#endif
+
+#ifndef PA_8_AF_TYPE
+#define    PA_8_AF_TYPE    AF_NOT_USED
+#endif
+
+#ifndef PA_9_AF_TYPE
+#define    PA_9_AF_TYPE    AF_NOT_USED
+#endif
+
+#ifndef PA_10_AF_TYPE
+#define    PA_10_AF_TYPE    AF_NOT_USED
+#endif
+
+#ifndef PA_11_AF_TYPE
+#define    PA_11_AF_TYPE    AF_NOT_USED
+#endif
+
+#ifndef PA_12_AF_TYPE
+#define    PA_12_AF_TYPE    AF_NOT_USED
+#endif
+
+#ifndef PA_13_AF_TYPE
+#define    PA_13_AF_TYPE    AF_NOT_USED
+#endif
+
+#ifndef PA_14_AF_TYPE
+#define    PA_14_AF_TYPE    AF_NOT_USED
+#endif
+
+#ifndef PA_15_AF_TYPE
+#define    PA_15_AF_TYPE    AF_NOT_USED
+#endif
+
+/* PORT B */
+#ifndef PB_0_AF_TYPE
+#define    PB_0_AF_TYPE    AF_NOT_USED
+#endif
+
+#ifndef PB_1_AF_TYPE
+#define    PB_1_AF_TYPE    AF_NOT_USED
+#endif
+
+#ifndef PB_2_AF_TYPE
+#define    PB_2_AF_TYPE    AF_NOT_USED
+#endif
+
+#ifndef PB_3_AF_TYPE
+#define    PB_3_AF_TYPE    AF_NOT_USED
+#endif
+
+#ifndef PB_4_AF_TYPE
+#define    PB_4_AF_TYPE    AF_NOT_USED
+#endif
+
+#ifndef PB_5_AF_TYPE
+#define    PB_5_AF_TYPE    AF_NOT_USED
+#endif
+
+#ifndef PB_6_AF_TYPE
+#define    PB_6_AF_TYPE    AF_NOT_USED
+#endif
+
+#ifndef PB_7_AF_TYPE
+#define    PB_7_AF_TYPE    AF_NOT_USED
+#endif
+
+#ifndef PB_8_AF_TYPE
+#define    PB_8_AF_TYPE    AF_NOT_USED
+#endif
+
+#ifndef PB_9_AF_TYPE
+#define    PB_9_AF_TYPE    AF_NOT_USED
+#endif
+
+#ifndef PB_10_AF_TYPE
+#define    PB_10_AF_TYPE    AF_NOT_USED
+#endif
+
+#ifndef PB_11_AF_TYPE
+#define    PB_11_AF_TYPE    AF_NOT_USED
+#endif
+
+#ifndef PB_12_AF_TYPE
+#define    PB_12_AF_TYPE    AF_NOT_USED
+#endif
+
+#ifndef PB_13_AF_TYPE
+#define    PB_13_AF_TYPE    AF_NOT_USED
+#endif
+
+#ifndef PB_14_AF_TYPE
+#define    PB_14_AF_TYPE    AF_NOT_USED
+#endif
+
+#ifndef PB_15_AF_TYPE
+#define    PB_15_AF_TYPE    AF_NOT_USED
+#endif
+
+/* PORT C */
+#ifndef PC_0_AF_TYPE
+#define    PC_0_AF_TYPE    AF_NOT_USED
+#endif
+
+#ifndef PC_1_AF_TYPE
+#define    PC_1_AF_TYPE    AF_NOT_USED
+#endif
+
+#ifndef PC_2_AF_TYPE
+#define    PC_2_AF_TYPE    AF_NOT_USED
+#endif
+
+#ifndef PC_3_AF_TYPE
+#define    PC_3_AF_TYPE    AF_NOT_USED
+#endif
+
+#ifndef PC_4_AF_TYPE
+#define    PC_4_AF_TYPE    AF_NOT_USED
+#endif
+
+#ifndef PC_5_AF_TYPE
+#define    PC_5_AF_TYPE    AF_NOT_USED
+#endif
+
+#ifndef PC_6_AF_TYPE
+#define    PC_6_AF_TYPE    AF_NOT_USED
+#endif
+
+#ifndef PC_7_AF_TYPE
+#define    PC_7_AF_TYPE    AF_NOT_USED
+#endif
+
+#ifndef PC_8_AF_TYPE
+#define    PC_8_AF_TYPE    AF_NOT_USED
+#endif
+
+#ifndef PC_9_AF_TYPE
+#define    PC_9_AF_TYPE    AF_NOT_USED
+#endif
+
+#ifndef PC_10_AF_TYPE
+#define    PC_10_AF_TYPE    AF_NOT_USED
+#endif
+
+#ifndef PC_11_AF_TYPE
+#define    PC_11_AF_TYPE    AF_NOT_USED
+#endif
+
+#ifndef PC_12_AF_TYPE
+#define    PC_12_AF_TYPE    AF_NOT_USED
+#endif
+
+#ifndef PC_13_AF_TYPE
+#define    PC_13_AF_TYPE    AF_NOT_USED
+#endif
+
+#ifndef PC_14_AF_TYPE
+#define    PC_14_AF_TYPE    AF_NOT_USED
+#endif
+
+#ifndef PC_15_AF_TYPE
+#define    PC_15_AF_TYPE    AF_NOT_USED
+#endif
+
+/* PORT D */
+#ifndef PD_0_AF_TYPE
+#define    PD_0_AF_TYPE    AF_NOT_USED
+#endif
+
+#ifndef PD_1_AF_TYPE
+#define    PD_1_AF_TYPE    AF_NOT_USED
+#endif
+
+#ifndef PD_2_AF_TYPE
+#define    PD_2_AF_TYPE    AF_NOT_USED
+#endif
+
+#ifndef PD_3_AF_TYPE
+#define    PD_3_AF_TYPE    AF_NOT_USED
+#endif
+
+#ifndef PD_4_AF_TYPE
+#define    PD_4_AF_TYPE    AF_NOT_USED
+#endif
+
+#ifndef PD_5_AF_TYPE
+#define    PD_5_AF_TYPE    AF_NOT_USED
+#endif
+
+#ifndef PD_6_AF_TYPE
+#define    PD_6_AF_TYPE    AF_NOT_USED
+#endif
+
+#ifndef PD_7_AF_TYPE
+#define    PD_7_AF_TYPE    AF_NOT_USED
+#endif
+
+#ifndef PD_8_AF_TYPE
+#define    PD_8_AF_TYPE    AF_NOT_USED
+#endif
+
+#ifndef PD_9_AF_TYPE
+#define    PD_9_AF_TYPE    AF_NOT_USED
+#endif
+
+#ifndef PD_10_AF_TYPE
+#define    PD_10_AF_TYPE    AF_NOT_USED
+#endif
+
+#ifndef PD_11_AF_TYPE
+#define    PD_11_AF_TYPE    AF_NOT_USED
+#endif
+
+#ifndef PD_12_AF_TYPE
+#define    PD_12_AF_TYPE    AF_NOT_USED
+#endif
+
+#ifndef PD_13_AF_TYPE
+#define    PD_13_AF_TYPE    AF_NOT_USED
+#endif
+
+#ifndef PD_14_AF_TYPE
+#define    PD_14_AF_TYPE    AF_NOT_USED
+#endif
+
+#ifndef PD_15_AF_TYPE
+#define    PD_15_AF_TYPE    AF_NOT_USED
+#endif
+
+
+/* PORT E */
+#ifndef PE_0_AF_TYPE
+#define    PE_0_AF_TYPE    AF_NOT_USED
+#endif
+
+#ifndef PE_1_AF_TYPE
+#define    PE_1_AF_TYPE    AF_NOT_USED
+#endif
+
+#ifndef PE_2_AF_TYPE
+#define    PE_2_AF_TYPE    AF_NOT_USED
+#endif
+
+#ifndef PE_3_AF_TYPE
+#define    PE_3_AF_TYPE    AF_NOT_USED
+#endif
+
+#ifndef PE_4_AF_TYPE
+#define    PE_4_AF_TYPE    AF_NOT_USED
+#endif
+
+#ifndef PE_5_AF_TYPE
+#define    PE_5_AF_TYPE    AF_NOT_USED
+#endif
+
+#ifndef PE_6_AF_TYPE
+#define    PE_6_AF_TYPE    AF_NOT_USED
+#endif
+
+#ifndef PE_7_AF_TYPE
+#define    PE_7_AF_TYPE    AF_NOT_USED
+#endif
+
+#ifndef PE_8_AF_TYPE
+#define    PE_8_AF_TYPE    AF_NOT_USED
+#endif
+
+#ifndef PE_9_AF_TYPE
+#define    PE_9_AF_TYPE    AF_NOT_USED
+#endif
+
+#ifndef PE_10_AF_TYPE
+#define    PE_10_AF_TYPE    AF_NOT_USED
+#endif
+
+#ifndef PE_11_AF_TYPE
+#define    PE_11_AF_TYPE    AF_NOT_USED
+#endif
+
+#ifndef PE_12_AF_TYPE
+#define    PE_12_AF_TYPE    AF_NOT_USED
+#endif
+
+#ifndef PE_13_AF_TYPE
+#define    PE_13_AF_TYPE    AF_NOT_USED
+#endif
+
+#ifndef PE_14_AF_TYPE
+#define    PE_14_AF_TYPE    AF_NOT_USED
+#endif
+
+#ifndef PE_15_AF_TYPE
+#define    PE_15_AF_TYPE    AF_NOT_USED
+#endif
+
+
+/* PORT F */
+#ifndef PF_0_AF_TYPE
+#define    PF_0_AF_TYPE    AF_NOT_USED
+#endif
+
+#ifndef PF_1_AF_TYPE
+#define    PF_1_AF_TYPE    AF_NOT_USED
+#endif
+
+#ifndef PF_2_AF_TYPE
+#define    PF_2_AF_TYPE    AF_NOT_USED
+#endif
+
+#ifndef PF_3_AF_TYPE
+#define    PF_3_AF_TYPE    AF_NOT_USED
+#endif
+
+#ifndef PF_4_AF_TYPE
+#define    PF_4_AF_TYPE    AF_NOT_USED
+#endif
+
+#ifndef PF_5_AF_TYPE
+#define    PF_5_AF_TYPE    AF_NOT_USED
+#endif
+
+#ifndef PF_6_AF_TYPE
+#define    PF_6_AF_TYPE    AF_NOT_USED
+#endif
+
+#ifndef PF_7_AF_TYPE
+#define    PF_7_AF_TYPE    AF_NOT_USED
+#endif
+
+#ifndef PF_8_AF_TYPE
+#define    PF_8_AF_TYPE    AF_NOT_USED
+#endif
+
+#ifndef PF_9_AF_TYPE
+#define    PF_9_AF_TYPE    AF_NOT_USED
+#endif
+
+#ifndef PF_10_AF_TYPE
+#define    PF_10_AF_TYPE    AF_NOT_USED
+#endif
+
+#ifndef PF_11_AF_TYPE
+#define    PF_11_AF_TYPE    AF_NOT_USED
+#endif
+
+#ifndef PF_12_AF_TYPE
+#define    PF_12_AF_TYPE    AF_NOT_USED
+#endif
+
+#ifndef PF_13_AF_TYPE
+#define    PF_13_AF_TYPE    AF_NOT_USED
+#endif
+
+#ifndef PF_14_AF_TYPE
+#define    PF_14_AF_TYPE    AF_NOT_USED
+#endif
+
+#ifndef PF_15_AF_TYPE
+#define    PF_15_AF_TYPE    AF_NOT_USED
+#endif
+
+
+/* PORT G */
+#ifndef PG_0_AF_TYPE
+#define    PG_0_AF_TYPE    AF_NOT_USED
+#endif
+
+#ifndef PG_1_AF_TYPE
+#define    PG_1_AF_TYPE    AF_NOT_USED
+#endif
+
+#ifndef PG_2_AF_TYPE
+#define    PG_2_AF_TYPE    AF_NOT_USED
+#endif
+
+#ifndef PG_3_AF_TYPE
+#define    PG_3_AF_TYPE    AF_NOT_USED
+#endif
+
+#ifndef PG_4_AF_TYPE
+#define    PG_4_AF_TYPE    AF_NOT_USED
+#endif
+
+#ifndef PG_5_AF_TYPE
+#define    PG_5_AF_TYPE    AF_NOT_USED
+#endif
+
+#ifndef PG_6_AF_TYPE
+#define    PG_6_AF_TYPE    AF_NOT_USED
+#endif
+
+#ifndef PG_7_AF_TYPE
+#define    PG_7_AF_TYPE    AF_NOT_USED
+#endif
+
+#ifndef PG_8_AF_TYPE
+#define    PG_8_AF_TYPE    AF_NOT_USED
+#endif
+
+#ifndef PG_9_AF_TYPE
+#define    PG_9_AF_TYPE    AF_NOT_USED
+#endif
+
+#ifndef PG_10_AF_TYPE
+#define    PG_10_AF_TYPE    AF_NOT_USED
+#endif
+
+#ifndef PG_11_AF_TYPE
+#define    PG_11_AF_TYPE    AF_NOT_USED
+#endif
+
+#ifndef PG_12_AF_TYPE
+#define    PG_12_AF_TYPE    AF_NOT_USED
+#endif
+
+#ifndef PG_13_AF_TYPE
+#define    PG_13_AF_TYPE    AF_NOT_USED
+#endif
+
+#ifndef PG_14_AF_TYPE
+#define    PG_14_AF_TYPE    AF_NOT_USED
+#endif
+
+#ifndef PG_15_AF_TYPE
+#define    PG_15_AF_TYPE    AF_NOT_USED
+#endif
+
+
+/* PORT H */
+#ifndef PH_0_AF_TYPE
+#define    PH_0_AF_TYPE    AF_NOT_USED
+#endif
+
+#ifndef PH_1_AF_TYPE
+#define    PH_1_AF_TYPE    AF_NOT_USED
+#endif
+
+#ifndef PH_2_AF_TYPE
+#define    PH_2_AF_TYPE    AF_NOT_USED
+#endif
+
+#ifndef PH_3_AF_TYPE
+#define    PH_3_AF_TYPE    AF_NOT_USED
+#endif
+
+#ifndef PH_4_AF_TYPE
+#define    PH_4_AF_TYPE    AF_NOT_USED
+#endif
+
+#ifndef PH_5_AF_TYPE
+#define    PH_5_AF_TYPE    AF_NOT_USED
+#endif
+
+#ifndef PH_6_AF_TYPE
+#define    PH_6_AF_TYPE    AF_NOT_USED
+#endif
+
+#ifndef PH_7_AF_TYPE
+#define    PH_7_AF_TYPE    AF_NOT_USED
+#endif
+
+#ifndef PH_8_AF_TYPE
+#define    PH_8_AF_TYPE    AF_NOT_USED
+#endif
+
+#ifndef PH_9_AF_TYPE
+#define    PH_9_AF_TYPE    AF_NOT_USED
+#endif
+
+#ifndef PH_10_AF_TYPE
+#define    PH_10_AF_TYPE    AF_NOT_USED
+#endif
+
+#ifndef PH_11_AF_TYPE
+#define    PH_11_AF_TYPE    AF_NOT_USED
+#endif
+
+#ifndef PH_12_AF_TYPE
+#define    PH_12_AF_TYPE    AF_NOT_USED
+#endif
+
+#ifndef PH_13_AF_TYPE
+#define    PH_13_AF_TYPE    AF_NOT_USED
+#endif
+
+#ifndef PH_14_AF_TYPE
+#define    PH_14_AF_TYPE    AF_NOT_USED
+#endif
+
+#ifndef PH_15_AF_TYPE
+#define    PH_15_AF_TYPE    AF_NOT_USED
+#endif
+
+
 
 
 #define PA_0_ID             0

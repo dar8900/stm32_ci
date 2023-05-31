@@ -87,6 +87,28 @@ typedef enum gpio_value
     HIGH = GPIO_PIN_SET
 }gpio_value;
 
+
+typedef enum gpio_af
+{
+    AF_NOT_USED = 0,
+    AF_0,
+    AF_1,
+    AF_2,
+    AF_3,
+    AF_4,
+    AF_5,
+    AF_6,
+    AF_7,
+    AF_8,
+    AF_9,
+    AF_10,
+    AF_11,
+    AF_12,
+    AF_13,
+    AF_14,
+    AF_15
+}gpio_af;
+
 typedef enum gpio_pin
 {
     IO_PIN_0   =  LL_GPIO_PIN_0,
@@ -116,7 +138,7 @@ typedef struct
     uint32_t                speed;       
     uint32_t                outputType;  
     uint32_t                pull;
-    uint32_t                alternate;
+    gpio_af                 alternate;
 
 }gpio_def;
 
