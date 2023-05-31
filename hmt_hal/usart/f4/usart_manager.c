@@ -10,26 +10,17 @@ void hmt_UsartInit(USART_TypeDef *UsartX)
 				/* USART1 interrupt Init */
 		NVIC_SetPriority(USART1_IRQn, NVIC_EncodePriority(NVIC_GetPriorityGrouping(),10, 0));
 		NVIC_EnableIRQ(USART1_IRQn);
-#ifdef STM32F1
-		LL_GPIO_AF_EnableRemap_USART1();
-#endif
 	} 
 	else if (UsartX == USART2){
 				/* USART1 interrupt Init */
 		NVIC_SetPriority(USART2_IRQn, NVIC_EncodePriority(NVIC_GetPriorityGrouping(),10, 0));
 		NVIC_EnableIRQ(USART2_IRQn);
-#ifdef STM32F1
-		LL_GPIO_AF_EnableRemap_USART2();
-#endif
 	}
 #ifdef USART3
 	else if (UsartX == USART3){
 				/* USART1 interrupt Init */
 		NVIC_SetPriority(USART3_IRQn, NVIC_EncodePriority(NVIC_GetPriorityGrouping(),10, 0));
 		NVIC_EnableIRQ(USART3_IRQn);
-#ifdef STM32F1
-		LL_GPIO_AF_EnableRemap_USART3();
-#endif
 	}
 #endif /* USART 3 */
 
