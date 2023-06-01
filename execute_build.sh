@@ -148,7 +148,7 @@ else
 fi
 
 print_message "Run make" info
-make
+make -j10
 
 MAKE_RET=$?
 if [ "$MAKE_RET" -ne 0 ]; then
