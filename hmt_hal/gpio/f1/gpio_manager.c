@@ -14,65 +14,6 @@ static gpio_value ValueToDigital(uint32_t Val)
     return NewVal;
 }
 
-#ifndef STM32F1
-static uint32_t AfValToAfLL(uint32_t AfVal)
-{
-    uint32_t LlVal = 0;
-    switch (AfVal)
-    {
-    case AF_0:
-        LlVal = LL_GPIO_AF_0;
-        break;
-    case AF_1:
-        LlVal = LL_GPIO_AF_1;
-        break;
-    case AF_2:
-        LlVal = LL_GPIO_AF_2;
-        break;
-    case AF_3:
-        LlVal = LL_GPIO_AF_3;
-        break;
-    case AF_4:
-        LlVal = LL_GPIO_AF_4;
-        break;
-    case AF_5:
-        LlVal = LL_GPIO_AF_5;
-        break;
-    case AF_6:
-        LlVal = LL_GPIO_AF_6;
-        break;
-    case AF_7:
-        LlVal = LL_GPIO_AF_7;
-        break;
-    case AF_8:
-        LlVal = LL_GPIO_AF_8;
-        break;
-    case AF_9:
-        LlVal = LL_GPIO_AF_9;
-        break;
-    case AF_10:
-        LlVal = LL_GPIO_AF_10;
-        break;
-    case AF_11:
-        LlVal = LL_GPIO_AF_11;
-        break;
-    case AF_12:
-        LlVal = LL_GPIO_AF_12;
-        break;
-    case AF_13:
-        LlVal = LL_GPIO_AF_13;
-        break;
-    case AF_14:
-        LlVal = LL_GPIO_AF_14;
-        break;
-    case AF_15:
-        LlVal = LL_GPIO_AF_15;
-        break;    
-    default:
-        break;
-    }
-}
-#endif
 
 void hmt_GpioInit()
 {
@@ -88,12 +29,7 @@ void hmt_GpioInit()
         InitStruct.Speed = ActualGpio.speed;
         InitStruct.OutputType = ActualGpio.outputType;
         InitStruct.Pull = ActualGpio.pull;
-    
-    #ifndef STM32F1
-        if(ActualGpio.alternate != AF_NOT_USED){
-            InitStruct.Alternate = AfValToAfLL(ActualGpio.alternate);
-        }
-    #endif
+
 
         if(ActualGpio.port == GPIOA && __HAL_RCC_GPIOA_IS_CLK_DISABLED()){
             __HAL_RCC_GPIOA_CLK_ENABLE();

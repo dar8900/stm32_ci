@@ -14,7 +14,7 @@ static gpio_value ValueToDigital(uint32_t Val)
     return NewVal;
 }
 
-#ifndef STM32F1
+
 static uint32_t AfValToAfLL(uint32_t AfVal)
 {
     uint32_t LlVal = 0;
@@ -72,7 +72,7 @@ static uint32_t AfValToAfLL(uint32_t AfVal)
         break;
     }
 }
-#endif
+
 
 void hmt_GpioInit()
 {
@@ -89,11 +89,9 @@ void hmt_GpioInit()
         InitStruct.OutputType = ActualGpio.outputType;
         InitStruct.Pull = ActualGpio.pull;
     
-    #ifndef STM32F1
         if(ActualGpio.alternate != AF_NOT_USED){
             InitStruct.Alternate = AfValToAfLL(ActualGpio.alternate);
         }
-    #endif
 
         if(ActualGpio.port == GPIOA && __HAL_RCC_GPIOA_IS_CLK_DISABLED()){
             __HAL_RCC_GPIOA_CLK_ENABLE();
