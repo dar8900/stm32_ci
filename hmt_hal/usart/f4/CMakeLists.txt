@@ -1,5 +1,5 @@
 
-set(LIBRARY_NAME "usart_manager")
+set(LIBRARY_NAME "usart_manager_${STM32_FAMILY}")
 
 include_directories(
     ../../../inc

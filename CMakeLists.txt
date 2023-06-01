@@ -21,6 +21,7 @@ include_directories(
     hmt_hal/common
     hmt_hal/rcc/${STM32_FAMILY_LOWER}
     hmt_hal/gpio
+    hmt_hal/gpio/${STM32_FAMILY_LOWER}
     src
     inc
 )
@@ -39,15 +40,15 @@ add_executable("${EXECUTABLE_NAME}" "${SOURCES}")
 target_link_libraries("${EXECUTABLE_NAME}" PUBLIC
     STM32::Nano
     common_func
-    rcc_manager
-    gpio_manager
+    rcc_manager_${STM32_FAMILY}
+    gpio_manager_${STM32_FAMILY}
 )
 
-set(INCLUEDES_DIRECTORY
-    "${PROJECT_BINARY_DIR}"
-    "${PROJECT_SOURCE_DIR}/hmt_hal"
-    "${PROJECT_SOURCE_DIR}/hmt_hal/gpio"  
-)
+# set(INCLUEDES_DIRECTORY
+#     "${PROJECT_BINARY_DIR}"
+#     "${PROJECT_SOURCE_DIR}/hmt_hal"
+#     "${PROJECT_SOURCE_DIR}/hmt_hal/gpio"  
+# )
 
 
 stm32_print_size_of_target("${EXECUTABLE_NAME}")

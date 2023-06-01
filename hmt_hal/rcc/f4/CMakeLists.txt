@@ -1,4 +1,4 @@
-set(LIBRARY_NAME "rcc_manager")
+set(LIBRARY_NAME "rcc_manager_${STM32_FAMILY}")
 
 include_directories(
     ../../../inc
