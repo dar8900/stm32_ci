@@ -198,4 +198,24 @@ void SysTick_Handler(void)
 
 /* USER CODE BEGIN 1 */
 
+#ifdef USART1
+void USART1_IRQHandler(void)
+{
+	
+}
+#endif
+
+#ifdef USART2
+void USART2_IRQHandler(void)
+{
+
+}
+#endif
+
+#ifdef USART3
+void USART3_IRQHandler(void)
+{
+
+}
+#endif
 /* USER CODE END 1 */
