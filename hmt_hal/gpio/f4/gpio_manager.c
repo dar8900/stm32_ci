@@ -1,0 +1,197 @@
+#include "gpio_manager.h"
+
+
+
+
+static gpio_value ValueToDigital(uint32_t Val)
+{
+    gpio_value NewVal = LOW;
+    if(Val == 0){
+        NewVal = LOW;
+     } else {
+        NewVal = HIGH;
+     }
+    return NewVal;
+}
+
+#ifndef STM32F1
+static uint32_t AfValToAfLL(uint32_t AfVal)
+{
+    uint32_t LlVal = 0;
+    switch (AfVal)
+    {
+    case AF_0:
+        LlVal = LL_GPIO_AF_0;
+        break;
+    case AF_1:
+        LlVal = LL_GPIO_AF_1;
+        break;
+    case AF_2:
+        LlVal = LL_GPIO_AF_2;
+        break;
+    case AF_3:
+        LlVal = LL_GPIO_AF_3;
+        break;
+    case AF_4:
+        LlVal = LL_GPIO_AF_4;
+        break;
+    case AF_5:
+        LlVal = LL_GPIO_AF_5;
+        break;
+    case AF_6:
+        LlVal = LL_GPIO_AF_6;
+        break;
+    case AF_7:
+        LlVal = LL_GPIO_AF_7;
+        break;
+    case AF_8:
+        LlVal = LL_GPIO_AF_8;
+        break;
+    case AF_9:
+        LlVal = LL_GPIO_AF_9;
+        break;
+    case AF_10:
+        LlVal = LL_GPIO_AF_10;
+        break;
+    case AF_11:
+        LlVal = LL_GPIO_AF_11;
+        break;
+    case AF_12:
+        LlVal = LL_GPIO_AF_12;
+        break;
+    case AF_13:
+        LlVal = LL_GPIO_AF_13;
+        break;
+    case AF_14:
+        LlVal = LL_GPIO_AF_14;
+        break;
+    case AF_15:
+        LlVal = LL_GPIO_AF_15;
+        break;    
+    default:
+        break;
+    }
+}
+#endif
+
+void hmt_GpioInit()
+{
+    for(int i = 0; i < MAX_GPIO; i++)
+    {
+        gpio_def ActualGpio = GpioDefsTab[i];
+        if(ActualGpio.mode == NOT_USED){
+            continue;
+        }
+        LL_GPIO_InitTypeDef InitStruct = {0};
+        InitStruct.Pin = ActualGpio.pin;
+        InitStruct.Mode = ActualGpio.mode;
+        InitStruct.Speed = ActualGpio.speed;
+        InitStruct.OutputType = ActualGpio.outputType;
+        InitStruct.Pull = ActualGpio.pull;
+    
+    #ifndef STM32F1
+        if(ActualGpio.alternate != AF_NOT_USED){
+            InitStruct.Alternate = AfValToAfLL(ActualGpio.alternate);
+        }
+    #endif
+
+        if(ActualGpio.port == GPIOA && __HAL_RCC_GPIOA_IS_CLK_DISABLED()){
+            __HAL_RCC_GPIOA_CLK_ENABLE();
+        } else if (ActualGpio.port == GPIOB  && __HAL_RCC_GPIOB_IS_CLK_DISABLED()){
+            __HAL_RCC_GPIOB_CLK_ENABLE();
+        } else if (ActualGpio.port == GPIOC  && __HAL_RCC_GPIOC_IS_CLK_DISABLED()){
+            __HAL_RCC_GPIOC_CLK_ENABLE();
+        } else if (ActualGpio.port == GPIOD  && __HAL_RCC_GPIOD_IS_CLK_DISABLED()){
+            __HAL_RCC_GPIOD_CLK_ENABLE();
+        } else if (ActualGpio.port == GPIOE  && __HAL_RCC_GPIOE_IS_CLK_DISABLED()){
+            __HAL_RCC_GPIOE_CLK_ENABLE();
+        } 
+    #ifdef GPIOF
+        else if (ActualGpio.port == GPIOF  && __HAL_RCC_GPIOF_IS_CLK_DISABLED()){
+            __HAL_RCC_GPIOF_CLK_ENABLE();
+        } 
+    #endif
+    #ifdef GPIOG
+        else if (ActualGpio.port == GPIOG  && __HAL_RCC_GPIOG_IS_CLK_DISABLED()){
+            __HAL_RCC_GPIOG_CLK_ENABLE();
+        } 
+    #endif    
+    #ifdef GPIOH    
+        else if (ActualGpio.port == GPIOH  && __HAL_RCC_GPIOH_IS_CLK_DISABLED()){
+            __HAL_RCC_GPIOH_CLK_ENABLE();
+        }
+    #endif
+
+        LL_GPIO_Init(ActualGpio.port, &InitStruct);
+
+        GpioValTab[i].active_level = HIGH;
+        GpioValTab[i].actualVal = LOW;
+        GpioValTab[i].oldVal = LOW;
+    }
+    
+}
+
+bool hmt_GpioTogglePin(uint16_t GpioId)
+{
+    bool Toggled = false;
+    uint32_t TmpVal = 0;
+    if(GpioId >= MAX_GPIO){
+        return false;
+    }
+    if(GpioDefsTab[GpioId].mode != OUTPUT){
+        return false;
+    }    
+    GpioValTab[GpioId].oldVal = LL_GPIO_IsOutputPinSet(GpioDefsTab[GpioId].port, GpioDefsTab[GpioId].pin) == 1 ? HIGH : LOW;
+    LL_GPIO_TogglePin(GpioDefsTab[GpioId].port, GpioDefsTab[GpioId].pin);
+    TmpVal = LL_GPIO_IsOutputPinSet(GpioDefsTab[GpioId].port, GpioDefsTab[GpioId].pin);
+    Toggled = ValueToDigital(TmpVal) != GpioValTab[GpioId].oldVal ? true : false;
+    GpioValTab[GpioId].actualVal = ValueToDigital(TmpVal);
+    return Toggled;
+}
+
+bool hmt_GpioWritePin(uint16_t GpioId, gpio_value NewVal)
+{
+    bool Writed = false;
+    if(GpioId >= MAX_GPIO){
+        return false;
+    }    
+    if(GpioDefsTab[GpioId].mode != OUTPUT){
+        return false;
+    }
+    GpioValTab[GpioId].oldVal = LL_GPIO_IsOutputPinSet(GpioDefsTab[GpioId].port, GpioDefsTab[GpioId].pin) == 1 ? HIGH : LOW;
+    if(NewVal == HIGH){
+        if(GpioValTab[GpioId].active_level == HIGH){
+            LL_GPIO_SetOutputPin(GpioDefsTab[GpioId].port, GpioDefsTab[GpioId].pin);
+        } else {
+            LL_GPIO_ResetOutputPin(GpioDefsTab[GpioId].port, GpioDefsTab[GpioId].pin);
+        }
+        Writed = true;
+    } 
+    else {
+        if(GpioValTab[GpioId].active_level == HIGH){
+            LL_GPIO_ResetOutputPin(GpioDefsTab[GpioId].port, GpioDefsTab[GpioId].pin);
+        } else {
+            LL_GPIO_SetOutputPin(GpioDefsTab[GpioId].port, GpioDefsTab[GpioId].pin);
+        }        
+        Writed = true;
+    }
+    GpioValTab[GpioId].actualVal = Writed ? NewVal : GpioValTab[GpioId].oldVal;
+    return Writed;
+}
+
+bool hmt_GpioReadPin(uint16_t GpioId)
+{
+    bool Readed = true;
+    if(GpioId >= MAX_GPIO){
+        return false;
+    }    
+    if(GpioDefsTab[GpioId].mode != INPUT){
+        return false;
+    }
+    GpioValTab[GpioId].oldVal = GpioValTab[GpioId].actualVal;
+    GpioValTab[GpioId].actualVal = LL_GPIO_IsInputPinSet(GpioDefsTab[GpioId].port, GpioDefsTab[GpioId].pin) == 1 ? HIGH : LOW;
+    if(GpioValTab[GpioId].active_level == LOW){
+       GpioValTab[GpioId].actualVal = GpioValTab[GpioId].actualVal == HIGH ? LOW : HIGH;
+    }
+    return Readed;
+}

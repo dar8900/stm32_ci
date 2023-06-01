@@ -10,6 +10,8 @@ set(CMAKE_INCLUDE_CURRENT_DIR TRUE)
 
 add_compile_definitions("USE_FULL_LL_DRIVER")
 
+string(TOLOWER ${STM32_FAMILY} STM32_FAMILY_LOWER)
+
 # Find all device specific drivers:
 find_package(CMSIS COMPONENTS STM32${STM32_FAMILY} REQUIRED)
 find_package(HAL COMPONENTS STM32${STM32_FAMILY} REQUIRED)
@@ -17,15 +19,14 @@ find_package(HAL COMPONENTS STM32${STM32_FAMILY} REQUIRED)
 
 include_directories(
     hmt_hal/common
-    hmt_hal/rcc
+    hmt_hal/rcc/${STM32_FAMILY_LOWER}
     hmt_hal/gpio
+    hmt_hal/gpio/${STM32_FAMILY_LOWER}
     src
     inc
 )
 
 add_subdirectory(hmt_hal)
-
-string(TOLOWER ${STM32_FAMILY} STM32_FAMILY_LOWER)
 
 set(SOURCES
     src/stm32${STM32_FAMILY_LOWER}xx_it.c
@@ -37,25 +38,18 @@ set(SOURCES
 add_executable("${EXECUTABLE_NAME}" "${SOURCES}")
 
 target_link_libraries("${EXECUTABLE_NAME}" PUBLIC
-    HAL::STM32::${STM32_FAMILY}::RCC
-    HAL::STM32::${STM32_FAMILY}::GPIO
-    HAL::STM32::${STM32_FAMILY}::CORTEX
-    CMSIS::STM32::${STM32_TYPE}
     STM32::Nano
     common_func
-    rcc_manager
-    gpio_manager
+    rcc_manager_${STM32_FAMILY}
+    gpio_manager_${STM32_FAMILY}
 )
 
-set(INCLUEDES_DIRECTORY
-    "${PROJECT_BINARY_DIR}"
-    "${PROJECT_SOURCE_DIR}/hmt_hal"
-    "${PROJECT_SOURCE_DIR}/hmt_hal/gpio"  
-)
-
-# target_include_directories("${EXECUTABLE_NAME}" PUBLIC
-#     "${INCLUEDES_DIRECTORY}"
+# set(INCLUEDES_DIRECTORY
+#     "${PROJECT_BINARY_DIR}"
+#     "${PROJECT_SOURCE_DIR}/hmt_hal"
+#     "${PROJECT_SOURCE_DIR}/hmt_hal/gpio"  
 # )
+
 
 stm32_print_size_of_target("${EXECUTABLE_NAME}")
 
