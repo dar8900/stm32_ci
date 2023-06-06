@@ -67,8 +67,8 @@ void hmt_Delay(uint32_t DelayMs);
 
 
 /* USART */
-bool hmt_UsartSendMsg(USART_TypeDef *UsartX, uint8_t *Data, uint16_t MsgLen);
-bool hmt_UsartReceiveMsg(USART_TypeDef *UsartX, uint8_t *Data, uint16_t MsgLen);
+bool hmt_UsartSendMsg(USART_TypeDef *UsartX, uint8_t *Data, uint32_t MsgLen);
+bool hmt_UsartReceiveMsg(USART_TypeDef *UsartX, uint8_t *Data, uint32_t MsgLen);
 
 
 

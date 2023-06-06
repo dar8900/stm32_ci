@@ -7,12 +7,16 @@
 
 typedef struct usart_data
 {
+	uint8_t *txDataPtr;
+	uint8_t *rxDataPtr;
 	uint8_t txBuffer[USART_MAX_BUFFER_LEN];
 	uint8_t rxBuffer[USART_MAX_BUFFER_LEN];
-	uint16_t txMsgLen;
-	uint16_t rxMsgLen;
-	uint16_t txMsgCnt;
-	uint16_t rxMsgCnt;
+	uint32_t txMsgLen;
+	uint32_t rxMsgLen;
+	uint32_t txMsgRemanining;
+	uint32_t rxMsgRemanining;
+	uint32_t txMsgCnt;
+	uint32_t rxMsgCnt;
 	bool txOnGoing;
 	bool msgRcv;
 }usart_data_s;
@@ -21,21 +25,31 @@ typedef struct usart_data
 static usart_data_s UsartData;
 
 
-bool hmt_UsartSendMsg(USART_TypeDef *UsartX, uint8_t *Data, uint16_t MsgLen)
+bool hmt_UsartSendMsg(USART_TypeDef *UsartX, uint8_t *Data, uint32_t MsgLen)
 {
 	bool SentStarted = false;
 
 	/* Init TX buffers and counters; init the it transmission */
-	if(!Data || MsgLen >= USART_MAX_BUFFER_LEN){
+	if(!Data){
 		return false;
 	}
 
 	if(!UsartData.txOnGoing)
 	{
 		UsartData.txMsgCnt = 0;
-		UsartData.txMsgLen = MsgLen;
+		UsartData.txMsgRemanining = 0;
+		UsartData.txDataPtr = NULL;
 		memset(UsartData.txBuffer, 0x00, USART_MAX_BUFFER_LEN);
-		memcpy(UsartData.txBuffer, Data, MsgLen);
+		if(MsgLen > USART_MAX_BUFFER_LEN){
+			UsartData.txMsgRemanining = MsgLen - USART_MAX_BUFFER_LEN;
+			UsartData.txMsgLen = USART_MAX_BUFFER_LEN;
+			memcpy(UsartData.txBuffer, Data, USART_MAX_BUFFER_LEN);
+			UsartData.txDataPtr = malloc(sizeof(uint8_t) * MsgLen);
+			memcpy(UsartData.txDataPtr, Data, MsgLen);
+		} else {
+			UsartData.txMsgLen = MsgLen;
+			memcpy(UsartData.txBuffer, Data, UsartData.txMsgLen);
+		}
 		UsartData.txOnGoing = true;
 		/* Start USART transmission : Will initiate TXE interrupt after DR register is empty */
 		LL_USART_TransmitData8(UsartX, UsartData.txBuffer[UsartData.txMsgCnt++]);
@@ -57,7 +71,7 @@ void hmt_UsartTxEmptyCB(USART_TypeDef *UsartX)
 		/* Enable TC interrupt */
 		LL_USART_EnableIT_TC(UsartX);
 	}
-	/* Fill DR with a new char */
+
 	LL_USART_TransmitData8(UsartX, UsartData.txBuffer[UsartData.txMsgCnt++]);
 }
 
@@ -65,19 +79,44 @@ void hmt_UsartTcCB(USART_TypeDef *UsartX)
 {
 	if(!UsartData.txOnGoing){
 		return;
-	}	
+	}
+
 	if(UsartData.txMsgCnt == UsartData.txMsgLen)
 	{
 		UsartData.txMsgCnt = 0;
 		UsartData.txOnGoing = false;
-		memset(UsartData.txBuffer, 0x00, USART_MAX_BUFFER_LEN);
 		/* Disable TC interrupt */
 		LL_USART_DisableIT_TC(UsartX);
+
+		__disable_irq();
+		memset(UsartData.txBuffer, 0x00, USART_MAX_BUFFER_LEN);
+		if(UsartData.txMsgRemanining != 0 && UsartData.txDataPtr)
+		{
+			if(UsartData.txMsgRemanining < USART_MAX_BUFFER_LEN)
+			{
+				UsartData.txMsgLen = UsartData.txMsgRemanining;
+				UsartData.txMsgRemanining = 0;
+				memcpy(UsartData.txBuffer, &UsartData.txDataPtr[USART_MAX_BUFFER_LEN], UsartData.txMsgLen);
+				free(UsartData.txDataPtr);		
+			}
+			else
+			{
+				UsartData.txMsgLen = USART_MAX_BUFFER_LEN;
+				UsartData.txMsgRemanining -= USART_MAX_BUFFER_LEN;
+				memcpy(UsartData.txBuffer, &UsartData.txDataPtr[USART_MAX_BUFFER_LEN], UsartData.txMsgLen);	
+			}
+			/* Start USART transmission : Will initiate TXE interrupt after DR register is empty */
+			LL_USART_TransmitData8(UsartX, UsartData.txBuffer[UsartData.txMsgCnt++]);
+			LL_USART_EnableIT_TXE(UsartX); 			
+			UsartData.txOnGoing = true;
+		}
+		__enable_irq();
 	}
+
 }
 
 
-bool hmt_UsartReceiveMsg(USART_TypeDef *UsartX, uint8_t *Data, uint16_t MsgLen)
+bool hmt_UsartReceiveMsg(USART_TypeDef *UsartX, uint8_t *Data, uint32_t MsgLen)
 {
 	bool MessageReceived = false;
 	if(!Data || MsgLen >= USART_MAX_BUFFER_LEN){
