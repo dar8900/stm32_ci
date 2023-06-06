@@ -34,6 +34,7 @@ bool hmt_UsartSendMsg(USART_TypeDef *UsartX, uint8_t *Data, uint16_t MsgLen)
 	{
 		UsartData.txMsgCnt = 0;
 		UsartData.txMsgLen = MsgLen;
+		memset(UsartData.txBuffer, 0x00, USART_MAX_BUFFER_LEN);
 		memcpy(UsartData.txBuffer, Data, MsgLen);
 		UsartData.txOnGoing = true;
 		/* Start USART transmission : Will initiate TXE interrupt after DR register is empty */
