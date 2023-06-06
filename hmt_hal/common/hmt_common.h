@@ -35,9 +35,10 @@
     #include "stm32f4xx_ll_gpio.h"
 #endif
 
-
+#include <stdlib.h>
 #include <stdint.h>
 #include <stdbool.h>
+#include <string.h>
 
 typedef struct hmt_simple_timer
 {
@@ -63,6 +64,14 @@ uint32_t hmt_GetMsTick();
  * @param uint32_t DelayMs 
  */
 void hmt_Delay(uint32_t DelayMs);
+
+
+/* USART */
+bool hmt_UsartSendMsg(USART_TypeDef *UsartX, uint8_t *Data, uint16_t MsgLen);
+bool hmt_UsartReceiveMsg(USART_TypeDef *UsartX, uint8_t *Data, uint16_t MsgLen);
+
+
+
 
 #include "project_board.h"
 

@@ -15,5 +15,5 @@ target_link_libraries("${LIBRARY_NAME}" PUBLIC
     HAL::STM32::${STM32_FAMILY}::LL_USART
     HAL::STM32::${STM32_FAMILY}::USART
     CMSIS::STM32::${STM32_TYPE}
-	rcc_manager
+	rcc_manager_${STM32_FAMILY}
 )
