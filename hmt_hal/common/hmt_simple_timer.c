@@ -48,3 +48,8 @@ bool hmt_SimpleTimerElapsed(simple_timer *Timer, bool Restart, uint32_t Timeout)
 	}
 	return Elapsed;
 }
+
+bool hmt_SimpleTimerOngoing(simple_timer *Timer)
+{
+	return Timer->start;
+}

@@ -38,4 +38,12 @@ void hmt_SimpleTimerRestart(simple_timer *Timer, uint32_t Timeout);
  */
 bool hmt_SimpleTimerElapsed(simple_timer *Timer, bool Restart, uint32_t Timeout);
 
+/**
+ * @brief Return the state of the timer
+ * 
+ * @param simple_timer* Timer 
+ * @return [bool] Ongoing 
+ */
+bool hmt_SimpleTimerOngoing(simple_timer *Timer);
+
 #endif
