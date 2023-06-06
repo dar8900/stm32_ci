@@ -24,8 +24,8 @@ static usart_data_s UsartData;
 bool hmt_UsartSendMsg(USART_TypeDef *UsartX, uint8_t *Data, uint16_t MsgLen)
 {
 	bool SentStarted = false;
-	/* TODO Init TX buffers and counters; init the it transmission */
 
+	/* Init TX buffers and counters; init the it transmission */
 	if(!Data || MsgLen >= USART_MAX_BUFFER_LEN){
 		return false;
 	}

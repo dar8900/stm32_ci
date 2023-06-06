@@ -14,7 +14,7 @@ void hmt_UsartInit(USART_TypeDef *UsartX)
 	}
 	else if (UsartX == USART2)
 	{
-		/* USART1 interrupt Init */
+		/* USART2 interrupt Init */
 		NVIC_SetPriority(USART2_IRQn, NVIC_EncodePriority(NVIC_GetPriorityGrouping(), 10, 0));
 		NVIC_EnableIRQ(USART2_IRQn);
 		LL_GPIO_AF_EnableRemap_USART2();
@@ -22,7 +22,7 @@ void hmt_UsartInit(USART_TypeDef *UsartX)
 #ifdef USART3
 	else if (UsartX == USART3)
 	{
-		/* USART1 interrupt Init */
+		/* USART3 interrupt Init */
 		NVIC_SetPriority(USART3_IRQn, NVIC_EncodePriority(NVIC_GetPriorityGrouping(), 10, 0));
 		NVIC_EnableIRQ(USART3_IRQn);
 		LL_GPIO_AF_EnableRemap_USART3();
@@ -56,7 +56,7 @@ void hmt_Usart_IT_Handler(USART_TypeDef *UsartX)
 		/* TXE flag will be automatically cleared when writing new data in DR register */
 
 		/* Call function in charge of handling empty DR => will lead to transmission of next character */
-		hmt_UsartTxEmptyCB(UsartX); // TODO
+		hmt_UsartTxEmptyCB(UsartX);
 	}
 
 	/* Check Rx data */
@@ -65,7 +65,7 @@ void hmt_Usart_IT_Handler(USART_TypeDef *UsartX)
 	{
 		/* RXNE flag will be cleared by reading of DR register (done in call) */
 		/* Call function in charge of handling Character reception */
-		hmt_UsartRxCB(UsartX); // TODO
+		hmt_UsartRxCB(UsartX);
 	}
 
 	if (LL_USART_IsEnabledIT_TC(UsartX) && LL_USART_IsActiveFlag_TC(UsartX))
@@ -74,7 +74,7 @@ void hmt_Usart_IT_Handler(USART_TypeDef *UsartX)
 		LL_USART_ClearFlag_TC(UsartX);
 		/* Call function in charge of handling end of transmission of sent character
 			and prepare next character transmission */
-		hmt_UsartTcCB(UsartX); // TODO
+		hmt_UsartTcCB(UsartX);
 	}
 
 	if (LL_USART_IsEnabledIT_ERROR(UsartX) && LL_USART_IsActiveFlag_NE(UsartX))
