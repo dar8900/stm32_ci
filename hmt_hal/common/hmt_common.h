@@ -48,6 +48,13 @@ typedef struct hmt_simple_timer
     uint32_t timeout;
 }simple_timer;
 
+typedef enum usart_rx_ret
+{
+    USART_RX_MSG_RCV = 0,
+    USART_RX_MSG_IDLE,
+    USART_RX_MSG_ERROR
+}usart_rx_ret_code;
+
 
 extern volatile uint32_t Tick1Ms;
 
@@ -68,7 +75,7 @@ void hmt_Delay(uint32_t DelayMs);
 
 /* USART */
 bool hmt_UsartSendMsg(USART_TypeDef *UsartX, uint8_t *Data, uint32_t MsgLen);
-bool hmt_UsartReceiveMsg(USART_TypeDef *UsartX, uint8_t *Data, uint32_t MsgLen);
+usart_rx_ret_code hmt_UsartReceiveMsg(USART_TypeDef *UsartX, uint8_t *Data, uint32_t MsgLen, uint32_t Timeout);
 
 
 
