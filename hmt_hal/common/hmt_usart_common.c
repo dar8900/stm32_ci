@@ -3,6 +3,7 @@
 #include "hmt_usart_common.h"
 #include "usart_manager.h"
 
+#ifdef USE_USART
 
 #define USART_MAX_TX_BUFFER_LEN				1024
 #define USART_MAX_RX_BUFFER_LEN				  64
@@ -45,16 +46,21 @@ bool hmt_UsartSendMsg(USART_TypeDef *UsartX, uint8_t *Data, uint32_t MsgLen)
 		UsartData.txMsgRemanining = 0;
 		UsartData.txDataPtr = NULL;
 		memset(UsartData.txBuffer, 0x00, USART_MAX_TX_BUFFER_LEN);
+#ifdef 	USE_DYNAMIC_MEM	
 		if(MsgLen > USART_MAX_TX_BUFFER_LEN){
 			UsartData.txMsgRemanining = MsgLen - USART_MAX_TX_BUFFER_LEN;
 			UsartData.txMsgLen = USART_MAX_TX_BUFFER_LEN;
 			memcpy(UsartData.txBuffer, Data, USART_MAX_TX_BUFFER_LEN);
 			UsartData.txDataPtr = malloc(sizeof(uint8_t) * MsgLen);
 			memcpy(UsartData.txDataPtr, Data, MsgLen);
-		} else {
+		} else {			
 			UsartData.txMsgLen = MsgLen;
 			memcpy(UsartData.txBuffer, Data, UsartData.txMsgLen);
 		}
+#else
+		UsartData.txMsgLen = MsgLen;
+		memcpy(UsartData.txBuffer, Data, UsartData.txMsgLen);
+#endif		
 		UsartData.txOnGoing = true;
 		/* Start USART transmission : Will initiate TXE interrupt after DR register is empty */
 		LL_USART_TransmitData8(UsartX, UsartData.txBuffer[UsartData.txMsgCnt++]);
@@ -95,6 +101,7 @@ void hmt_UsartTcCB(USART_TypeDef *UsartX)
 
 		__disable_irq();
 		memset(UsartData.txBuffer, 0x00, USART_MAX_TX_BUFFER_LEN);
+#ifdef 	USE_DYNAMIC_MEM	
 		if(UsartData.txMsgRemanining != 0 && UsartData.txDataPtr)
 		{
 			if(UsartData.txMsgRemanining < USART_MAX_TX_BUFFER_LEN)
@@ -115,6 +122,7 @@ void hmt_UsartTcCB(USART_TypeDef *UsartX)
 			LL_USART_EnableIT_TXE(UsartX); 			
 			UsartData.txOnGoing = true;
 		}
+#endif		
 		__enable_irq();
 	}
 
@@ -136,15 +144,13 @@ usart_rx_ret_code hmt_UsartReceiveMsg(USART_TypeDef *UsartX, uint8_t *Data, uint
 		UsartData.rxMsgRemanining = 0;
 		UsartData.rxMsgCnt = 0;
 		memset(UsartData.rxBuffer, 0x00, USART_MAX_RX_BUFFER_LEN);
-		if(MsgLen > USART_MAX_RX_BUFFER_LEN){
-			UsartData.rxMsgLen = MsgLen;
+		if(MsgLen > USART_MAX_RX_BUFFER_LEN)
+		{
 			UsartData.rxMsgRemanining = MsgLen - USART_MAX_RX_BUFFER_LEN;
 			UsartData.rxDataPtr = malloc(sizeof(uint8_t) * MsgLen);
-		} else {
-			UsartData.rxMsgLen = MsgLen;
 		}
-		if(Timeout != 0)
-		{
+		UsartData.rxMsgLen = MsgLen;
+		if(Timeout != 0){
 			hmt_SimpleTimerStart(&RxTimer, Timeout);
 		}
 	}
@@ -155,7 +161,8 @@ usart_rx_ret_code hmt_UsartReceiveMsg(USART_TypeDef *UsartX, uint8_t *Data, uint
 		UsartData.msgRcv = false;
 		UsartData.rxMsgCnt = 0;
 		UsartData.rxMsgLen = 0;
-		if(UsartData.rxMsgRemanining != 0){
+		if(UsartData.rxMsgRemanining != 0)
+		{
 			memcpy(Data, UsartData.rxDataPtr, MsgLen);
 			free(UsartData.rxDataPtr);
 			UsartData.rxMsgRemanining = 0;
@@ -201,3 +208,5 @@ void hmt_UsartRxCB(USART_TypeDef *UsartX)
 		hmt_SimpleTimerRestart(&RxTimer, 0);
 	}
 }
+
+#endif

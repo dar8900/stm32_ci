@@ -1,7 +1,7 @@
 #include "usart_manager.h"
 #include "rcc_manager.h"
 
-
+#ifdef USE_USART
 
 void hmt_UsartInit(USART_TypeDef *UsartX)
 {
@@ -84,3 +84,4 @@ void hmt_Usart_IT_Handler(USART_TypeDef *UsartX)
 	}
 }
 
+#endif

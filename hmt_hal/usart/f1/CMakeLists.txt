@@ -3,11 +3,12 @@ set(LIBRARY_NAME "usart_manager_${STM32_FAMILY}")
 
 include_directories(
     ../../inc
-    ../common
+    ../../common
 	../rcc
 )
 
-add_library("${LIBRARY_NAME}" 
+add_library("${LIBRARY_NAME}"
+    ../../common/hmt_usart_common.c
 	usart_manager.c
 )
 
