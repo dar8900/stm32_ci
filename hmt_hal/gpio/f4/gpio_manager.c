@@ -125,6 +125,25 @@ void hmt_GpioInit()
         GpioValTab[i].activeLevel = HIGH;
         GpioValTab[i].actualVal = LOW;
         GpioValTab[i].oldVal = LOW;
+        if(ActualGpio.mode == OUTPUT)
+        {
+            if(GpioValTab[i].activeLevel == LOW)
+            {
+                if(GpioValTab[i].actualVal == HIGH){
+                    LL_GPIO_ResetOutputPin(ActualGpio.port, ActualGpio.pin);
+                } else {
+                    LL_GPIO_SetOutputPin(ActualGpio.port, ActualGpio.pin);
+                }
+            } 
+            else 
+            {
+                if(GpioValTab[i].actualVal == HIGH){
+                    LL_GPIO_SetOutputPin(ActualGpio.port, ActualGpio.pin);
+                } else {
+                    LL_GPIO_ResetOutputPin(ActualGpio.port, ActualGpio.pin);
+                }                
+            }
+        }        
     }
     
 }
