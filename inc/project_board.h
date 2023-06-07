@@ -11,6 +11,11 @@
 	#define USART_USED			USART1
 #endif
 
+#define USE_SPI
+#ifdef USE_SPI
+	#define SPI_USED			SPI1
+#endif
+
 /*
 #define    P<port>_<pin>_MODE    		NOT_USED
 #define    P<port>_<pin>_SPEED    		SPEED_HIGH

@@ -5,6 +5,7 @@ include_directories(
     ../../inc
     ../../common
 	../rcc
+    ../
 )
 
 add_library("${LIBRARY_NAME}"
