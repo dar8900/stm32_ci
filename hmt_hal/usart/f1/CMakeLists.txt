@@ -8,7 +8,7 @@ include_directories(
 )
 
 add_library("${LIBRARY_NAME}"
-    ../../common/hmt_usart_common.c
+    ../usart_common.c
 	usart_manager.c
 )
 

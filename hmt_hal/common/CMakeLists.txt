@@ -13,7 +13,7 @@ include_directories(
 add_library("${LIBRARY_NAME}" 
     hmt_common.c
     hmt_simple_timer.c
-    hmt_usart_common.c
+    ../usart/usart_common.c
 )
 
 target_link_libraries("${LIBRARY_NAME}" PUBLIC

@@ -13,12 +13,14 @@ int main(void)
     uint32_t NewTimeout = 50;
     for (;;)
     {
-        if(hmt_SimpleTimerElapsed(&ToggleTimer, true, NewTimeout)){
+        if(hmt_SimpleTimerElapsed(&ToggleTimer, true, NewTimeout))
+        {
             hmt_GpioTogglePin(PA_5_ID);
             if(NewTimeout < 500)
                 NewTimeout += 2;
             else
                 NewTimeout = 50;
+            hmt_UsartSendMsg(USART_USED, "Hello world!", strlen("Hello world!"));
         }
     }
 

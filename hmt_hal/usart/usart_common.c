@@ -1,7 +1,7 @@
 #include "hmt_common.h"
 #include "hmt_simple_timer.h"
-#include "hmt_usart_common.h"
-#include "usart_manager.h"
+#include "usart_common.h"
+// #include "usart_manager.h"
 
 #ifdef USE_USART
 
