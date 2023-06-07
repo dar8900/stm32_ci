@@ -19,6 +19,7 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "hmt_common.h"
+#include "usart_manager.h"
 #include "stm32f1xx_it.h"
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
@@ -196,26 +197,30 @@ void SysTick_Handler(void)
 /* please refer to the startup file (startup_stm32f1xx.s).                    */
 /******************************************************************************/
 
-/* USER CODE BEGIN 1 */
+
+
+#ifdef USE_USART
 
 #ifdef USART1
 void USART1_IRQHandler(void)
 {
-	
+    hmt_Usart_IT_Handler(USART1);
 }
 #endif
 
 #ifdef USART2
 void USART2_IRQHandler(void)
 {
-
+    hmt_Usart_IT_Handler(USART2);
 }
 #endif
 
 #ifdef USART3
 void USART3_IRQHandler(void)
 {
-
+    hmt_Usart_IT_Handler(USART3);
 }
 #endif
-/* USER CODE END 1 */
+
+#endif /* USE_USART */
+

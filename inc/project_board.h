@@ -6,6 +6,11 @@
 // #define USE_HSI
 #define USE_HSE
 
+// #define USE_USART
+#ifdef USE_USART
+	#define USART_USED			USART1
+#endif
+
 /*
 #define    P<port>_<pin>_MODE    	NOT_USED
 #define    P<port>_<pin>_SPEED    	SPEED_HIGH

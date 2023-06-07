@@ -6,6 +6,9 @@ int main(void)
     simple_timer ToggleTimer;
     hmt_RccInit();
     hmt_GpioInit();
+#ifdef USE_USART    
+    hmt_UsartInit(USART_USED);
+#endif
     hmt_SimpleTimerStart(&ToggleTimer, 50);
     uint32_t NewTimeout = 50;
     for (;;)

@@ -10,6 +10,8 @@ set(CMAKE_INCLUDE_CURRENT_DIR TRUE)
 
 add_compile_definitions("USE_FULL_LL_DRIVER")
 
+# add_compile_definitions("USE_DYNAMIC_MEM")
+
 string(TOLOWER ${STM32_FAMILY} STM32_FAMILY_LOWER)
 
 # Find all device specific drivers:
@@ -22,6 +24,8 @@ include_directories(
     hmt_hal/rcc/${STM32_FAMILY_LOWER}
     hmt_hal/gpio
     hmt_hal/gpio/${STM32_FAMILY_LOWER}
+    hmt_hal/usart
+    hmt_hal/usart/${STM32_FAMILY_LOWER}
     src
     inc
 )
@@ -37,18 +41,17 @@ set(SOURCES
 
 add_executable("${EXECUTABLE_NAME}" "${SOURCES}")
 
+# if you want to use malloc or dynamic memory allocation
+# then switch to STM32::Nano -> STM32::NoSys
+
 target_link_libraries("${EXECUTABLE_NAME}" PUBLIC
     STM32::Nano
     common_func
     rcc_manager_${STM32_FAMILY}
     gpio_manager_${STM32_FAMILY}
+    usart_manager_${STM32_FAMILY}
 )
 
-# set(INCLUEDES_DIRECTORY
-#     "${PROJECT_BINARY_DIR}"
-#     "${PROJECT_SOURCE_DIR}/hmt_hal"
-#     "${PROJECT_SOURCE_DIR}/hmt_hal/gpio"  
-# )
 
 
 stm32_print_size_of_target("${EXECUTABLE_NAME}")
