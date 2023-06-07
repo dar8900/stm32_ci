@@ -9,7 +9,8 @@
 
 #define ADD_GPIO_TO_TAB(port, pin)      {GPIO##port, P##port##_##pin##_PIN, \
                                         P##port##_##pin##_MODE, P##port##_##pin##_SPEED,\
-                                        P##port##_##pin##_OUTPUT, P##port##_##pin##_PULL_TYPE, P##port##_##pin##_AF_TYPE}
+                                        P##port##_##pin##_OUTPUT, P##port##_##pin##_PULL_TYPE, P##port##_##pin##_AF_TYPE, \
+                                        P##port##_##pin##_ACTIVE_LEVEL, P##port##_##pin##_START_LEVEL}
 
 #define P(port)      GPIO##port
 
@@ -102,12 +103,13 @@ typedef struct
     uint32_t                outputType;  
     uint32_t                pull;
     gpio_af                 alternate;
-
+    gpio_value              activeLevel;
+    gpio_value              startVal;
 }gpio_def;
 
 typedef struct 
 {
-    gpio_value              active_level;                 
+    gpio_value              activeLevel;                 
     gpio_value              actualVal;
     gpio_value              oldVal;
 }gpio_val_s;
@@ -2961,8 +2963,1068 @@ typedef struct
 #define    PH_15_AF_TYPE    AF_NOT_USED
 #endif
 
+/* ACTIVE LEVEL */
+
+/* PORT A */
+#ifndef PA_0_ACTIVE_LEVEL
+#define PA_0_ACTIVE_LEVEL HIGH
+#endif
+
+#ifndef PA_1_ACTIVE_LEVEL
+#define PA_1_ACTIVE_LEVEL HIGH
+#endif
+
+#ifndef PA_2_ACTIVE_LEVEL
+#define PA_2_ACTIVE_LEVEL HIGH
+#endif
+
+#ifndef PA_3_ACTIVE_LEVEL
+#define PA_3_ACTIVE_LEVEL HIGH
+#endif
+
+#ifndef PA_4_ACTIVE_LEVEL
+#define PA_4_ACTIVE_LEVEL HIGH
+#endif
+
+#ifndef PA_5_ACTIVE_LEVEL
+#define PA_5_ACTIVE_LEVEL HIGH
+#endif
+
+#ifndef PA_6_ACTIVE_LEVEL
+#define PA_6_ACTIVE_LEVEL HIGH
+#endif
+
+#ifndef PA_7_ACTIVE_LEVEL
+#define PA_7_ACTIVE_LEVEL HIGH
+#endif
+
+#ifndef PA_8_ACTIVE_LEVEL
+#define PA_8_ACTIVE_LEVEL HIGH
+#endif
+
+#ifndef PA_9_ACTIVE_LEVEL
+#define PA_9_ACTIVE_LEVEL HIGH
+#endif
+
+#ifndef PA_10_ACTIVE_LEVEL
+#define PA_10_ACTIVE_LEVEL HIGH
+#endif
+
+#ifndef PA_11_ACTIVE_LEVEL
+#define PA_11_ACTIVE_LEVEL HIGH
+#endif
+
+#ifndef PA_12_ACTIVE_LEVEL
+#define PA_12_ACTIVE_LEVEL HIGH
+#endif
+
+#ifndef PA_13_ACTIVE_LEVEL
+#define PA_13_ACTIVE_LEVEL HIGH
+#endif
+
+#ifndef PA_14_ACTIVE_LEVEL
+#define PA_14_ACTIVE_LEVEL HIGH
+#endif
+
+#ifndef PA_15_ACTIVE_LEVEL
+#define PA_15_ACTIVE_LEVEL HIGH
+#endif
+
+/* PORT B */
+
+#ifndef PB_0_ACTIVE_LEVEL
+#define PB_0_ACTIVE_LEVEL HIGH
+#endif
+
+#ifndef PB_1_ACTIVE_LEVEL
+#define PB_1_ACTIVE_LEVEL HIGH
+#endif
+
+#ifndef PB_2_ACTIVE_LEVEL
+#define PB_2_ACTIVE_LEVEL HIGH
+#endif
+
+#ifndef PB_3_ACTIVE_LEVEL
+#define PB_3_ACTIVE_LEVEL HIGH
+#endif
+
+#ifndef PB_4_ACTIVE_LEVEL
+#define PB_4_ACTIVE_LEVEL HIGH
+#endif
+
+#ifndef PB_5_ACTIVE_LEVEL
+#define PB_5_ACTIVE_LEVEL HIGH
+#endif
+
+#ifndef PB_6_ACTIVE_LEVEL
+#define PB_6_ACTIVE_LEVEL HIGH
+#endif
+
+#ifndef PB_7_ACTIVE_LEVEL
+#define PB_7_ACTIVE_LEVEL HIGH
+#endif
+
+#ifndef PB_8_ACTIVE_LEVEL
+#define PB_8_ACTIVE_LEVEL HIGH
+#endif
+
+#ifndef PB_9_ACTIVE_LEVEL
+#define PB_9_ACTIVE_LEVEL HIGH
+#endif
+
+#ifndef PB_10_ACTIVE_LEVEL
+#define PB_10_ACTIVE_LEVEL HIGH
+#endif
+
+#ifndef PB_11_ACTIVE_LEVEL
+#define PB_11_ACTIVE_LEVEL HIGH
+#endif
+
+#ifndef PB_12_ACTIVE_LEVEL
+#define PB_12_ACTIVE_LEVEL HIGH
+#endif
+
+#ifndef PB_13_ACTIVE_LEVEL
+#define PB_13_ACTIVE_LEVEL HIGH
+#endif
+
+#ifndef PB_14_ACTIVE_LEVEL
+#define PB_14_ACTIVE_LEVEL HIGH
+#endif
+
+#ifndef PB_15_ACTIVE_LEVEL
+#define PB_15_ACTIVE_LEVEL HIGH
+#endif
+
+/* PORT C */
+
+#ifndef PC_0_ACTIVE_LEVEL
+#define PC_0_ACTIVE_LEVEL HIGH
+#endif
+
+#ifndef PC_1_ACTIVE_LEVEL
+#define PC_1_ACTIVE_LEVEL HIGH
+#endif
+
+#ifndef PC_2_ACTIVE_LEVEL
+#define PC_2_ACTIVE_LEVEL HIGH
+#endif
+
+#ifndef PC_3_ACTIVE_LEVEL
+#define PC_3_ACTIVE_LEVEL HIGH
+#endif
+
+#ifndef PC_4_ACTIVE_LEVEL
+#define PC_4_ACTIVE_LEVEL HIGH
+#endif
+
+#ifndef PC_5_ACTIVE_LEVEL
+#define PC_5_ACTIVE_LEVEL HIGH
+#endif
+
+#ifndef PC_6_ACTIVE_LEVEL
+#define PC_6_ACTIVE_LEVEL HIGH
+#endif
+
+#ifndef PC_7_ACTIVE_LEVEL
+#define PC_7_ACTIVE_LEVEL HIGH
+#endif
+
+#ifndef PC_8_ACTIVE_LEVEL
+#define PC_8_ACTIVE_LEVEL HIGH
+#endif
+
+#ifndef PC_9_ACTIVE_LEVEL
+#define PC_9_ACTIVE_LEVEL HIGH
+#endif
+
+#ifndef PC_10_ACTIVE_LEVEL
+#define PC_10_ACTIVE_LEVEL HIGH
+#endif
+
+#ifndef PC_11_ACTIVE_LEVEL
+#define PC_11_ACTIVE_LEVEL HIGH
+#endif
+
+#ifndef PC_12_ACTIVE_LEVEL
+#define PC_12_ACTIVE_LEVEL HIGH
+#endif
+
+#ifndef PC_13_ACTIVE_LEVEL
+#define PC_13_ACTIVE_LEVEL HIGH
+#endif
+
+#ifndef PC_14_ACTIVE_LEVEL
+#define PC_14_ACTIVE_LEVEL HIGH
+#endif
+
+#ifndef PC_15_ACTIVE_LEVEL
+#define PC_15_ACTIVE_LEVEL HIGH
+#endif
+
+/* PORT D */
+
+#ifndef PD_0_ACTIVE_LEVEL
+#define PD_0_ACTIVE_LEVEL HIGH
+#endif
+
+#ifndef PD_1_ACTIVE_LEVEL
+#define PD_1_ACTIVE_LEVEL HIGH
+#endif
+
+#ifndef PD_2_ACTIVE_LEVEL
+#define PD_2_ACTIVE_LEVEL HIGH
+#endif
+
+#ifndef PD_3_ACTIVE_LEVEL
+#define PD_3_ACTIVE_LEVEL HIGH
+#endif
+
+#ifndef PD_4_ACTIVE_LEVEL
+#define PD_4_ACTIVE_LEVEL HIGH
+#endif
+
+#ifndef PD_5_ACTIVE_LEVEL
+#define PD_5_ACTIVE_LEVEL HIGH
+#endif
+
+#ifndef PD_6_ACTIVE_LEVEL
+#define PD_6_ACTIVE_LEVEL HIGH
+#endif
+
+#ifndef PD_7_ACTIVE_LEVEL
+#define PD_7_ACTIVE_LEVEL HIGH
+#endif
+
+#ifndef PD_8_ACTIVE_LEVEL
+#define PD_8_ACTIVE_LEVEL HIGH
+#endif
+
+#ifndef PD_9_ACTIVE_LEVEL
+#define PD_9_ACTIVE_LEVEL HIGH
+#endif
+
+#ifndef PD_10_ACTIVE_LEVEL
+#define PD_10_ACTIVE_LEVEL HIGH
+#endif
+
+#ifndef PD_11_ACTIVE_LEVEL
+#define PD_11_ACTIVE_LEVEL HIGH
+#endif
+
+#ifndef PD_12_ACTIVE_LEVEL
+#define PD_12_ACTIVE_LEVEL HIGH
+#endif
+
+#ifndef PD_13_ACTIVE_LEVEL
+#define PD_13_ACTIVE_LEVEL HIGH
+#endif
+
+#ifndef PD_14_ACTIVE_LEVEL
+#define PD_14_ACTIVE_LEVEL HIGH
+#endif
+
+#ifndef PD_15_ACTIVE_LEVEL
+#define PD_15_ACTIVE_LEVEL HIGH
+#endif
+
+/* PORT E */
+
+#ifndef PE_0_ACTIVE_LEVEL
+#define PE_0_ACTIVE_LEVEL HIGH
+#endif
+
+#ifndef PE_1_ACTIVE_LEVEL
+#define PE_1_ACTIVE_LEVEL HIGH
+#endif
+
+#ifndef PE_2_ACTIVE_LEVEL
+#define PE_2_ACTIVE_LEVEL HIGH
+#endif
+
+#ifndef PE_3_ACTIVE_LEVEL
+#define PE_3_ACTIVE_LEVEL HIGH
+#endif
+
+#ifndef PE_4_ACTIVE_LEVEL
+#define PE_4_ACTIVE_LEVEL HIGH
+#endif
+
+#ifndef PE_5_ACTIVE_LEVEL
+#define PE_5_ACTIVE_LEVEL HIGH
+#endif
+
+#ifndef PE_6_ACTIVE_LEVEL
+#define PE_6_ACTIVE_LEVEL HIGH
+#endif
+
+#ifndef PE_7_ACTIVE_LEVEL
+#define PE_7_ACTIVE_LEVEL HIGH
+#endif
+
+#ifndef PE_8_ACTIVE_LEVEL
+#define PE_8_ACTIVE_LEVEL HIGH
+#endif
+
+#ifndef PE_9_ACTIVE_LEVEL
+#define PE_9_ACTIVE_LEVEL HIGH
+#endif
+
+#ifndef PE_10_ACTIVE_LEVEL
+#define PE_10_ACTIVE_LEVEL HIGH
+#endif
+
+#ifndef PE_11_ACTIVE_LEVEL
+#define PE_11_ACTIVE_LEVEL HIGH
+#endif
+
+#ifndef PE_12_ACTIVE_LEVEL
+#define PE_12_ACTIVE_LEVEL HIGH
+#endif
+
+#ifndef PE_13_ACTIVE_LEVEL
+#define PE_13_ACTIVE_LEVEL HIGH
+#endif
+
+#ifndef PE_14_ACTIVE_LEVEL
+#define PE_14_ACTIVE_LEVEL HIGH
+#endif
+
+#ifndef PE_15_ACTIVE_LEVEL
+#define PE_15_ACTIVE_LEVEL HIGH
+#endif
+
+/* PORT F */
+
+#ifndef PF_0_ACTIVE_LEVEL
+#define PF_0_ACTIVE_LEVEL HIGH
+#endif
+
+#ifndef PF_1_ACTIVE_LEVEL
+#define PF_1_ACTIVE_LEVEL HIGH
+#endif
+
+#ifndef PF_2_ACTIVE_LEVEL
+#define PF_2_ACTIVE_LEVEL HIGH
+#endif
+
+#ifndef PF_3_ACTIVE_LEVEL
+#define PF_3_ACTIVE_LEVEL HIGH
+#endif
+
+#ifndef PF_4_ACTIVE_LEVEL
+#define PF_4_ACTIVE_LEVEL HIGH
+#endif
+
+#ifndef PF_5_ACTIVE_LEVEL
+#define PF_5_ACTIVE_LEVEL HIGH
+#endif
+
+#ifndef PF_6_ACTIVE_LEVEL
+#define PF_6_ACTIVE_LEVEL HIGH
+#endif
+
+#ifndef PF_7_ACTIVE_LEVEL
+#define PF_7_ACTIVE_LEVEL HIGH
+#endif
+
+#ifndef PF_8_ACTIVE_LEVEL
+#define PF_8_ACTIVE_LEVEL HIGH
+#endif
+
+#ifndef PF_9_ACTIVE_LEVEL
+#define PF_9_ACTIVE_LEVEL HIGH
+#endif
+
+#ifndef PF_10_ACTIVE_LEVEL
+#define PF_10_ACTIVE_LEVEL HIGH
+#endif
+
+#ifndef PF_11_ACTIVE_LEVEL
+#define PF_11_ACTIVE_LEVEL HIGH
+#endif
+
+#ifndef PF_12_ACTIVE_LEVEL
+#define PF_12_ACTIVE_LEVEL HIGH
+#endif
+
+#ifndef PF_13_ACTIVE_LEVEL
+#define PF_13_ACTIVE_LEVEL HIGH
+#endif
+
+#ifndef PF_14_ACTIVE_LEVEL
+#define PF_14_ACTIVE_LEVEL HIGH
+#endif
+
+#ifndef PF_15_ACTIVE_LEVEL
+#define PF_15_ACTIVE_LEVEL HIGH
+#endif
 
 
+/* PORT G */
+
+#ifndef PG_0_ACTIVE_LEVEL
+#define PG_0_ACTIVE_LEVEL HIGH
+#endif
+
+#ifndef PG_1_ACTIVE_LEVEL
+#define PG_1_ACTIVE_LEVEL HIGH
+#endif
+
+#ifndef PG_2_ACTIVE_LEVEL
+#define PG_2_ACTIVE_LEVEL HIGH
+#endif
+
+#ifndef PG_3_ACTIVE_LEVEL
+#define PG_3_ACTIVE_LEVEL HIGH
+#endif
+
+#ifndef PG_4_ACTIVE_LEVEL
+#define PG_4_ACTIVE_LEVEL HIGH
+#endif
+
+#ifndef PG_5_ACTIVE_LEVEL
+#define PG_5_ACTIVE_LEVEL HIGH
+#endif
+
+#ifndef PG_6_ACTIVE_LEVEL
+#define PG_6_ACTIVE_LEVEL HIGH
+#endif
+
+#ifndef PG_7_ACTIVE_LEVEL
+#define PG_7_ACTIVE_LEVEL HIGH
+#endif
+
+#ifndef PG_8_ACTIVE_LEVEL
+#define PG_8_ACTIVE_LEVEL HIGH
+#endif
+
+#ifndef PG_9_ACTIVE_LEVEL
+#define PG_9_ACTIVE_LEVEL HIGH
+#endif
+
+#ifndef PG_10_ACTIVE_LEVEL
+#define PG_10_ACTIVE_LEVEL HIGH
+#endif
+
+#ifndef PG_11_ACTIVE_LEVEL
+#define PG_11_ACTIVE_LEVEL HIGH
+#endif
+
+#ifndef PG_12_ACTIVE_LEVEL
+#define PG_12_ACTIVE_LEVEL HIGH
+#endif
+
+#ifndef PG_13_ACTIVE_LEVEL
+#define PG_13_ACTIVE_LEVEL HIGH
+#endif
+
+#ifndef PG_14_ACTIVE_LEVEL
+#define PG_14_ACTIVE_LEVEL HIGH
+#endif
+
+#ifndef PG_15_ACTIVE_LEVEL
+#define PG_15_ACTIVE_LEVEL HIGH
+#endif
+
+/* PORT H */
+
+#ifndef PH_0_ACTIVE_LEVEL
+#define PH_0_ACTIVE_LEVEL HIGH
+#endif
+
+#ifndef PH_1_ACTIVE_LEVEL
+#define PH_1_ACTIVE_LEVEL HIGH
+#endif
+
+#ifndef PH_2_ACTIVE_LEVEL
+#define PH_2_ACTIVE_LEVEL HIGH
+#endif
+
+#ifndef PH_3_ACTIVE_LEVEL
+#define PH_3_ACTIVE_LEVEL HIGH
+#endif
+
+#ifndef PH_4_ACTIVE_LEVEL
+#define PH_4_ACTIVE_LEVEL HIGH
+#endif
+
+#ifndef PH_5_ACTIVE_LEVEL
+#define PH_5_ACTIVE_LEVEL HIGH
+#endif
+
+#ifndef PH_6_ACTIVE_LEVEL
+#define PH_6_ACTIVE_LEVEL HIGH
+#endif
+
+#ifndef PH_7_ACTIVE_LEVEL
+#define PH_7_ACTIVE_LEVEL HIGH
+#endif
+
+#ifndef PH_8_ACTIVE_LEVEL
+#define PH_8_ACTIVE_LEVEL HIGH
+#endif
+
+#ifndef PH_9_ACTIVE_LEVEL
+#define PH_9_ACTIVE_LEVEL HIGH
+#endif
+
+#ifndef PH_10_ACTIVE_LEVEL
+#define PH_10_ACTIVE_LEVEL HIGH
+#endif
+
+#ifndef PH_11_ACTIVE_LEVEL
+#define PH_11_ACTIVE_LEVEL HIGH
+#endif
+
+#ifndef PH_12_ACTIVE_LEVEL
+#define PH_12_ACTIVE_LEVEL HIGH
+#endif
+
+#ifndef PH_13_ACTIVE_LEVEL
+#define PH_13_ACTIVE_LEVEL HIGH
+#endif
+
+#ifndef PH_14_ACTIVE_LEVEL
+#define PH_14_ACTIVE_LEVEL HIGH
+#endif
+
+#ifndef PH_15_ACTIVE_LEVEL
+#define PH_15_ACTIVE_LEVEL HIGH
+#endif
+
+/* START LEVEL */
+
+/* PORT A */
+#ifndef PA_0_START_LEVEL
+#define PA_0_START_LEVEL HIGH
+#endif
+
+#ifndef PA_1_START_LEVEL
+#define PA_1_START_LEVEL HIGH
+#endif
+
+#ifndef PA_2_START_LEVEL
+#define PA_2_START_LEVEL HIGH
+#endif
+
+#ifndef PA_3_START_LEVEL
+#define PA_3_START_LEVEL HIGH
+#endif
+
+#ifndef PA_4_START_LEVEL
+#define PA_4_START_LEVEL HIGH
+#endif
+
+#ifndef PA_5_START_LEVEL
+#define PA_5_START_LEVEL HIGH
+#endif
+
+#ifndef PA_6_START_LEVEL
+#define PA_6_START_LEVEL HIGH
+#endif
+
+#ifndef PA_7_START_LEVEL
+#define PA_7_START_LEVEL HIGH
+#endif
+
+#ifndef PA_8_START_LEVEL
+#define PA_8_START_LEVEL HIGH
+#endif
+
+#ifndef PA_9_START_LEVEL
+#define PA_9_START_LEVEL HIGH
+#endif
+
+#ifndef PA_10_START_LEVEL
+#define PA_10_START_LEVEL HIGH
+#endif
+
+#ifndef PA_11_START_LEVEL
+#define PA_11_START_LEVEL HIGH
+#endif
+
+#ifndef PA_12_START_LEVEL
+#define PA_12_START_LEVEL HIGH
+#endif
+
+#ifndef PA_13_START_LEVEL
+#define PA_13_START_LEVEL HIGH
+#endif
+
+#ifndef PA_14_START_LEVEL
+#define PA_14_START_LEVEL HIGH
+#endif
+
+#ifndef PA_15_START_LEVEL
+#define PA_15_START_LEVEL HIGH
+#endif
+
+/* PORT B */
+
+#ifndef PB_0_START_LEVEL
+#define PB_0_START_LEVEL HIGH
+#endif
+
+#ifndef PB_1_START_LEVEL
+#define PB_1_START_LEVEL HIGH
+#endif
+
+#ifndef PB_2_START_LEVEL
+#define PB_2_START_LEVEL HIGH
+#endif
+
+#ifndef PB_3_START_LEVEL
+#define PB_3_START_LEVEL HIGH
+#endif
+
+#ifndef PB_4_START_LEVEL
+#define PB_4_START_LEVEL HIGH
+#endif
+
+#ifndef PB_5_START_LEVEL
+#define PB_5_START_LEVEL HIGH
+#endif
+
+#ifndef PB_6_START_LEVEL
+#define PB_6_START_LEVEL HIGH
+#endif
+
+#ifndef PB_7_START_LEVEL
+#define PB_7_START_LEVEL HIGH
+#endif
+
+#ifndef PB_8_START_LEVEL
+#define PB_8_START_LEVEL HIGH
+#endif
+
+#ifndef PB_9_START_LEVEL
+#define PB_9_START_LEVEL HIGH
+#endif
+
+#ifndef PB_10_START_LEVEL
+#define PB_10_START_LEVEL HIGH
+#endif
+
+#ifndef PB_11_START_LEVEL
+#define PB_11_START_LEVEL HIGH
+#endif
+
+#ifndef PB_12_START_LEVEL
+#define PB_12_START_LEVEL HIGH
+#endif
+
+#ifndef PB_13_START_LEVEL
+#define PB_13_START_LEVEL HIGH
+#endif
+
+#ifndef PB_14_START_LEVEL
+#define PB_14_START_LEVEL HIGH
+#endif
+
+#ifndef PB_15_START_LEVEL
+#define PB_15_START_LEVEL HIGH
+#endif
+
+/* PORT C */
+
+#ifndef PC_0_START_LEVEL
+#define PC_0_START_LEVEL HIGH
+#endif
+
+#ifndef PC_1_START_LEVEL
+#define PC_1_START_LEVEL HIGH
+#endif
+
+#ifndef PC_2_START_LEVEL
+#define PC_2_START_LEVEL HIGH
+#endif
+
+#ifndef PC_3_START_LEVEL
+#define PC_3_START_LEVEL HIGH
+#endif
+
+#ifndef PC_4_START_LEVEL
+#define PC_4_START_LEVEL HIGH
+#endif
+
+#ifndef PC_5_START_LEVEL
+#define PC_5_START_LEVEL HIGH
+#endif
+
+#ifndef PC_6_START_LEVEL
+#define PC_6_START_LEVEL HIGH
+#endif
+
+#ifndef PC_7_START_LEVEL
+#define PC_7_START_LEVEL HIGH
+#endif
+
+#ifndef PC_8_START_LEVEL
+#define PC_8_START_LEVEL HIGH
+#endif
+
+#ifndef PC_9_START_LEVEL
+#define PC_9_START_LEVEL HIGH
+#endif
+
+#ifndef PC_10_START_LEVEL
+#define PC_10_START_LEVEL HIGH
+#endif
+
+#ifndef PC_11_START_LEVEL
+#define PC_11_START_LEVEL HIGH
+#endif
+
+#ifndef PC_12_START_LEVEL
+#define PC_12_START_LEVEL HIGH
+#endif
+
+#ifndef PC_13_START_LEVEL
+#define PC_13_START_LEVEL HIGH
+#endif
+
+#ifndef PC_14_START_LEVEL
+#define PC_14_START_LEVEL HIGH
+#endif
+
+#ifndef PC_15_START_LEVEL
+#define PC_15_START_LEVEL HIGH
+#endif
+
+/* PORT D */
+
+#ifndef PD_0_START_LEVEL
+#define PD_0_START_LEVEL HIGH
+#endif
+
+#ifndef PD_1_START_LEVEL
+#define PD_1_START_LEVEL HIGH
+#endif
+
+#ifndef PD_2_START_LEVEL
+#define PD_2_START_LEVEL HIGH
+#endif
+
+#ifndef PD_3_START_LEVEL
+#define PD_3_START_LEVEL HIGH
+#endif
+
+#ifndef PD_4_START_LEVEL
+#define PD_4_START_LEVEL HIGH
+#endif
+
+#ifndef PD_5_START_LEVEL
+#define PD_5_START_LEVEL HIGH
+#endif
+
+#ifndef PD_6_START_LEVEL
+#define PD_6_START_LEVEL HIGH
+#endif
+
+#ifndef PD_7_START_LEVEL
+#define PD_7_START_LEVEL HIGH
+#endif
+
+#ifndef PD_8_START_LEVEL
+#define PD_8_START_LEVEL HIGH
+#endif
+
+#ifndef PD_9_START_LEVEL
+#define PD_9_START_LEVEL HIGH
+#endif
+
+#ifndef PD_10_START_LEVEL
+#define PD_10_START_LEVEL HIGH
+#endif
+
+#ifndef PD_11_START_LEVEL
+#define PD_11_START_LEVEL HIGH
+#endif
+
+#ifndef PD_12_START_LEVEL
+#define PD_12_START_LEVEL HIGH
+#endif
+
+#ifndef PD_13_START_LEVEL
+#define PD_13_START_LEVEL HIGH
+#endif
+
+#ifndef PD_14_START_LEVEL
+#define PD_14_START_LEVEL HIGH
+#endif
+
+#ifndef PD_15_START_LEVEL
+#define PD_15_START_LEVEL HIGH
+#endif
+
+/* PORT E */
+
+#ifndef PE_0_START_LEVEL
+#define PE_0_START_LEVEL HIGH
+#endif
+
+#ifndef PE_1_START_LEVEL
+#define PE_1_START_LEVEL HIGH
+#endif
+
+#ifndef PE_2_START_LEVEL
+#define PE_2_START_LEVEL HIGH
+#endif
+
+#ifndef PE_3_START_LEVEL
+#define PE_3_START_LEVEL HIGH
+#endif
+
+#ifndef PE_4_START_LEVEL
+#define PE_4_START_LEVEL HIGH
+#endif
+
+#ifndef PE_5_START_LEVEL
+#define PE_5_START_LEVEL HIGH
+#endif
+
+#ifndef PE_6_START_LEVEL
+#define PE_6_START_LEVEL HIGH
+#endif
+
+#ifndef PE_7_START_LEVEL
+#define PE_7_START_LEVEL HIGH
+#endif
+
+#ifndef PE_8_START_LEVEL
+#define PE_8_START_LEVEL HIGH
+#endif
+
+#ifndef PE_9_START_LEVEL
+#define PE_9_START_LEVEL HIGH
+#endif
+
+#ifndef PE_10_START_LEVEL
+#define PE_10_START_LEVEL HIGH
+#endif
+
+#ifndef PE_11_START_LEVEL
+#define PE_11_START_LEVEL HIGH
+#endif
+
+#ifndef PE_12_START_LEVEL
+#define PE_12_START_LEVEL HIGH
+#endif
+
+#ifndef PE_13_START_LEVEL
+#define PE_13_START_LEVEL HIGH
+#endif
+
+#ifndef PE_14_START_LEVEL
+#define PE_14_START_LEVEL HIGH
+#endif
+
+#ifndef PE_15_START_LEVEL
+#define PE_15_START_LEVEL HIGH
+#endif
+
+/* PORT F */
+
+#ifndef PF_0_START_LEVEL
+#define PF_0_START_LEVEL HIGH
+#endif
+
+#ifndef PF_1_START_LEVEL
+#define PF_1_START_LEVEL HIGH
+#endif
+
+#ifndef PF_2_START_LEVEL
+#define PF_2_START_LEVEL HIGH
+#endif
+
+#ifndef PF_3_START_LEVEL
+#define PF_3_START_LEVEL HIGH
+#endif
+
+#ifndef PF_4_START_LEVEL
+#define PF_4_START_LEVEL HIGH
+#endif
+
+#ifndef PF_5_START_LEVEL
+#define PF_5_START_LEVEL HIGH
+#endif
+
+#ifndef PF_6_START_LEVEL
+#define PF_6_START_LEVEL HIGH
+#endif
+
+#ifndef PF_7_START_LEVEL
+#define PF_7_START_LEVEL HIGH
+#endif
+
+#ifndef PF_8_START_LEVEL
+#define PF_8_START_LEVEL HIGH
+#endif
+
+#ifndef PF_9_START_LEVEL
+#define PF_9_START_LEVEL HIGH
+#endif
+
+#ifndef PF_10_START_LEVEL
+#define PF_10_START_LEVEL HIGH
+#endif
+
+#ifndef PF_11_START_LEVEL
+#define PF_11_START_LEVEL HIGH
+#endif
+
+#ifndef PF_12_START_LEVEL
+#define PF_12_START_LEVEL HIGH
+#endif
+
+#ifndef PF_13_START_LEVEL
+#define PF_13_START_LEVEL HIGH
+#endif
+
+#ifndef PF_14_START_LEVEL
+#define PF_14_START_LEVEL HIGH
+#endif
+
+#ifndef PF_15_START_LEVEL
+#define PF_15_START_LEVEL HIGH
+#endif
+
+
+/* PORT G */
+
+#ifndef PG_0_START_LEVEL
+#define PG_0_START_LEVEL HIGH
+#endif
+
+#ifndef PG_1_START_LEVEL
+#define PG_1_START_LEVEL HIGH
+#endif
+
+#ifndef PG_2_START_LEVEL
+#define PG_2_START_LEVEL HIGH
+#endif
+
+#ifndef PG_3_START_LEVEL
+#define PG_3_START_LEVEL HIGH
+#endif
+
+#ifndef PG_4_START_LEVEL
+#define PG_4_START_LEVEL HIGH
+#endif
+
+#ifndef PG_5_START_LEVEL
+#define PG_5_START_LEVEL HIGH
+#endif
+
+#ifndef PG_6_START_LEVEL
+#define PG_6_START_LEVEL HIGH
+#endif
+
+#ifndef PG_7_START_LEVEL
+#define PG_7_START_LEVEL HIGH
+#endif
+
+#ifndef PG_8_START_LEVEL
+#define PG_8_START_LEVEL HIGH
+#endif
+
+#ifndef PG_9_START_LEVEL
+#define PG_9_START_LEVEL HIGH
+#endif
+
+#ifndef PG_10_START_LEVEL
+#define PG_10_START_LEVEL HIGH
+#endif
+
+#ifndef PG_11_START_LEVEL
+#define PG_11_START_LEVEL HIGH
+#endif
+
+#ifndef PG_12_START_LEVEL
+#define PG_12_START_LEVEL HIGH
+#endif
+
+#ifndef PG_13_START_LEVEL
+#define PG_13_START_LEVEL HIGH
+#endif
+
+#ifndef PG_14_START_LEVEL
+#define PG_14_START_LEVEL HIGH
+#endif
+
+#ifndef PG_15_START_LEVEL
+#define PG_15_START_LEVEL HIGH
+#endif
+
+/* PORT H */
+
+#ifndef PH_0_START_LEVEL
+#define PH_0_START_LEVEL HIGH
+#endif
+
+#ifndef PH_1_START_LEVEL
+#define PH_1_START_LEVEL HIGH
+#endif
+
+#ifndef PH_2_START_LEVEL
+#define PH_2_START_LEVEL HIGH
+#endif
+
+#ifndef PH_3_START_LEVEL
+#define PH_3_START_LEVEL HIGH
+#endif
+
+#ifndef PH_4_START_LEVEL
+#define PH_4_START_LEVEL HIGH
+#endif
+
+#ifndef PH_5_START_LEVEL
+#define PH_5_START_LEVEL HIGH
+#endif
+
+#ifndef PH_6_START_LEVEL
+#define PH_6_START_LEVEL HIGH
+#endif
+
+#ifndef PH_7_START_LEVEL
+#define PH_7_START_LEVEL HIGH
+#endif
+
+#ifndef PH_8_START_LEVEL
+#define PH_8_START_LEVEL HIGH
+#endif
+
+#ifndef PH_9_START_LEVEL
+#define PH_9_START_LEVEL HIGH
+#endif
+
+#ifndef PH_10_START_LEVEL
+#define PH_10_START_LEVEL HIGH
+#endif
+
+#ifndef PH_11_START_LEVEL
+#define PH_11_START_LEVEL HIGH
+#endif
+
+#ifndef PH_12_START_LEVEL
+#define PH_12_START_LEVEL HIGH
+#endif
+
+#ifndef PH_13_START_LEVEL
+#define PH_13_START_LEVEL HIGH
+#endif
+
+#ifndef PH_14_START_LEVEL
+#define PH_14_START_LEVEL HIGH
+#endif
+
+#ifndef PH_15_START_LEVEL
+#define PH_15_START_LEVEL HIGH
+#endif
+
+
+/* PIN ID */
 
 #define PA_0_ID             0
 #define PA_1_ID             1

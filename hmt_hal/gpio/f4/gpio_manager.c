@@ -122,7 +122,7 @@ void hmt_GpioInit()
 
         LL_GPIO_Init(ActualGpio.port, &InitStruct);
 
-        GpioValTab[i].active_level = HIGH;
+        GpioValTab[i].activeLevel = HIGH;
         GpioValTab[i].actualVal = LOW;
         GpioValTab[i].oldVal = LOW;
     }
@@ -158,7 +158,7 @@ bool hmt_GpioWritePin(uint16_t GpioId, gpio_value NewVal)
     }
     GpioValTab[GpioId].oldVal = LL_GPIO_IsOutputPinSet(GpioDefsTab[GpioId].port, GpioDefsTab[GpioId].pin) == 1 ? HIGH : LOW;
     if(NewVal == HIGH){
-        if(GpioValTab[GpioId].active_level == HIGH){
+        if(GpioValTab[GpioId].activeLevel == HIGH){
             LL_GPIO_SetOutputPin(GpioDefsTab[GpioId].port, GpioDefsTab[GpioId].pin);
         } else {
             LL_GPIO_ResetOutputPin(GpioDefsTab[GpioId].port, GpioDefsTab[GpioId].pin);
@@ -166,7 +166,7 @@ bool hmt_GpioWritePin(uint16_t GpioId, gpio_value NewVal)
         Writed = true;
     } 
     else {
-        if(GpioValTab[GpioId].active_level == HIGH){
+        if(GpioValTab[GpioId].activeLevel == HIGH){
             LL_GPIO_ResetOutputPin(GpioDefsTab[GpioId].port, GpioDefsTab[GpioId].pin);
         } else {
             LL_GPIO_SetOutputPin(GpioDefsTab[GpioId].port, GpioDefsTab[GpioId].pin);
@@ -188,7 +188,7 @@ bool hmt_GpioReadPin(uint16_t GpioId)
     }
     GpioValTab[GpioId].oldVal = GpioValTab[GpioId].actualVal;
     GpioValTab[GpioId].actualVal = LL_GPIO_IsInputPinSet(GpioDefsTab[GpioId].port, GpioDefsTab[GpioId].pin) == 1 ? HIGH : LOW;
-    if(GpioValTab[GpioId].active_level == LOW){
+    if(GpioValTab[GpioId].activeLevel == LOW){
        GpioValTab[GpioId].actualVal = GpioValTab[GpioId].actualVal == HIGH ? LOW : HIGH;
     }
     return Readed;
