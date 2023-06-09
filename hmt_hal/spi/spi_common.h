@@ -3,8 +3,8 @@
 #include "hmt_common.h"
 
 
-void hmt_SPITxCB(SPI_TypeDef *SPIx);
-void hmt_SPIRxCB(SPI_TypeDef *SPIx);
+void hmt_SPI_Tx_CB(SPI_TypeDef *SPIx);
+void hmt_SPI_Rx_CB(SPI_TypeDef *SPIx);
 
 
 

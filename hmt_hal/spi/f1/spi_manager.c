@@ -45,8 +45,7 @@ void hmt_SPIInit(SPI_TypeDef *SPIx)
 	/* Configure SPI2 transfer interrupts */
 	/* Enable RXNE  Interrupt             */
 	LL_SPI_EnableIT_RXNE(SPIx);
-	/* Enable TXE   Interrupt             */
-	LL_SPI_EnableIT_TXE(SPIx);
+
 	/* Enable Error Interrupt             */
 	LL_SPI_EnableIT_ERR(SPIx);
 }
@@ -57,13 +56,13 @@ void hmt_SPI_IT_Handler(SPI_TypeDef *SPIx)
 	if(LL_SPI_IsActiveFlag_RXNE(SPIx))
 	{
 		/* Call function Slave Reception Callback */
-		hmt_SPIRxCB(SPIx);
+		hmt_SPI_Rx_CB(SPIx);
 	}
 	/* Check RXNE flag value in ISR register */
 	else if(LL_SPI_IsActiveFlag_TXE(SPIx))
 	{
 		/* Call function Slave Reception Callback */
-		hmt_SPITxCB(SPIx);
+		hmt_SPI_Tx_CB(SPIx);
 	}
 	/* Check STOP flag value in ISR register */
 	else if(LL_SPI_IsActiveFlag_OVR(SPIx))
@@ -72,7 +71,6 @@ void hmt_SPI_IT_Handler(SPI_TypeDef *SPIx)
 		// SPI2_TransferError_Callback();
 	}
 }
-
 
 
 
