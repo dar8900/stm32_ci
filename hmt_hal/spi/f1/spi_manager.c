@@ -11,14 +11,14 @@ void hmt_SPIInit(SPI_TypeDef *SPIx)
 	{
 		NVIC_SetPriority(SPI1_IRQn, NVIC_EncodePriority(NVIC_GetPriorityGrouping(),0, 0));
 		NVIC_EnableIRQ(SPI1_IRQn);
-		LL_GPIO_AF_EnableRemap_SPI1();
+		// LL_GPIO_AF_EnableRemap_SPI1();
 	} 
 #ifdef SPI2
 	if(SPIx == SPI2)
 	{
 		NVIC_SetPriority(SPI2_IRQn, NVIC_EncodePriority(NVIC_GetPriorityGrouping(),0, 0));
 		NVIC_EnableIRQ(SPI2_IRQn);
-		LL_GPIO_AF_EnableRemap_SPI2();
+		// LL_GPIO_AF_EnableRemap_SPI2();
 	}
 #endif
 #ifdef SPI3
@@ -26,7 +26,7 @@ void hmt_SPIInit(SPI_TypeDef *SPIx)
 	{
 		NVIC_SetPriority(SPI3_IRQn, NVIC_EncodePriority(NVIC_GetPriorityGrouping(),0, 0));
 		NVIC_EnableIRQ(SPI3_IRQn);
-		LL_GPIO_AF_EnableRemap_SPI3();
+		// LL_GPIO_AF_EnableRemap_SPI3();
 	}
 #endif
 
@@ -45,7 +45,6 @@ void hmt_SPIInit(SPI_TypeDef *SPIx)
 	/* Configure SPI2 transfer interrupts */
 	/* Enable RXNE  Interrupt             */
 	LL_SPI_EnableIT_RXNE(SPIx);
-
 	/* Enable Error Interrupt             */
 	LL_SPI_EnableIT_ERR(SPIx);
 }
@@ -53,13 +52,13 @@ void hmt_SPIInit(SPI_TypeDef *SPIx)
 void hmt_SPI_IT_Handler(SPI_TypeDef *SPIx)
 {
 		/* Check RXNE flag value in ISR register */
-	if(LL_SPI_IsActiveFlag_RXNE(SPIx))
+	if(LL_SPI_IsEnabledIT_RXNE(SPIx) && LL_SPI_IsActiveFlag_RXNE(SPIx))
 	{
 		/* Call function Slave Reception Callback */
 		hmt_SPI_Rx_CB(SPIx);
 	}
 	/* Check RXNE flag value in ISR register */
-	else if(LL_SPI_IsActiveFlag_TXE(SPIx))
+	else if(LL_SPI_IsEnabledIT_TXE(SPIx) && LL_SPI_IsActiveFlag_TXE(SPIx))
 	{
 		/* Call function Slave Reception Callback */
 		hmt_SPI_Tx_CB(SPIx);
@@ -69,6 +68,13 @@ void hmt_SPI_IT_Handler(SPI_TypeDef *SPIx)
 	{
 		/* Call Error function */
 		// SPI2_TransferError_Callback();
+		LL_SPI_ClearFlag_OVR(SPIx);
+		
+		/* Disable RXNE  Interrupt             */
+		// LL_SPI_DisableIT_RXNE(SPI2);
+
+		/* Disable TXE   Interrupt             */
+		// LL_SPI_DisableIT_TXE(SPI2);
 	}
 }
 

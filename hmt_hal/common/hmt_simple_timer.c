@@ -1,6 +1,6 @@
 #include "hmt_simple_timer.h"
 
-void hmt_SimpleTimerStart(simple_timer *Timer, uint32_t Timeout)
+void hmt_SimpleTimerStart(simple_timer_t *Timer, uint32_t Timeout)
 {
 	if(!Timer){
 		return;
@@ -13,7 +13,7 @@ void hmt_SimpleTimerStart(simple_timer *Timer, uint32_t Timeout)
 	Timer->counter = hmt_GetMsTick();
 }
 
-void hmt_SimpleTimerStop(simple_timer *Timer)
+void hmt_SimpleTimerStop(simple_timer_t *Timer)
 {
 	if(!Timer){
 		return;
@@ -22,14 +22,14 @@ void hmt_SimpleTimerStop(simple_timer *Timer)
 	Timer->stop = true;	
 }
 
-void hmt_SimpleTimerRestart(simple_timer *Timer, uint32_t Timeout)
+void hmt_SimpleTimerRestart(simple_timer_t *Timer, uint32_t Timeout)
 {
 	hmt_SimpleTimerStop(Timer);
 	hmt_SimpleTimerStart(Timer, Timeout);
 }
 
 
-bool hmt_SimpleTimerElapsed(simple_timer *Timer, bool Restart, uint32_t Timeout)
+bool hmt_SimpleTimerElapsed(simple_timer_t *Timer, bool Restart, uint32_t Timeout)
 {
 	bool Elapsed = false;
 	if(!Timer){
@@ -49,7 +49,7 @@ bool hmt_SimpleTimerElapsed(simple_timer *Timer, bool Restart, uint32_t Timeout)
 	return Elapsed;
 }
 
-bool hmt_SimpleTimerOngoing(simple_timer *Timer)
+bool hmt_SimpleTimerOngoing(simple_timer_t *Timer)
 {
 	return Timer->start;
 }

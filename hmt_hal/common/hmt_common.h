@@ -46,7 +46,7 @@ typedef struct hmt_simple_timer
     bool stop;
     uint32_t counter;
     uint32_t timeout;
-}simple_timer;
+}simple_timer_t;
 
 typedef enum usart_rx_ret
 {
@@ -55,6 +55,20 @@ typedef enum usart_rx_ret
     USART_RX_MSG_ERROR
 }usart_rx_ret_code;
 
+typedef enum spi_tx_ret_e
+{
+    SPI_TX_IDLE = 0,
+    SPI_TX_SENT,
+    SPI_TX_TIMEOUT,
+    SPI_TX_ERROR
+}spi_tx_ret_v;
+typedef enum spi_rx_ret_e
+{
+    SPI_RX_IDLE = 0,
+    SPI_RX_RECEIVED,
+    SPI_RX_TIMEOUT,
+    SPI_RX_ERROR
+}spi_rx_ret_v;
 
 extern volatile uint32_t Tick1Ms;
 

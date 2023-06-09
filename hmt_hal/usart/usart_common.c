@@ -26,7 +26,7 @@ typedef struct usart_data
 
 
 static usart_data_s UsartData;
-static simple_timer RxTimer;
+static simple_timer_t RxTimer;
 
 
 /********************************* TX **************************************/

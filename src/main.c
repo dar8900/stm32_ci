@@ -3,7 +3,7 @@
 
 int main(void)
 {
-    simple_timer ToggleTimer;
+    simple_timer_t ToggleTimer;
     hmt_RccInit();
     hmt_GpioInit();
 #ifdef USE_USART    
