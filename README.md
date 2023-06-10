@@ -27,6 +27,17 @@ This project is structured to provide a basic template for STM32 development. Yo
 	* Add your `stm32<family>xx_it.h` under **inc** folder and your `stm32<family>xx_it.c` under **src** folder
 	* In `main.h` add the `#include <stm32<family>xx_hal.h>` for your application
 
+## Debugging
+To debug the project, install **openocd** and run it with two options. 
+These two options vary according to the type of debugger in use and according to the STM32 platform being used.
+An example of a command could be:
+- `openocd -f /usr/share/openocd/scripts/interface/stlink-v2.cfg -f /usr/share/openocd/scripts/target/stm32f1x.cfg` (for users who installed openocd on linux)
+Openocd will start a session on localhost on port 3333 to which we will have to connect with gdb.
+Now start **gdb-multiarch** giving it the project's **elf**.
+Once started type the command:
+- `target extended-remote localhost:3333`
+and gdb will connect to openocd and you can start debugging.
+
 ## Contributing
 Contributions to this project are welcome! If you find any issues or have suggestions for improvements, please submit them via GitHub's issue tracker. Feel free to fork the repository and submit pull requests with your enhancements.
 
