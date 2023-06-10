@@ -4,5 +4,3 @@ build_Release_*
 build_*.conf
 .vscode
 compile_commands.json
-src/*
-inc/*
