@@ -6,12 +6,12 @@
 // #define USE_HSI
 #define USE_HSE
 
-#define USE_USART
+// #define USE_USART
 #ifdef USE_USART
 	#define USART_USED			USART1
 #endif
 
-#define USE_SPI
+// #define USE_SPI
 #ifdef USE_SPI
 	#define SPI_USED			SPI1
 #endif
@@ -25,16 +25,5 @@
 #define    P<port>_<pin>_ACTIVE_LEVEL   NO_PULL
 #define    P<port>_<pin>_START_LEVEL   	NO_PULL
 */
-
-
-#define PA_5_MODE		OUTPUT
-#define PA_5_SPEED		SPEED_HIGH
-#define PA_5_OUTPUT		PUSH_PULL
-#define PA_5_PULL_TYPE	NO_PULL
-
-#define PC_13_MODE		OUTPUT
-#define PC_13_SPEED		SPEED_HIGH
-#define PC_13_OUTPUT	PUSH_PULL
-#define PC_13_PULL_TYPE	NO_PULL
 
 #endif
