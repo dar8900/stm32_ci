@@ -21,6 +21,7 @@ find_package(HAL COMPONENTS STM32${STM32_FAMILY} REQUIRED)
 
 include_directories(
     hmt_hal/common
+    hmt_hal/rcc
     hmt_hal/rcc/${STM32_FAMILY_LOWER}
     hmt_hal/gpio
     hmt_hal/gpio/${STM32_FAMILY_LOWER}

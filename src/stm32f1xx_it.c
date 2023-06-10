@@ -19,6 +19,7 @@
 
 /* Includes ------------------------------------------------------------------*/
 #include "hmt_common.h"
+#include "rcc_common.h"
 #include "usart_manager.h"
 #include "stm32f1xx_it.h"
 /* Private includes ----------------------------------------------------------*/
@@ -183,11 +184,7 @@ void PendSV_Handler(void)
   */
 void SysTick_Handler(void)
 {
-    if(Tick1Ms < UINT32_MAX){
-        Tick1Ms++;
-    } else {
-        Tick1Ms = 0;
-    }
+    hmt_RccSysTickHandler();
 }
 
 /******************************************************************************/
