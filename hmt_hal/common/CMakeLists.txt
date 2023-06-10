@@ -5,6 +5,7 @@ string(TOLOWER ${STM32_FAMILY} STM32_FAMILY_LOWER)
 
 include_directories(
     ../../inc
+    ../rcc
     ../usart/${STM32_FAMILY_LOWER}
 )
 
@@ -13,6 +14,7 @@ include_directories(
 add_library("${LIBRARY_NAME}" 
     hmt_common.c
     hmt_simple_timer.c
+    ../rcc/rcc_common.c
     ../usart/usart_common.c
 )
 

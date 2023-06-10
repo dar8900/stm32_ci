@@ -70,7 +70,6 @@ typedef enum spi_rx_ret_e
     SPI_RX_ERROR
 }spi_rx_ret_v;
 
-extern volatile uint32_t Tick1Ms;
 
 /**
  * @brief Return ms elapsed
