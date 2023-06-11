@@ -3,21 +3,21 @@
 
 #ifdef USE_USART
 
-void hmt_UsartInit(USART_TypeDef *UsartX)
+void hmt_UsartInit(USART_TypeDef *UsartX, uint32_t Baudrate)
 {
 	if (UsartX == USART1)
 	{
 		/* USART1 interrupt Init */
 		NVIC_SetPriority(USART1_IRQn, NVIC_EncodePriority(NVIC_GetPriorityGrouping(), 10, 0));
 		NVIC_EnableIRQ(USART1_IRQn);
-		LL_GPIO_AF_EnableRemap_USART1();
+		// LL_GPIO_AF_EnableRemap_USART1();
 	}
 	else if (UsartX == USART2)
 	{
 		/* USART2 interrupt Init */
 		NVIC_SetPriority(USART2_IRQn, NVIC_EncodePriority(NVIC_GetPriorityGrouping(), 10, 0));
 		NVIC_EnableIRQ(USART2_IRQn);
-		LL_GPIO_AF_EnableRemap_USART2();
+		// LL_GPIO_AF_EnableRemap_USART2();
 	}
 #ifdef USART3
 	else if (UsartX == USART3)
@@ -25,13 +25,13 @@ void hmt_UsartInit(USART_TypeDef *UsartX)
 		/* USART3 interrupt Init */
 		NVIC_SetPriority(USART3_IRQn, NVIC_EncodePriority(NVIC_GetPriorityGrouping(), 10, 0));
 		NVIC_EnableIRQ(USART3_IRQn);
-		LL_GPIO_AF_EnableRemap_USART3();
+		// LL_GPIO_AF_EnableRemap_USART3();
 	}
 #endif /* USART 3 */
 
 	LL_USART_InitTypeDef USART_InitStruct = {0};
 
-	USART_InitStruct.BaudRate = 115200;
+	USART_InitStruct.BaudRate = Baudrate;
 	USART_InitStruct.DataWidth = LL_USART_DATAWIDTH_8B;
 	USART_InitStruct.StopBits = LL_USART_STOPBITS_1;
 	USART_InitStruct.Parity = LL_USART_PARITY_NONE;
