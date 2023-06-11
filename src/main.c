@@ -7,7 +7,7 @@ int main(void)
     hmt_RccInit();
     hmt_GpioInit();
 #ifdef USE_USART    
-    hmt_UsartInit(USART_USED);
+    hmt_UsartInit(USART_USED, 115200);
 #endif
     hmt_SimpleTimerStart(&ToggleTimer, 50);
     uint32_t NewTimeout = 50;
