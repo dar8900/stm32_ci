@@ -34,7 +34,8 @@
 #define PA_9_PULL_TYPE	NO_PULL
 
 /* RX */
-#define PA_10_MODE		FLOATING
+#define PA_10_MODE		INPUT
+#define PA_10_PUL_TYPE	PULL_UP
 #define PA_10_SPEED		SPEED_HIGH
 
 
