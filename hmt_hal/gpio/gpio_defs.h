@@ -48,8 +48,8 @@ typedef enum gpio_speed
 
 typedef enum gpio_value
 {
-    LOW = GPIO_PIN_RESET,
-    HIGH = GPIO_PIN_SET
+    LOW = 0x0,
+    HIGH = 0x1
 }gpio_value;
 
 
