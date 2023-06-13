@@ -1,7 +1,22 @@
 cmake_minimum_required(VERSION 3.16)
 # set(CMAKE_TOOLCHAIN_FILE "/home/deo/Documenti/STM32/stm32-cmake/cmake/stm32_gcc.cmake")
 
-set(EXECUTABLE_NAME "simple_blinky")
+find_package (Git)
+if (NOT GIT_FOUND)
+    message(FATAL_ERROR "Git repo not found")
+endif (GIT_FOUND)
+
+execute_process(
+    COMMAND ${GIT_EXECUTABLE} rev-parse --abbrev-ref HEAD 
+    OUTPUT_VARIABLE BRANCH_NAME
+)
+
+string(STRIP ${BRANCH_NAME} BRANCH_NAME)
+
+message("Actual branch is ${BRANCH_NAME}")
+
+
+set(EXECUTABLE_NAME "stm32_ci_${BRANCH_NAME}")
 
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
