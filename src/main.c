@@ -11,7 +11,7 @@ int main(void)
     {
         if(hmt_SimpleTimerElapsed(&ToggleTimer, true, 0))
         {
-            hmt_GpioTogglePin(PC_13_ID);
+            hmt_GpioTogglePin(DEBUG_LED);
         }
     }
 
