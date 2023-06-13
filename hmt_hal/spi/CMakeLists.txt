@@ -1,4 +1,0 @@
-
-string(TOLOWER ${STM32_FAMILY} STM32_FAMILY_LOWER)
-
-add_subdirectory(${STM32_FAMILY_LOWER})
