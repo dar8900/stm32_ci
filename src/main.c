@@ -1,5 +1,6 @@
 #include "main.h"
 
+unsigned char *TestMsg = "Hallo world from stm32f103\r\n";
 
 int main(void)
 {
@@ -15,13 +16,12 @@ int main(void)
     {
         if(hmt_SimpleTimerElapsed(&ToggleTimer, true, NewTimeout))
         {
-            hmt_GpioTogglePin(PC_13_ID);
-            hmt_GpioTogglePin(PB_3_ID);
+            hmt_GpioTogglePin(DEBUG_LED);
             if(NewTimeout < 500)
                 NewTimeout += 2;
             else
                 NewTimeout = 50;
-            hmt_UsartSendMsg(USART_USED, "Hello world!", strlen("Hello world!"));
+            hmt_UsartSendMsg(USART_USED, TestMsg, strlen(TestMsg));
         }
     }
 
