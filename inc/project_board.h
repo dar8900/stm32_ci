@@ -32,4 +32,6 @@
 #define PC_13_OUTPUT	PUSH_PULL
 #define PC_13_PULL_TYPE	NO_PULL
 
+#define DEBUG_LED		PC_13_ID
+
 #endif
