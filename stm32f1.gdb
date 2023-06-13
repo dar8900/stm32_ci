@@ -292,8 +292,10 @@ set $USART_5 = 0x40005000
 set $USART_OFF_SR = 0x00
 set $USART_OFF_DR = 0x04
 set $USART_OFF_BRR = 0x08
-set $USART_OFF_CRy = 0x0C
-set $USART_OFF_GTPR = 0x2C
+set $USART_OFF_CR1 = 0x0C
+set $USART_OFF_CR2 = 0x10
+set $USART_OFF_CR3 = 0x14
+set $USART_OFF_GTPR = 0x18
 
 define f1_USARTx_SR
     if $arg0 >= 1 && $arg0 <= 5
@@ -340,24 +342,49 @@ Print BRR register of USARTx
 Usage: f1_USARTx_BRR <usart number>
 end
 
-define f1_USARTx_CRy
+define f1_USARTx_CR1
     if $arg0 >= 1 && $arg0 <= 5
-        if $arg1 >= 1 && $arg1 <= 3
-            set $baseaddr = $USART_$arg0 + $USART_OFF_CRy + (0x04 * ($arg1 - 1))
-            printf "USART%d CR%d:\t", $arg0, $arg1
-            x/wx $baseaddr
-        else
-            printf "Wrong <CRy number> argument\n"
-            help f1_USARTx_CRy
-        end
+        set $baseaddr = $USART_$arg0 + $USART_OFF_CR1
+        printf "USART%d CR1:\t", $arg0
+        x/wx $baseaddr
     else
         printf "Wrong <adc number> argument\n"
-        help f1_USARTx_CRy
+        help f1_USARTx_CR1
     end
 end
-document f1_USARTx_CRy
-Print CRy register of USARTx
-Usage: f1_USARTx_CRy <usart number>
+document f1_USARTx_CR1
+Print CR1 register of USARTx
+Usage: f1_USARTx_CR1 <usart number>
+end
+
+define f1_USARTx_CR2
+    if $arg0 >= 1 && $arg0 <= 5
+        set $baseaddr = $USART_$arg0 + $USART_OFF_CR2
+        printf "USART%d CR2:\t", $arg0
+        x/wx $baseaddr
+    else
+        printf "Wrong <adc number> argument\n"
+        help f1_USARTx_CR2
+    end
+end
+document f1_USARTx_CR2
+Print CR2 register of USARTx
+Usage: f1_USARTx_CR2 <usart number>
+end
+
+define f1_USARTx_CR3
+    if $arg0 >= 1 && $arg0 <= 5
+        set $baseaddr = $USART_$arg0 + $USART_OFF_CR3
+        printf "USART%d CR3:\t", $arg0
+        x/wx $baseaddr
+    else
+        printf "Wrong <adc number> argument\n"
+        help f1_USARTx_CR3
+    end
+end
+document f1_USARTx_CR3
+Print CR3 register of USARTx
+Usage: f1_USARTx_CR3 <usart number>
 end
 
 define f1_USARTx_GTPR
@@ -380,9 +407,9 @@ define f1_USARTx_registers
         f1_USARTx_SR $arg0
         f1_USARTx_DR $arg0
         f1_USARTx_BRR $arg0
-        f1_USARTx_CRy $arg0 1
-        f1_USARTx_CRy $arg0 2
-        f1_USARTx_CRy $arg0 3
+        f1_USARTx_CR1 $arg0
+        f1_USARTx_CR2 $arg0
+        f1_USARTx_CR3 $arg0
         f1_USARTx_GTPR $arg0
     else
         printf "Wrong <usart number> argument\n"
