@@ -1,4 +1,0 @@
-[submodule "hmt_hal"]
-	path = hmt_hal
-	url = git@github.com:dar8900/hmt_hal.git
-	branch = develop
