@@ -4,7 +4,7 @@ cmake_minimum_required(VERSION 3.16)
 find_package (Git)
 if (NOT GIT_FOUND)
     message(FATAL_ERROR "Git repo not found")
-endif (GIT_FOUND)
+endif (NOT GIT_FOUND)
 
 execute_process(
     COMMAND ${GIT_EXECUTABLE} rev-parse --abbrev-ref HEAD 
