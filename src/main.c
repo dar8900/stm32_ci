@@ -1,6 +1,8 @@
 #include "main.h"
 
-unsigned char *TestMsg = "Hallo world from stm32f103\r\n";
+unsigned char *TestMsg = "\r\nMessaggio ricevuto\r\n";
+
+char ByteRcv[14]; // = "abcdefghilmno";
 
 int main(void)
 {
@@ -10,18 +12,19 @@ int main(void)
 #ifdef USE_USART    
     hmt_UsartInit(USART_USED, 115200);
 #endif
-    hmt_SimpleTimerStart(&ToggleTimer, 50);
-    uint32_t NewTimeout = 50;
+    hmt_SimpleTimerStart(&ToggleTimer, 500);
     for (;;)
     {
-        if(hmt_SimpleTimerElapsed(&ToggleTimer, true, NewTimeout))
+        if(hmt_SimpleTimerElapsed(&ToggleTimer, true, 0))
         {
             hmt_GpioTogglePin(DEBUG_LED);
-            if(NewTimeout < 500)
-                NewTimeout += 2;
-            else
-                NewTimeout = 50;
-            hmt_UsartSendMsg(USART_USED, TestMsg, strlen(TestMsg));
+            // hmt_UsartSendMsg(USART_USED, TestMsg, strlen(TestMsg));
+        }
+
+        usart_rx_ret_code code = hmt_UsartReceiveMsg(USART_USED, &ByteRcv, 13, 0);
+        if(code == USART_RX_MSG_RCV){
+            hmt_UsartSendMsg(USART_USED, TestMsg, strlen(TestMsg)); 
+            while(!hmt_UsartSendMsg(USART_USED, ByteRcv, strlen(ByteRcv))){}
         }
     }
 
