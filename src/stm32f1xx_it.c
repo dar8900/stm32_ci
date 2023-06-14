@@ -20,7 +20,15 @@
 /* Includes ------------------------------------------------------------------*/
 #include "hmt_common.h"
 #include "rcc_common.h"
+
+#ifdef USE_USART
 #include "usart_manager.h"
+#endif
+
+#ifdef USE_SPI
+#include "spi_manager.h"
+#endif
+
 #include "stm32f1xx_it.h"
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
@@ -221,3 +229,20 @@ void USART3_IRQHandler(void)
 
 #endif /* USE_USART */
 
+#ifdef USE_SPI
+
+#ifdef SPI1
+void SPI1_IRQHandler()
+{
+    hmt_SPI_IT_Handler(SPI1);
+}
+#endif
+
+#ifdef SPI2
+void SPI2_IRQHandler()
+{
+    hmt_SPI_IT_Handler(SPI2);
+}
+#endif
+
+#endif /* USE_SPI */
