@@ -40,8 +40,8 @@ include_directories(
     hmt_hal/rcc/${STM32_FAMILY_LOWER}
     hmt_hal/gpio
     hmt_hal/gpio/${STM32_FAMILY_LOWER}
-    hmt_hal/usart
-    hmt_hal/usart/${STM32_FAMILY_LOWER}
+    hmt_hal/spi
+    hmt_hal/spi/${STM32_FAMILY_LOWER}
     src
     inc
 )
@@ -65,7 +65,7 @@ target_link_libraries("${EXECUTABLE_NAME}" PUBLIC
     common_func
     rcc_manager_${STM32_FAMILY}
     gpio_manager_${STM32_FAMILY}
-    usart_manager_${STM32_FAMILY}
+    spi_manager_${STM32_FAMILY}
 )
 
 
