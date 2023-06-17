@@ -1094,3 +1094,178 @@ document f1_I2Cx_registers
 Print I2Cx registers
 Usage: f1_I2Cx_registers <i2c number>
 end
+
+
+#SPI
+set $SPI_1 = 0x40013000
+set $SPI_2 = 0x40013800
+set $SPI_3 = 0x40013C00
+
+
+set $SPI_OFF_CR1 = 0x00
+set $SPI_OFF_CR2 = 0x04
+set $SPI_OFF_SR = 0x08
+set $SPI_OFF_DR = 0x0C
+set $SPI_OFF_CRCPR = 0x10
+set $SPI_OFF_RXCRCR = 0x14
+set $SPI_OFF_TXCRCR = 0x18
+set $SPI_OFF_I2SCFGR = 0x1C
+set $SPI_OFF_I2SPR = 0x20
+
+
+define f1_SPIx_CR1
+    if $arg0 >= 0 && $arg0 <= 3
+        set $baseaddr = $SPI_OFF_CR1 + $arg0
+        printf "SPI%d CR1:\t", $arg0
+        x/wx $baseaddr
+    else
+        printf "Wrong <SPI number> argument\n"
+        help f1_SPIx_CR1
+    end
+end
+document f1_SPIx_CR1
+Print CR1 register of SPIx
+Usage: f1_SPIx_CR1 <SPI number>
+end
+
+define f1_SPIx_CR2
+    if $arg0 >= 0 && $arg0 <= 3
+        set $baseaddr = $SPI_OFF_CR2 + $arg0
+        printf "SPI%d CR2:\t", $arg0
+        x/wx $baseaddr
+    else
+        printf "Wrong <SPI number> argument\n"
+        help f1_SPIx_CR2
+    end
+end
+document f1_SPIx_CR2
+Print CR2 register of SPIx
+Usage: f1_SPIx_CR2 <SPI number>
+end
+
+define f1_SPIx_SR
+    if $arg0 >= 0 && $arg0 <= 3
+        set $baseaddr = $SPI_OFF_SR + $arg0
+        printf "SPI%d SR:\t", $arg0
+        x/wx $baseaddr
+    else
+        printf "Wrong <SPI number> argument\n"
+        help f1_SPIx_SR
+    end
+end
+document f1_SPIx_SR
+Print SR register of SPIx
+Usage: f1_SPIx_SR <SPI number>
+end
+
+define f1_SPIx_DR
+    if $arg0 >= 0 && $arg0 <= 3
+        set $baseaddr = $SPI_OFF_DR + $arg0
+        printf "SPI%d DR:\t", $arg0
+        x/wx $baseaddr
+    else
+        printf "Wrong <SPI number> argument\n"
+        help f1_SPIx_DR
+    end
+end
+document f1_SPIx_DR
+Print DR register of SPIx
+Usage: f1_SPIx_DR <SPI number>
+end
+
+define f1_SPIx_CRCPR
+    if $arg0 >= 0 && $arg0 <= 3
+        set $baseaddr = $SPI_OFF_CRCPR + $arg0
+        printf "SPI%d CRCPR:\t", $arg0
+        x/wx $baseaddr
+    else
+        printf "Wrong <SPI number> argument\n"
+        help f1_SPIx_CRCPR
+    end
+end
+document f1_SPIx_CRCPR
+Print CRCPR register of SPIx
+Usage: f1_SPIx_CRCPR <SPI number>
+end
+
+define f1_SPIx_RXCRCR
+    if $arg0 >= 0 && $arg0 <= 3
+        set $baseaddr = $SPI_OFF_RXCRCR + $arg0
+        printf "SPI%d RXCRCR:\t", $arg0
+        x/wx $baseaddr
+    else
+        printf "Wrong <SPI number> argument\n"
+        help f1_SPIx_RXCRCR
+    end
+end
+document f1_SPIx_RXCRCR
+Print RXCRCR register of SPIx
+Usage: f1_SPIx_RXCRCR <SPI number>
+end
+
+define f1_SPIx_TXCRCR
+    if $arg0 >= 0 && $arg0 <= 3
+        set $baseaddr = $SPI_OFF_TXCRCR + $arg0
+        printf "SPI%d TXCRCR:\t", $arg0
+        x/wx $baseaddr
+    else
+        printf "Wrong <SPI number> argument\n"
+        help f1_SPIx_TXCRCR
+    end
+end
+document f1_SPIx_TXCRCR
+Print RXCRCR register of SPIx
+Usage: f1_SPIx_TXCRCR <SPI number>
+end
+
+define f1_SPIx_I2SCFGR
+    if $arg0 >= 0 && $arg0 <= 3
+        set $baseaddr = $SPI_OFF_I2SCFGR + $arg0
+        printf "SPI%d I2SCFGR:\t", $arg0
+        x/wx $baseaddr
+    else
+        printf "Wrong <SPI number> argument\n"
+        help f1_SPIx_I2SCFGR
+    end
+end
+document f1_SPIx_I2SCFGR
+Print RXCRCR register of SPIx
+Usage: f1_SPIx_I2SCFGR <SPI number>
+end
+
+define f1_SPIx_I2SPR
+    if $arg0 >= 0 && $arg0 <= 3
+        set $baseaddr = $SPI_OFF_I2SPR + $arg0
+        printf "SPI%d I2SPR:\t", $arg0
+        x/wx $baseaddr
+    else
+        printf "Wrong <SPI number> argument\n"
+        help f1_SPIx_I2SPR
+    end
+end
+document f1_SPIx_I2SPR
+Print RXCRCR register of SPIx
+Usage: f1_SPIx_I2SPR <SPI number>
+end
+
+define f1_SPIx_registers
+    if $arg0 >= 1 && $arg0 <= 3
+        f1_SPIx_CR1 $arg0
+        f1_SPIx_CR2 $arg0
+        f1_SPIx_SR $arg0
+        f1_SPIx_SR $arg0
+        f1_SPIx_DR $arg0
+        f1_SPIx_CRCPR $arg0
+        f1_SPIx_RXCRCR $arg0
+        f1_SPIx_TXCRCR $arg0
+        f1_SPIx_I2SCFGR $arg0
+        f1_SPIx_I2SPR $arg0
+    else
+        printf "Wrong <i2c number> argument\n"
+        help f1_SPIx_registers
+    end
+end
+document f1_SPIx_registers
+Print SPIx registers
+Usage: f1_SPIx_registers <spi number>
+end
