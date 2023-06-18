@@ -11,11 +11,19 @@ Before getting started, ensure you have the following prerequisites:
 - CMake (version 3.20 or higher)
 - ObKo's CMake library (included as a submodule in this repository)
 - STCube Hal and CMSIS firmware git repo (automatic cloning after updating configuration file)
+- You have to install **docker** and [scuba](https://github.com/JonathonReinhart/scuba)  if you want to build the binary file inside a container
 
 ## Getting Started
 To begin using this project, follow these steps:
 - Write your configuration file **build_conf.conf** using the template file under the **template** dir
 - Launch the build with the script **launch_cmake.sh** adding the type of your build <debug or release> (default __debug__)
+
+### Scuba and docker users
+If you want to use [scuba](https://github.com/JonathonReinhart/scuba) to build the program, the **Dockerfile** for building the image and the configuration file for scuba (**.scuba.yml**) is attached in the repository.
+To start the build type 
+``` bash
+scuba build <conf file.conf> [clean]
+```
 
 ## Customization
 This project is structured to provide a basic template for STM32 development. You can customize it to fit your specific requirements:
