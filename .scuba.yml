@@ -1,0 +1,7 @@
+image: debian-stm32-build:latest
+
+aliases:
+  build: /bin/bash execute_build.sh
+
+volumes:
+  /root/stm32_ci: ./
