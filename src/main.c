@@ -1,4 +1,5 @@
 #include "main.h"
+#include "i2c_common.h"
 
 
 int main(void)
@@ -12,6 +13,7 @@ int main(void)
         if(hmt_SimpleTimerElapsed(&ToggleTimer, true, 0))
         {
             hmt_GpioTogglePin(DEBUG_LED);
+            // hmt_I2C_MasterTransmitterHandler(I2C1);
         }
     }
 
