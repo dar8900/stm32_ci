@@ -13,7 +13,7 @@ int main(void)
         if(hmt_SimpleTimerElapsed(&ToggleTimer, true, 0))
         {
             hmt_GpioTogglePin(DEBUG_LED);
-            // hmt_I2C_MasterTransmitterHandler(I2C1);
+            // hmt_I2C_MasterTransmitter(I2C1);
         }
     }
 
