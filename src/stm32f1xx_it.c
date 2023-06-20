@@ -21,6 +21,7 @@
 #include "hmt_common.h"
 #include "rcc_common.h"
 #include "usart_manager.h"
+#include "i2c_manager.h"
 #include "stm32f1xx_it.h"
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
@@ -221,3 +222,42 @@ void USART3_IRQHandler(void)
 
 #endif /* USE_USART */
 
+#ifndef USE_I2C
+
+#ifdef I2C1
+void void I2C1_EV_IRQHandler(void)(void)
+{
+    hmt_I2C_IT_Handler(I2C1);
+}
+
+void void I2C1_ER_IRQHandler(void)
+{
+    // TODO
+}
+#endif
+
+#ifdef I2C2
+void void I2C2_EV_IRQHandler(void)(void)
+{
+    hmt_I2C_IT_Handler(I2C2);
+}
+
+void void I2C2_ER_IRQHandler(void)
+{
+     // TODO
+}
+#endif
+
+#ifdef I2C3
+void void I2C3_EV_IRQHandler(void)(void)
+{
+    hmt_I2C_IT_Handler(I2C3);
+}
+
+void void I2C3_ER_IRQHandler(void)
+{
+     // TODO
+}
+#endif
+
+#endif /* USE_I2C */
