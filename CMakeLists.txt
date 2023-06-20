@@ -42,6 +42,8 @@ include_directories(
     hmt_hal/gpio/${STM32_FAMILY_LOWER}
     hmt_hal/usart
     hmt_hal/usart/${STM32_FAMILY_LOWER}
+    hmt_hal/i2c
+    hmt_hal/i2c/${STM32_FAMILY_LOWER}    
     src
     inc
 )
@@ -66,6 +68,7 @@ target_link_libraries("${EXECUTABLE_NAME}" PUBLIC
     rcc_manager_${STM32_FAMILY}
     gpio_manager_${STM32_FAMILY}
     usart_manager_${STM32_FAMILY}
+    i2c_manager_${STM32_FAMILY}
 )
 
 
