@@ -16,6 +16,12 @@
 	#define SPI_USED			SPI1
 #endif
 
+#define USE_I2C
+#ifdef USE_I2C
+	#define I2C_USED			I2C1
+#endif
+
+
 /*
 #define    P<port>_<pin>_MODE    		NOT_USED
 #define    P<port>_<pin>_SPEED    		SPEED_HIGH
