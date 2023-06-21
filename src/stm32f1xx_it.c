@@ -23,16 +23,16 @@
 
 #ifdef USE_USART
 #include "usart_manager.h"
-<<<<<<< HEAD
+#endif
+
+#ifdef USE_I2C
 #include "i2c_manager.h"
-=======
 #endif
 
 #ifdef USE_SPI
 #include "spi_manager.h"
 #endif
 
->>>>>>> spi_test
 #include "stm32f1xx_it.h"
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
