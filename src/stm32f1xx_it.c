@@ -34,8 +34,7 @@
 #endif
 
 #ifdef USE_ADC
-
-
+#include "adc_manager.h"
 #endif
 
 #include "stm32f1xx_it.h"
