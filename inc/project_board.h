@@ -32,7 +32,6 @@
 #define    P<port>_<pin>_START_LEVEL   	LOW
 */
 
-
 #define PC_13_MODE		OUTPUT
 #define PC_13_SPEED		SPEED_HIGH
 #define PC_13_OUTPUT	PUSH_PULL
