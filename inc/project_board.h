@@ -21,6 +21,10 @@
 	#define I2C_USED			I2C1
 #endif
 
+#define USE_ADC
+#ifdef USE_ADC
+	#define ADC_USED			ADC1
+#endif
 
 /*
 #define    P<port>_<pin>_MODE    		NOT_USED
