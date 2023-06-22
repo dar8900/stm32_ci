@@ -25,9 +25,10 @@
 #ifdef USE_ADC
 	#define ADC_USED			ADC1
 	#define DMA_USED			DMA1
-	#define ADC_CHAN_NUM		1 /* MAX 16 */
-	#define ADC_BUFF_SIZE		50
+	#define ADC_CHAN_NUM		1 /* MAX 16 WITHOUT TEMP SENSOR OTHERWISE 15 */
+	#define ADC_SAMPLES			50
 	#define DMA_ADC_CHANNEL		LL_DMA_CHANNEL_1
+	#define TEMP_SENSOR			1
 #endif
 
 /*
