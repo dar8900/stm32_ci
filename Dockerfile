@@ -5,4 +5,6 @@ RUN	apt update && apt upgrade -y && \
 	apt install -y cmake && \
 	apt install -y openocd && \
 	apt install -y stlink-tools && \
-	apt install -y git
+	apt install -y git && \
+	apt install -y wget && \
+	apt install -y curl
