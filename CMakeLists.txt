@@ -20,7 +20,7 @@ set(EXECUTABLE_NAME "stm32_ci_${BRANCH_NAME}")
 
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
-project(stm32-blinky C ASM)
+project(stm32-ci-${BRANCH_NAME} C ASM)
 set(CMAKE_INCLUDE_CURRENT_DIR TRUE)
 
 add_compile_definitions("USE_FULL_LL_DRIVER")
