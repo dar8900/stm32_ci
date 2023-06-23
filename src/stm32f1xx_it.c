@@ -298,6 +298,11 @@ void SPI2_IRQHandler()
 
 #ifdef USE_ADC
 
-
+#ifdef DMA1
+void DMA1_Channel1_IRQHandler(void)
+{
+    hmt_DmaAdc_IT_Handler(DMA1);
+}
+#endif
 
 #endif /* USE_ADC */
