@@ -1,10 +1,8 @@
 #ifndef PROJECT_BOARD
 #define PROJECT_BOARD
 
-#include "hmt_common.h"
-
-// #define USE_HSI
-#define USE_HSE
+#define USE_HSI
+// #define USE_HSE
 
 // #define USE_USART
 #ifdef USE_USART
@@ -16,7 +14,7 @@
 	#define SPI_USED			SPI1
 #endif
 
-#define USE_I2C
+// #define USE_I2C
 #ifdef USE_I2C
 	#define I2C_USED			I2C1
 #endif
@@ -32,12 +30,12 @@
 #define    P<port>_<pin>_START_LEVEL   	LOW
 */
 
-
 #define PC_13_MODE		OUTPUT
 #define PC_13_SPEED		SPEED_HIGH
 #define PC_13_OUTPUT	PUSH_PULL
 #define PC_13_PULL_TYPE	NO_PULL
 
-#define DEBUG_LED		PC_13_ID
+/* GPIO custom name ids */
+#define DEBUG_LED		PA_5_ID
 
 #endif
