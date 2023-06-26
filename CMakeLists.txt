@@ -20,7 +20,7 @@ set(EXECUTABLE_NAME "stm32_ci_${BRANCH_NAME}")
 
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
-project(stm32-blinky C ASM)
+project(stm32-ci-${BRANCH_NAME} C ASM)
 set(CMAKE_INCLUDE_CURRENT_DIR TRUE)
 
 add_compile_definitions("USE_FULL_LL_DRIVER")
@@ -40,10 +40,17 @@ include_directories(
     hmt_hal/rcc/${STM32_FAMILY_LOWER}
     hmt_hal/gpio
     hmt_hal/gpio/${STM32_FAMILY_LOWER}
+    hmt_hal/usart
+    hmt_hal/usart/${STM32_FAMILY_LOWER}
+    hmt_hal/i2c
+    hmt_hal/i2c/${STM32_FAMILY_LOWER}    
     hmt_hal/spi
     hmt_hal/spi/${STM32_FAMILY_LOWER}
+    hmt_hal/adc
+    hmt_hal/adc/${STM32_FAMILY_LOWER}
     src
     inc
+    boards/${PROJECT_BOARD}
 )
 
 add_subdirectory(hmt_hal)
@@ -65,7 +72,10 @@ target_link_libraries("${EXECUTABLE_NAME}" PUBLIC
     common_func
     rcc_manager_${STM32_FAMILY}
     gpio_manager_${STM32_FAMILY}
+    usart_manager_${STM32_FAMILY}
+    i2c_manager_${STM32_FAMILY}
     spi_manager_${STM32_FAMILY}
+    adc_manager_${STM32_FAMILY}
 )
 
 
