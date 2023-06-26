@@ -30,6 +30,17 @@
 #define    P<port>_<pin>_START_LEVEL   	LOW
 */
 
+/* MOSI */
+#define PA_7_MODE		ALTERNATE
+
+/* MISO */
+#define PA_6_MODE		INPUT
+#define PA_6_PULL_TYPE	PULL_UP
+
+/* SCK */
+#define PA_5_MODE		ALTERNATE
+
+
 #define PC_13_MODE		OUTPUT
 #define PC_13_SPEED		SPEED_HIGH
 #define PC_13_OUTPUT	PUSH_PULL
