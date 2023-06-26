@@ -50,6 +50,7 @@ include_directories(
     hmt_hal/adc/${STM32_FAMILY_LOWER}
     src
     inc
+    boards/${PROJECT_BOARD}
 )
 
 add_subdirectory(hmt_hal)

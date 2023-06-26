@@ -65,8 +65,20 @@ CMAKE_TOOLCHAIN="$OBKO_CMAKE_DIR/cmake/stm32_gcc.cmake"
 
 if [ ! -z "$CONF_FILE" ] && [ -f "$CONF_FILE" ];then
 	source "$CONF_FILE"
+	if [ -z "$STM_FAMILY" ] || [ -z "$STM_TYPE" ] || [ -z "$PROJECT_BOARD" ]; then
+		print_message "One or more field of the config file \"$CONF_FILE\" are empty" error
+		exit 1
+	fi
 	STM_FAMILY=$(echo "$STM_FAMILY" | awk '{ print toupper($0) }')
 	STM_TYPE=$(echo "$STM_TYPE" | awk '{ print toupper($0) }')
+	PROJECT_BOARD=$(echo "$PROJECT_BOARD" | awk '{ print tolower($0) }')
+	if [ ! -d "./boards/$PROJECT_BOARD" ]; then
+		print_message "The board folder for \"$PROJECT_BOARD\" doesn't exists" error
+		exit 1
+	fi
+	print_message "STM Family selected: $STM_FAMILY" info
+	print_message "STM Type selected: $STM_TYPE" info
+	print_message "Board selected: $PROJECT_BOARD" info
 else
 	print_message "Config file not present" error
 	exit 1
@@ -137,7 +149,7 @@ print_message "Build folder is \"$BUILD_DIR\"" info
 cd "$BUILD_DIR"	
 
 print_message "Run cmake" info
-cmake -DCMAKE_TOOLCHAIN_FILE="$CMAKE_TOOLCHAIN" -DSTM32_CUBE_"$STM_FAMILY"_PATH="$ST_CUBE_PATH" -DSTM32_FAMILY="$STM_FAMILY" -DSTM32_TYPE="$STM_TYPE" -DCMAKE_BUILD_TYPE="$BUILD_TYPE" "$SRC_DIR" #../
+cmake -DCMAKE_TOOLCHAIN_FILE="$CMAKE_TOOLCHAIN" -DSTM32_CUBE_"$STM_FAMILY"_PATH="$ST_CUBE_PATH" -DSTM32_FAMILY="$STM_FAMILY" -DSTM32_TYPE="$STM_TYPE" -DPROJECT_BOARD="$PROJECT_BOARD" -DCMAKE_BUILD_TYPE="$BUILD_TYPE" "$SRC_DIR" #../
 
 CMAKE_RET=$?
 if [ "$CMAKE_RET" -ne 0 ]; then
