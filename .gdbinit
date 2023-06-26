@@ -1,6 +1,7 @@
 
 layout src
 
+set $USECOLOR = 1
 target extended-remote localhost:3333
 
 set $DBGMCU_IDCODE = 0xE0042000

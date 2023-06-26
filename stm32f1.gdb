@@ -10,10 +10,16 @@ set $ADC_3 = 0x40013C00
 
 set $ADC_OFF_SR = 0x00
 set $ADC_OFF_CRy = 0x04
+<<<<<<< HEAD
 set $ADC_OFF_SMPRy = 0x0C
 set $ADC_OFF_HTR = 0x24
 set $ADC_OFF_LTR = 0x28
 set $ADC_OFF_SQRy = 0x2C
+=======
+set $ADC_OFF_SQR1 = 0x2C
+set $ADC_OFF_SQR2 = 0x30
+set $ADC_OFF_SQR3 = 0x34
+>>>>>>> master
 set $ADC_OFF_DR = 0x4C
 
 define f1_ADCx_SR
@@ -66,6 +72,7 @@ Print CFGR register of ADCx
 Usage: f1_ADCx_CFGR <adc number>
 end
 
+<<<<<<< HEAD
 define f1_ADCx_SMPR1
     if $arg0 >= 1 && $arg0 <= 3
         set $baseaddr = $ADC_$arg0 + $ADC_OFF_SMPR1
@@ -160,6 +167,53 @@ end
 document f1_ADCx_SQRy
 Print SQRy register of ADCx
 Usage: f1_ADCx_SQR1 <adc number> <SQR number>
+=======
+
+
+define f1_ADCx_SQR1
+    if $arg0 >= 1 && $arg0 <= 3
+        set $baseaddr = $ADC_$arg0 + $ADC_OFF_SQR1
+        printf "ADC%d SQR1:\t", $arg0
+        x/wx $baseaddr
+    else
+        printf "Wrong <adc number> argument\n"
+        help f1_ADCx_SQR1
+    end
+end
+document f1_ADCx_SQR1
+Print SQR1 register of ADCx
+Usage: f1_ADCx_SQR1 <adc number>
+end
+
+define f1_ADCx_SQR2
+    if $arg0 >= 1 && $arg0 <= 3
+        set $baseaddr = $ADC_$arg0 + $ADC_OFF_SQR2
+        printf "ADC%d SQR2:\t", $arg0
+        x/wx $baseaddr
+    else
+        printf "Wrong <adc number> argument\n"
+        help f1_ADCx_SQR2
+    end
+end
+document f1_ADCx_SQR2
+Print SQR2 register of ADCx
+Usage: f1_ADCx_SQR2 <adc number>
+end
+
+define f1_ADCx_SQR3
+    if $arg0 >= 1 && $arg0 <= 3
+        set $baseaddr = $ADC_$arg0 + $ADC_OFF_SQR3
+        printf "ADC%d SQR1:\t", $arg0
+        x/wx $baseaddr
+    else
+        printf "Wrong <adc number> argument\n"
+        help f1_ADCx_SQR3
+    end
+end
+document f1_ADCx_SQR3
+Print SQR3 register of ADCx
+Usage: f1_ADCx_SQR3 <adc number>
+>>>>>>> master
 end
 
 define f1_ADCx_DR
@@ -177,6 +231,7 @@ Print DR register of ADCx
 Usage: f1_ADCx_DR <adc number>
 end
 
+<<<<<<< HEAD
 define f1_ADCx_JSQR
     if $arg0 >= 1 && $arg0 <= 3
         set $baseaddr = $ADC_$arg0 + $ADC_OFF_JSQR
@@ -281,6 +336,28 @@ document f1_ADCx_CALFACT
 Print CALFACT register of ADCx
 Usage: f1_ADCx_CALFACT <adc number>
 end
+=======
+define f1_ADCx_registers
+    if $arg0 >= 1 && $arg0 <= 3
+        f1_ADCx_SR $arg0
+        f1_ADCx_CRy $arg0 1
+        f1_ADCx_CRy $arg0 2
+        f1_ADCx_SQR1 $arg0
+        f1_ADCx_SQR2 $arg0
+        f1_ADCx_SQR3 $arg0
+        f1_ADCx_DR $arg0
+    else
+        printf "Wrong <usart number> argument\n"
+        help f1_ADCx_registers
+    end
+end
+document f1_ADCx_registers
+Print ADCx registers
+Usage: f1_ADCx_registers <adc number>
+end
+
+
+>>>>>>> master
 
 #USART
 set $USART_1 = 0x40013800
@@ -292,10 +369,15 @@ set $USART_5 = 0x40005000
 set $USART_OFF_SR = 0x00
 set $USART_OFF_DR = 0x04
 set $USART_OFF_BRR = 0x08
+<<<<<<< HEAD
 set $USART_OFF_CR1 = 0x0C
 set $USART_OFF_CR2 = 0x10
 set $USART_OFF_CR3 = 0x14
 set $USART_OFF_GTPR = 0x18
+=======
+set $USART_OFF_CRy = 0x0C
+set $USART_OFF_GTPR = 0x2C
+>>>>>>> master
 
 define f1_USARTx_SR
     if $arg0 >= 1 && $arg0 <= 5
@@ -342,6 +424,7 @@ Print BRR register of USARTx
 Usage: f1_USARTx_BRR <usart number>
 end
 
+<<<<<<< HEAD
 define f1_USARTx_CR1
     if $arg0 >= 1 && $arg0 <= 5
         set $baseaddr = $USART_$arg0 + $USART_OFF_CR1
@@ -385,6 +468,26 @@ end
 document f1_USARTx_CR3
 Print CR3 register of USARTx
 Usage: f1_USARTx_CR3 <usart number>
+=======
+define f1_USARTx_CRy
+    if $arg0 >= 1 && $arg0 <= 5
+        if $arg1 >= 1 && $arg1 <= 3
+            set $baseaddr = $USART_$arg0 + $USART_OFF_CRy + (0x04 * ($arg1 - 1))
+            printf "USART%d CR%d:\t", $arg0, $arg1
+            x/wx $baseaddr
+        else
+            printf "Wrong <CRy number> argument\n"
+            help f1_USARTx_CRy
+        end
+    else
+        printf "Wrong <adc number> argument\n"
+        help f1_USARTx_CRy
+    end
+end
+document f1_USARTx_CRy
+Print CRy register of USARTx
+Usage: f1_USARTx_CRy <usart number>
+>>>>>>> master
 end
 
 define f1_USARTx_GTPR
@@ -407,9 +510,15 @@ define f1_USARTx_registers
         f1_USARTx_SR $arg0
         f1_USARTx_DR $arg0
         f1_USARTx_BRR $arg0
+<<<<<<< HEAD
         f1_USARTx_CR1 $arg0
         f1_USARTx_CR2 $arg0
         f1_USARTx_CR3 $arg0
+=======
+        f1_USARTx_CRy $arg0 1
+        f1_USARTx_CRy $arg0 2
+        f1_USARTx_CRy $arg0 3
+>>>>>>> master
         f1_USARTx_GTPR $arg0
     else
         printf "Wrong <usart number> argument\n"
@@ -1120,4 +1229,299 @@ end
 document f1_I2Cx_registers
 Print I2Cx registers
 Usage: f1_I2Cx_registers <i2c number>
+end
+
+#SPI
+set $SPI_1 = 0x40013000
+set $SPI_2 = 0x40013800
+set $SPI_3 = 0x40013C00
+
+
+set $SPI_OFF_CR1 = 0x00
+set $SPI_OFF_CR2 = 0x04
+set $SPI_OFF_SR = 0x08
+set $SPI_OFF_DR = 0x0C
+set $SPI_OFF_CRCPR = 0x10
+set $SPI_OFF_RXCRCR = 0x14
+set $SPI_OFF_TXCRCR = 0x18
+set $SPI_OFF_I2SCFGR = 0x1C
+set $SPI_OFF_I2SPR = 0x20
+
+
+define f1_SPIx_CR1
+    if $arg0 >= 0 && $arg0 <= 3
+        set $baseaddr = $SPI_$arg0 + $SPI_OFF_CR1
+        printf "SPI%d CR1:\t", $arg0
+        x/wx $baseaddr
+    else
+        printf "Wrong <SPI number> argument\n"
+        help f1_SPIx_CR1
+    end
+end
+document f1_SPIx_CR1
+Print CR1 register of SPIx
+Usage: f1_SPIx_CR1 <SPI number>
+end
+
+define f1_SPIx_CR2
+    if $arg0 >= 0 && $arg0 <= 3
+        set $baseaddr = $SPI_$arg0 + $SPI_OFF_CR2 
+        printf "SPI%d CR2:\t", $arg0
+        x/wx $baseaddr
+    else
+        printf "Wrong <SPI number> argument\n"
+        help f1_SPIx_CR2
+    end
+end
+document f1_SPIx_CR2
+Print CR2 register of SPIx
+Usage: f1_SPIx_CR2 <SPI number>
+end
+
+define f1_SPIx_SR
+    if $arg0 >= 0 && $arg0 <= 3
+        set $baseaddr = $SPI_$arg0 + $SPI_OFF_SR 
+        printf "SPI%d SR:\t", $arg0
+        x/wx $baseaddr
+    else
+        printf "Wrong <SPI number> argument\n"
+        help f1_SPIx_SR
+    end
+end
+document f1_SPIx_SR
+Print SR register of SPIx
+Usage: f1_SPIx_SR <SPI number>
+end
+
+define f1_SPIx_DR
+    if $arg0 >= 0 && $arg0 <= 3
+        set $baseaddr = $SPI_$arg0 + $SPI_OFF_DR 
+        printf "SPI%d DR:\t", $arg0
+        x/wx $baseaddr
+    else
+        printf "Wrong <SPI number> argument\n"
+        help f1_SPIx_DR
+    end
+end
+document f1_SPIx_DR
+Print DR register of SPIx
+Usage: f1_SPIx_DR <SPI number>
+end
+
+define f1_SPIx_CRCPR
+    if $arg0 >= 0 && $arg0 <= 3
+        set $baseaddr = $SPI_$arg0 + $SPI_OFF_CRCPR 
+        printf "SPI%d CRCPR:\t", $arg0
+        x/wx $baseaddr
+    else
+        printf "Wrong <SPI number> argument\n"
+        help f1_SPIx_CRCPR
+    end
+end
+document f1_SPIx_CRCPR
+Print CRCPR register of SPIx
+Usage: f1_SPIx_CRCPR <SPI number>
+end
+
+define f1_SPIx_RXCRCR
+    if $arg0 >= 0 && $arg0 <= 3
+        set $baseaddr = $SPI_$arg0 + $SPI_OFF_RXCRCR 
+        printf "SPI%d RXCRCR:\t", $arg0
+        x/wx $baseaddr
+    else
+        printf "Wrong <SPI number> argument\n"
+        help f1_SPIx_RXCRCR
+    end
+end
+document f1_SPIx_RXCRCR
+Print RXCRCR register of SPIx
+Usage: f1_SPIx_RXCRCR <SPI number>
+end
+
+define f1_SPIx_TXCRCR
+    if $arg0 >= 0 && $arg0 <= 3
+        set $baseaddr = $SPI_$arg0 + $SPI_OFF_TXCRCR 
+        printf "SPI%d TXCRCR:\t", $arg0
+        x/wx $baseaddr
+    else
+        printf "Wrong <SPI number> argument\n"
+        help f1_SPIx_TXCRCR
+    end
+end
+document f1_SPIx_TXCRCR
+Print RXCRCR register of SPIx
+Usage: f1_SPIx_TXCRCR <SPI number>
+end
+
+define f1_SPIx_I2SCFGR
+    if $arg0 >= 0 && $arg0 <= 3
+        set $baseaddr = $SPI_$arg0 + $SPI_OFF_I2SCFGR 
+        printf "SPI%d I2SCFGR:\t", $arg0
+        x/wx $baseaddr
+    else
+        printf "Wrong <SPI number> argument\n"
+        help f1_SPIx_I2SCFGR
+    end
+end
+document f1_SPIx_I2SCFGR
+Print RXCRCR register of SPIx
+Usage: f1_SPIx_I2SCFGR <SPI number>
+end
+
+define f1_SPIx_I2SPR
+    if $arg0 >= 0 && $arg0 <= 3
+        set $baseaddr = $SPI_$arg0 + $SPI_OFF_I2SPR 
+        printf "SPI%d I2SPR:\t", $arg0
+        x/wx $baseaddr
+    else
+        printf "Wrong <SPI number> argument\n"
+        help f1_SPIx_I2SPR
+    end
+end
+document f1_SPIx_I2SPR
+Print RXCRCR register of SPIx
+Usage: f1_SPIx_I2SPR <SPI number>
+end
+
+define f1_SPIx_registers
+    if $arg0 >= 1 && $arg0 <= 3
+        f1_SPIx_CR1 $arg0
+        f1_SPIx_CR2 $arg0
+        f1_SPIx_SR $arg0
+        f1_SPIx_SR $arg0
+        f1_SPIx_DR $arg0
+        f1_SPIx_CRCPR $arg0
+        f1_SPIx_RXCRCR $arg0
+        f1_SPIx_TXCRCR $arg0
+        f1_SPIx_I2SCFGR $arg0
+        f1_SPIx_I2SPR $arg0
+    else
+        printf "Wrong <i2c number> argument\n"
+        help f1_SPIx_registers
+    end
+end
+document f1_SPIx_registers
+Print SPIx registers
+Usage: f1_SPIx_registers <spi number>
+end
+
+
+#DMA
+set $DMA_1 = 0x40020000
+set $DMA_2 = 0x40024000
+
+set $DMA_OFF_ISR = 0x00
+set $DMA_OFF_IFCR = 0x04
+set $DMA_OFF_CCR1 = 0x08
+set $DMA_OFF_CNDTR1 = 0x0C
+set $DMA_OFF_CPAR1 = 0x10
+set $DMA_OFF_CMAR1 = 0x14
+
+
+define f1_DMAx_ISR
+    if $arg0 >= 0 && $arg0 <= 2
+        set $baseaddr = $DMA_$arg0 + $DMA_OFF_ISR 
+        printf "DMA%d ISR:\t", $arg0
+        x/wx $baseaddr
+    else
+        printf "Wrong <DMA number> argument\n"
+        help f1_DMAx_ISR
+    end
+end
+document f1_DMAx_ISR
+Print ISR register of DMAx
+Usage: f1_DMAx_ISR <DMA number>
+end
+
+define f1_DMAx_IFCR
+    if $arg0 >= 0 && $arg0 <= 2
+        set $baseaddr = $DMA_$arg0 + $DMA_OFF_IFCR 
+        printf "DMA%d IFCR:\t", $arg0
+        x/wx $baseaddr
+    else
+        printf "Wrong <DMA number> argument\n"
+        help f1_DMAx_IFCR
+    end
+end
+document f1_DMAx_IFCR
+Print IFCR register of DMAx
+Usage: f1_DMAx_IFCR <DMA number>
+end
+
+define f1_DMAx_CCR1
+    if $arg0 >= 0 && $arg0 <= 2
+        set $baseaddr = $DMA_$arg0 + $DMA_OFF_CCR1 
+        printf "DMA%d CCR1:\t", $arg0
+        x/wx $baseaddr
+    else
+        printf "Wrong <DMA number> argument\n"
+        help f1_DMAx_CCR1
+    end
+end
+document f1_DMAx_CCR1
+Print CCR1 register of DMAx
+Usage: f1_DMAx_CCR1 <DMA number>
+end
+
+define f1_DMAx_CNDTR1
+    if $arg0 >= 0 && $arg0 <= 2
+        set $baseaddr = $DMA_$arg0 + $DMA_OFF_CNDTR1 
+        printf "DMA%d CNDTR1:\t", $arg0
+        x/wx $baseaddr
+    else
+        printf "Wrong <DMA number> argument\n"
+        help f1_DMAx_CNDTR1
+    end
+end
+document f1_DMAx_CNDTR1
+Print CNDTR1 register of DMAx
+Usage: f1_DMAx_CNDTR1 <DMA number>
+end
+
+define f1_DMAx_CPAR1
+    if $arg0 >= 0 && $arg0 <= 2
+        set $baseaddr = $DMA_$arg0 + $DMA_OFF_CPAR1 
+        printf "DMA%d CPAR1:\t", $arg0
+        x/wx $baseaddr
+    else
+        printf "Wrong <DMA number> argument\n"
+        help f1_DMAx_CPAR1
+    end
+end
+document f1_DMAx_CPAR1
+Print CPAR1 register of DMAx
+Usage: f1_DMAx_CPAR1 <DMA number>
+end
+
+define f1_DMAx_CMAR1
+    if $arg0 >= 0 && $arg0 <= 2
+        set $baseaddr = $DMA_$arg0 + $DMA_OFF_CMAR1 
+        printf "DMA%d CMAR1:\t", $arg0
+        x/wx $baseaddr
+    else
+        printf "Wrong <DMA number> argument\n"
+        help f1_DMAx_CMAR1
+    end
+end
+document f1_DMAx_CMAR1
+Print CMAR1 register of DMAx
+Usage: f1_DMAx_CMAR1 <DMA number>
+end
+
+define f1_DMAx_registers
+    if $arg0 >= 1 && $arg0 <= 2
+        f1_DMAx_ISR $arg0
+        f1_DMAx_IFCR $arg0
+        f1_DMAx_CCR1 $arg0
+        f1_DMAx_CNDTR1 $arg0
+        f1_DMAx_CPAR1 $arg0
+        f1_DMAx_CMAR1 $arg0
+    else
+        printf "Wrong <dma number> argument\n"
+        help f1_DMAx_registers
+    end
+end
+document f1_DMAx_registers
+Print DMAx registers
+Usage: f1_DMAx_registers <dma number>
 end
