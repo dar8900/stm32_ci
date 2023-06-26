@@ -54,6 +54,30 @@ clone_repo()
 	return 0
 }
 
+
+function get_board(){
+
+	MAIN_FOLDER=$1
+	# Dichiarazione dell'array per i nomi delle cartelle
+	directories=()
+
+	# Lettura dei nomi delle cartelle nella directory "boards" e salvataggio nell'array
+	while IFS= read -r -d '' dir; do
+	name=$(basename "$dir")
+	directories+=("$name")
+	done < <(find $MAIN_FOLDER -mindepth 1 -type d -print0)
+
+	select PROJECT_BOARD in "${directories[@]}"; do
+	if [[ -n $PROJECT_BOARD ]]; then
+		print_message "Hai selezionato: $PROJECT_BOARD	" ok
+		break
+	else
+		echo "Opzione non valida. Riprova."
+	fi
+	done
+}
+
+
 CONF_FILE=$1
 CLEAN_BUILD=$2
 CONTRIB_FOLDER="contrib"
@@ -62,6 +86,18 @@ OBKO_GIT_REPO="https://github.com/ObKo/stm32-cmake"
 OBKO_CMAKE_DIR="./$CONTRIB_FOLDER/obko_stm32cmake"
 SRC_DIR="$PWD"
 CMAKE_TOOLCHAIN="$OBKO_CMAKE_DIR/cmake/stm32_gcc.cmake"
+BOARDS_FOLDER="./boards"
+
+if [ ! -z "$CLEAN_BUILD" ] && [ "$CLEAN_BUILD" == "clean" ];then
+	rm ".project.board"
+fi
+if [ ! -f ".project.board" ];then
+	print_message "Selezionare una board per il progetto" info
+	get_board "$BOARDS_FOLDER"
+	echo "PROJECT_BOARD=$PROJECT_BOARD" >> .project.board
+else
+	source ".project.board"
+fi
 
 if [ ! -z "$CONF_FILE" ] && [ -f "$CONF_FILE" ];then
 	source "$CONF_FILE"
