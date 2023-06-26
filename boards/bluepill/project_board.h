@@ -4,7 +4,7 @@
 // #define USE_HSI
 #define USE_HSE
 
-// #define USE_USART
+#define USE_USART
 #ifdef USE_USART
 	#define USART_USED			USART2
 #endif
