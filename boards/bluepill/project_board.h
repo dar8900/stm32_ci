@@ -9,7 +9,7 @@
 	#define USART_USED			USART1
 #endif
 
-// #define USE_SPI
+#define USE_SPI
 #ifdef USE_SPI
 	#define SPI_USED			SPI1
 #endif
