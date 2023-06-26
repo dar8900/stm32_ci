@@ -3,6 +3,7 @@
 #include "adc_common.h"
 
 
+
 int main(void)
 {
     simple_timer_t ToggleTimer;

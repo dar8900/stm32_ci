@@ -23,9 +23,7 @@
 
 #ifdef USE_USART
 #include "usart_manager.h"
-#endif
-
-#ifdef USE_I2C
+<<<<<<< HEAD
 #include "i2c_manager.h"
 #endif
 
@@ -33,10 +31,7 @@
 #include "spi_manager.h"
 #endif
 
-#ifdef USE_ADC
-#include "adc_manager.h"
-#endif
-
+>>>>>>> spi_test
 #include "stm32f1xx_it.h"
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
