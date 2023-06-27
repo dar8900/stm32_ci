@@ -19,7 +19,7 @@
 	#define I2C_USED			I2C1
 #endif
 
-#define USE_ADC
+// #define USE_ADC
 #ifdef USE_ADC
 	#define ADC_USED			ADC1
 	#define DMA_USED			DMA1
@@ -39,14 +39,6 @@
 #define    P<port>_<pin>_START_LEVEL   	LOW
 */
 
-#define PA_0_MODE		ANALOG
-
-
-// #define PA_5_MODE		OUTPUT
-// #define PA_5_SPEED		SPEED_HIGH
-// #define PA_5_OUTPUT		PUSH_PULL
-// #define PA_5_PULL_TYPE	NO_PULL
-
 #define PC_13_MODE		OUTPUT
 #define PC_13_SPEED		SPEED_HIGH
 #define PC_13_OUTPUT	PUSH_PULL
@@ -54,6 +46,5 @@
 
 /* GPIO custom name ids */
 #define DEBUG_LED		PC_13_ID
-// #define DEBUG_LED		PA_5_ID
 
 #endif
