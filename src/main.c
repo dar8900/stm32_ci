@@ -7,8 +7,8 @@ int main(void)
     simple_timer_t ToggleTimer;
     hmt_RccInit();
     hmt_GpioInit();
-    hmt_PWM_Init(TIMER_USED);
-    hmt_PWM_SetDutyCycle(TIMER_USED, 50);
+    hmt_PWM_Init(TIMER_USED, TIMER_CHANNEL);
+    hmt_PWM_SetDutyCycle(TIMER_USED, TIMER_CHANNEL, 50);
     hmt_SimpleTimerStart(&ToggleTimer, 500);
     for (;;)
     {
