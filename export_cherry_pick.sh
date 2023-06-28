@@ -14,9 +14,11 @@ fi
 # Itera su ogni branch
 for branch in $branches; do
   # Passa al branch corrente
-  git checkout $branch
+  git switch $branch
   
   # Esegui il cherry-pick della commit specificata
   git cherry-pick $commit
+
+  git push origin $branch
 done
 
