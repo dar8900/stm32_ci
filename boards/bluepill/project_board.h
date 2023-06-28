@@ -39,6 +39,11 @@
 	#define PWM_FRQ_DFLT		1000
 #endif
 
+#define USE_INPUT_CAPTURE
+#ifdef USE_INPUT_CAPTURE
+
+#endif
+
 /*
 #define    P<port>_<pin>_MODE    		NOT_USED
 #define    P<port>_<pin>_SPEED    		SPEED_HIGH

@@ -50,6 +50,8 @@ include_directories(
     hmt_hal/adc/${STM32_FAMILY_LOWER}
     hmt_hal/pwm
     hmt_hal/pwm/${STM32_FAMILY_LOWER}
+    hmt_hal/input_capture
+    hmt_hal/input_capture/${STM32_FAMILY_LOWER}
     src
     inc
     boards/${PROJECT_BOARD}
@@ -79,6 +81,7 @@ target_link_libraries("${EXECUTABLE_NAME}" PUBLIC
     spi_manager_${STM32_FAMILY}
     adc_manager_${STM32_FAMILY}
     pwm_manager_${STM32_FAMILY} 
+    ic_manager_${STM32_FAMILY} 
 )
 
 
