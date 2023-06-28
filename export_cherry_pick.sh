@@ -14,13 +14,17 @@ fi
 
 # Itera su ogni branch
 for branch in $branches; do
-  # Passa al branch corrente
-  git switch $branch
-  
-  # Esegui il cherry-pick della commit specificata
-  git cherry-pick $commit
 
-  git push origin $branch
+  if [ "$branch" !=  "$ACTUAL_BRANCH" ]; then
+    # Passa al branch corrente
+    git switch $branch
+    
+    # Esegui il cherry-pick della commit specificata
+    git cherry-pick $commit
+
+    git push origin $branch
+  fi
+  
 done
 
 git switch "$ACTUAL_BRANCH"
