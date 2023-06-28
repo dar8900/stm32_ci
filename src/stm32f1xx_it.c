@@ -41,6 +41,10 @@
 #include "pwm_manager.h"
 #endif
 
+#ifdef USE_INPUT_CAPTURE
+#include "ic_manager.h"
+#endif
+
 #include "stm32f1xx_it.h"
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
@@ -308,7 +312,7 @@ void DMA1_Channel1_IRQHandler(void)
 
 #endif /* USE_ADC */
 
-#ifdef USE_PWM
+#if defined(USE_PWM) || defined(USE_INPUT_CAPTURE)
 
 void TIM2_IRQHandler(void)
 {
@@ -317,20 +321,59 @@ void TIM2_IRQHandler(void)
     {
         /* Clear the update interrupt flag*/
         LL_TIM_ClearFlag_CC1(TIM2);
-
     }
+    if (LL_TIM_IsActiveFlag_CC2(TIM2) == 1)
+    {
+        /* Clear the update interrupt flag*/
+        LL_TIM_ClearFlag_CC2(TIM2);
+    }
+
+    if (LL_TIM_IsActiveFlag_CC3(TIM2) == 1)
+    {
+        /* Clear the update interrupt flag*/
+        LL_TIM_ClearFlag_CC3(TIM2);
+    }
+
+    if (LL_TIM_IsActiveFlag_CC4(TIM2) == 1)
+    {
+        /* Clear the update interrupt flag*/
+        LL_TIM_ClearFlag_CC4(TIM2);
+    }
+#ifdef USE_INPUT_CAPTURE
+    hmt_IC_IT_Handler(TIM2, IC_TIMER_CHANNEL);
+#endif
+
 }
 
 void TIM3_IRQHandler(void)
 {
     /* Check whether CC1 interrupt is pending */
+
     if (LL_TIM_IsActiveFlag_CC1(TIM3) == 1)
     {
         /* Clear the update interrupt flag*/
         LL_TIM_ClearFlag_CC1(TIM3);
-
-
     }
+    if (LL_TIM_IsActiveFlag_CC2(TIM3) == 1)
+    {
+        /* Clear the update interrupt flag*/
+        LL_TIM_ClearFlag_CC2(TIM3);
+    }
+
+    if (LL_TIM_IsActiveFlag_CC3(TIM3) == 1)
+    {
+        /* Clear the update interrupt flag*/
+        LL_TIM_ClearFlag_CC3(TIM3);
+    }
+
+    if (LL_TIM_IsActiveFlag_CC4(TIM3) == 1)
+    {
+        /* Clear the update interrupt flag*/
+        LL_TIM_ClearFlag_CC4(TIM3);
+    }
+#ifdef USE_INPUT_CAPTURE
+    hmt_IC_IT_Handler(TIM3, IC_TIMER_CHANNEL);
+#endif    
 }
 
 void TIM4_IRQHandler(void)
@@ -340,9 +383,27 @@ void TIM4_IRQHandler(void)
     {
         /* Clear the update interrupt flag*/
         LL_TIM_ClearFlag_CC1(TIM4);
-
-
     }
+    if (LL_TIM_IsActiveFlag_CC2(TIM4) == 1)
+    {
+        /* Clear the update interrupt flag*/
+        LL_TIM_ClearFlag_CC2(TIM4);
+    }
+
+    if (LL_TIM_IsActiveFlag_CC3(TIM4) == 1)
+    {
+        /* Clear the update interrupt flag*/
+        LL_TIM_ClearFlag_CC3(TIM4);
+    }
+
+    if (LL_TIM_IsActiveFlag_CC4(TIM4) == 1)
+    {
+        /* Clear the update interrupt flag*/
+        LL_TIM_ClearFlag_CC4(TIM4);
+    }
+#ifdef USE_INPUT_CAPTURE
+    hmt_IC_IT_Handler(TIM4, IC_TIMER_CHANNEL);
+#endif    
 }
 
 
