@@ -1,5 +1,6 @@
 #!/bin/bash
 
+ACTUAL_BRANCH=$(git rev-parse --abbrev-ref HEAD)
 # Ottieni l'elenco dei branch locali
 branches=$(git branch --format='%(refname:short)')
 
@@ -22,3 +23,4 @@ for branch in $branches; do
   git push origin $branch
 done
 
+git switch "$ACTUAL_BRANCH"
