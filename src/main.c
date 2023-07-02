@@ -8,8 +8,8 @@ int main(void)
     simple_timer_t ToggleTimer;
     hmt_RccInit();
     hmt_GpioInit();
-    hmt_Sp(SPI_USED);
-    hmt_SimpleTimerStart(&ToggleTimer, 500);
+    hmt_SPIInit(SPI_USED);
+    hmt_SimpleTimerStart(&ToggleTimer, 2000);
     for (;;)
     {
         if(hmt_SimpleTimerElapsed(&ToggleTimer, true, 0))
