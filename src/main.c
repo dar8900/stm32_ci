@@ -16,6 +16,7 @@ int main(void)
     for (;;)
     {
         if(hmt_SimpleTimerElapsed(&ToggleTimer, true, 0))
+        if(hmt_SimpleTimerElapsed(&ToggleTimer, true, 0))
         {
             hmt_GpioTogglePin(DEBUG_LED);
             // hmt_UsartSendMsg(USART_USED, TestMsg, strlen(TestMsg));
