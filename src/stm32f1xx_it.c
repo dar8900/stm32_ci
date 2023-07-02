@@ -33,6 +33,10 @@
 #include "spi_manager.h"
 #endif
 
+#ifdef USE_ADC
+#define "adc_manager.h"
+#endif
+
 #include "stm32f1xx_it.h"
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
@@ -292,3 +296,13 @@ void SPI2_IRQHandler()
 
 #endif /* USE_SPI */
 
+#ifdef USE_ADC
+
+#ifdef DMA1
+void DMA1_Channel1_IRQHandler(void)
+{
+    hmt_DmaAdc_IT_Handler(DMA1);
+}
+#endif
+
+#endif /* USE_ADC */

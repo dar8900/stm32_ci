@@ -1,10 +1,8 @@
 #ifndef PROJECT_BOARD
 #define PROJECT_BOARD
 
-#include "hmt_common.h"
-
-// #define USE_HSI
-#define USE_HSE
+#define USE_HSI
+// #define USE_HSE
 
 // #define USE_USART
 #ifdef USE_USART
@@ -37,6 +35,7 @@
 #define PC_13_OUTPUT	PUSH_PULL
 #define PC_13_PULL_TYPE	NO_PULL
 
-#define DEBUG_LED		PC_13_ID
+/* GPIO custom name ids */
+#define DEBUG_LED		PA_5_ID
 
 #endif
