@@ -6,6 +6,8 @@
 // #define USE_HSI
 #define USE_HSE
 
+#define HCLK					72000000
+
 // #define USE_USART
 #ifdef USE_USART
 	#define USART_USED			USART1
