@@ -11,19 +11,21 @@ int main(void)
     hmt_PWM_Init(PWM_TIMER_USED, PWM_TIMER_CHANNEL);
     hmt_PWM_SetDutyCycle(PWM_TIMER_USED, PWM_TIMER_CHANNEL, 50);
     hmt_IC_Init(IC_TIMER_USED, IC_TIMER_CHANNEL);
-    hmt_SimpleTimerStart(&ToggleTimer, 1000);
+    hmt_SimpleTimerStart(&ToggleTimer, 50);
     uint32_t SwitchPwmFrw = PWM_FRQ_DFLT * 2;
+    hmt_PWM_SetPwmFrq(PWM_TIMER_USED, 5000);
+    uint32_t Dc = 0;
     for (;;)
     {
         if(hmt_SimpleTimerElapsed(&ToggleTimer, true, 0))
         {
             hmt_GpioTogglePin(DEBUG_LED);
-            hmt_PWM_SetPwmFrq(PWM_TIMER_USED, SwitchPwmFrw);
-            if(SwitchPwmFrw == PWM_FRQ_DFLT){
-                SwitchPwmFrw =  PWM_FRQ_DFLT * 2;
+            if(Dc < 100){
+                Dc++;
             } else {
-                SwitchPwmFrw = PWM_FRQ_DFLT;
+                Dc = 0;
             }
+            hmt_PWM_SetDutyCycle(PWM_TIMER_USED, PWM_TIMER_CHANNEL, Dc);
         }
     }
 
