@@ -406,6 +406,33 @@ void TIM4_IRQHandler(void)
 #endif    
 }
 
-
-
 #endif
+
+void EXTI0_IRQHandler()
+{
+
+}
+void EXTI1_IRQHandler()
+{
+    
+}
+void EXTI2_IRQHandler()
+{
+    
+}
+void EXTI3_IRQHandler()
+{
+    
+}
+void EXTI4_IRQHandler()
+{
+    
+}
+void EXTI9_5_IRQHandler()
+{
+    
+}
+void EXTI15_10_IRQHandler()
+{
+    
+}
