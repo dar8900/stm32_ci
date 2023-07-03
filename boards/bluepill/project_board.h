@@ -33,7 +33,7 @@
 	#define TEMP_SENSOR			1
 #endif
 
-#define USE_PWM	
+// #define USE_PWM
 #ifdef USE_PWM
 	#define PWM_TIMER_USED		TIM2
 	#define PWM_TIMER_CHANNEL	LL_TIM_CHANNEL_CH1
@@ -41,7 +41,7 @@
 	#define PWM_FRQ_DFLT		1000
 #endif
 
-#define USE_INPUT_CAPTURE
+// #define USE_INPUT_CAPTURE
 #ifdef USE_INPUT_CAPTURE
 	#define IC_TIMER_USED		TIM2
 	#define IC_TIMER_CHANNEL	LL_TIM_CHANNEL_CH2
@@ -57,12 +57,13 @@
 #define    P<port>_<pin>_START_LEVEL   	LOW
 */
 
+/* EXTIT */
+#define PB_12_MODE		INPUT
+#define PB_12_PULL_TYPE	PULL_DOWN
+#define PB_12_EXTI		EXTI_ENABLE
 
-/* TIM2 CH1 PWM */
-#define PA_0_MODE		ALTERNATE
 
-/* TIM2 CH2 IC */
-#define PA_1_MODE		FLOATING
+
 
 #define PC_13_MODE		OUTPUT
 #define PC_13_SPEED		SPEED_HIGH
