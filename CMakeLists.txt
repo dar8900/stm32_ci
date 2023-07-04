@@ -1,6 +1,17 @@
 cmake_minimum_required(VERSION 3.16)
 # set(CMAKE_TOOLCHAIN_FILE "/home/deo/Documenti/STM32/stm32-cmake/cmake/stm32_gcc.cmake")
 
+function(check_folder_exists FOLDER_PATH)
+    file(GLOB FOLDER_CONTENTS ${FOLDER_PATH}/*)
+    if(FOLDER_CONTENTS)
+        set(FOLDER_EXISTS TRUE PARENT_SCOPE)
+    else()
+        set(FOLDER_EXISTS FALSE PARENT_SCOPE)
+    endif()
+endfunction()
+
+
+
 find_package (Git)
 if (NOT GIT_FOUND)
     message(FATAL_ERROR "Git repo not found")
@@ -15,6 +26,15 @@ string(STRIP ${BRANCH_NAME} BRANCH_NAME)
 
 message("Actual branch is ${BRANCH_NAME}")
 
+check_folder_exists("./hmt_hal")
+if(NOT ${FOLDER_EXISTS})
+    message(FATAL_ERROR "La cartella \"hmtl_hal\" non esiste.")
+endif()
+
+check_folder_exists("./boards")
+if(NOT ${FOLDER_EXISTS})
+    message(FATAL_ERROR "La cartella \"boards\" non esiste.")
+endif()
 
 set(EXECUTABLE_NAME "stm32_ci_${BRANCH_NAME}")
 
