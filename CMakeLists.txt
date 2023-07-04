@@ -1,6 +1,16 @@
 cmake_minimum_required(VERSION 3.16)
 # set(CMAKE_TOOLCHAIN_FILE "/home/deo/Documenti/STM32/stm32-cmake/cmake/stm32_gcc.cmake")
 
+function(check_folder_exists FOLDER_PATH)
+    file(GLOB FOLDER_CONTENTS ${FOLDER_PATH}/*)
+    if(FOLDER_CONTENTS)
+        set(FOLDER_EXISTS TRUE PARENT_SCOPE)
+    else()
+        set(FOLDER_EXISTS FALSE PARENT_SCOPE)
+    endif()
+endfunction()
+
+
 find_package (Git)
 if (NOT GIT_FOUND)
     message(FATAL_ERROR "Git repo not found")
@@ -10,6 +20,30 @@ execute_process(
     COMMAND ${GIT_EXECUTABLE} rev-parse --abbrev-ref HEAD 
     OUTPUT_VARIABLE BRANCH_NAME
 )
+
+find_package (Git)
+if (NOT GIT_FOUND)
+    message(FATAL_ERROR "Git repo not found")
+endif (NOT GIT_FOUND)
+
+execute_process(
+    COMMAND ${GIT_EXECUTABLE} rev-parse --abbrev-ref HEAD 
+    OUTPUT_VARIABLE BRANCH_NAME
+)
+
+string(STRIP ${BRANCH_NAME} BRANCH_NAME)
+
+message("Actual branch is ${BRANCH_NAME}")
+
+check_folder_exists("./hmt_hal")
+if(NOT ${FOLDER_EXISTS})
+    message(FATAL_ERROR "La cartella \"hmtl_hal\" non esiste.")
+endif()
+
+check_folder_exists("./boards_stm32")
+if(NOT ${FOLDER_EXISTS})
+    message(FATAL_ERROR "La cartella \"boards_stm32\" non esiste.")
+endif()
 
 string(STRIP ${BRANCH_NAME} BRANCH_NAME)
 
@@ -50,7 +84,7 @@ include_directories(
     hmt_hal/adc/${STM32_FAMILY_LOWER}
     src
     inc
-    boards/${PROJECT_BOARD}
+    boards_stm32/${PROJECT_BOARD}
 )
 
 add_subdirectory(hmt_hal)
