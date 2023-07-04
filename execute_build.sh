@@ -86,7 +86,7 @@ OBKO_GIT_REPO="https://github.com/ObKo/stm32-cmake"
 OBKO_CMAKE_DIR="./$CONTRIB_FOLDER/obko_stm32cmake"
 SRC_DIR="$PWD"
 CMAKE_TOOLCHAIN="$OBKO_CMAKE_DIR/cmake/stm32_gcc.cmake"
-BOARDS_FOLDER="./boards"
+BOARDS_FOLDER="./boards_stm32"
 
 if [ ! -z "$CLEAN_BUILD" ] && [ "$CLEAN_BUILD" == "clean" ];then
 	rm ".project.board"
@@ -108,7 +108,7 @@ if [ ! -z "$CONF_FILE" ] && [ -f "$CONF_FILE" ];then
 	STM_FAMILY=$(echo "$STM_FAMILY" | awk '{ print toupper($0) }')
 	STM_TYPE=$(echo "$STM_TYPE" | awk '{ print toupper($0) }')
 	PROJECT_BOARD=$(echo "$PROJECT_BOARD" | awk '{ print tolower($0) }')
-	if [ ! -d "./boards/$PROJECT_BOARD" ]; then
+	if [ ! -d "$BOARDS_FOLDER/$PROJECT_BOARD" ]; then
 		print_message "The board folder for \"$PROJECT_BOARD\" doesn't exists" error
 		exit 1
 	fi

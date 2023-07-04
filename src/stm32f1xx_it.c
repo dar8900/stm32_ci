@@ -23,11 +23,18 @@
 
 #ifdef USE_USART
 #include "usart_manager.h"
+#endif
+
+#ifdef USE_I2C
 #include "i2c_manager.h"
 #endif
 
 #ifdef USE_SPI
 #include "spi_manager.h"
+#endif
+
+#ifdef USE_ADC
+#define "adc_manager.h"
 #endif
 
 #include "stm32f1xx_it.h"
