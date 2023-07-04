@@ -10,7 +10,15 @@ function(check_folder_exists FOLDER_PATH)
     endif()
 endfunction()
 
+find_package (Git)
+if (NOT GIT_FOUND)
+    message(FATAL_ERROR "Git repo not found")
+endif (NOT GIT_FOUND)
 
+execute_process(
+    COMMAND ${GIT_EXECUTABLE} rev-parse --abbrev-ref HEAD 
+    OUTPUT_VARIABLE BRANCH_NAME
+)
 
 find_package (Git)
 if (NOT GIT_FOUND)
@@ -31,10 +39,11 @@ if(NOT ${FOLDER_EXISTS})
     message(FATAL_ERROR "La cartella \"hmtl_hal\" non esiste.")
 endif()
 
-check_folder_exists("./boards")
+check_folder_exists("./boards_stm32")
 if(NOT ${FOLDER_EXISTS})
-    message(FATAL_ERROR "La cartella \"boards\" non esiste.")
+    message(FATAL_ERROR "La cartella \"boards_stm32\" non esiste.")
 endif()
+
 
 set(EXECUTABLE_NAME "stm32_ci_${BRANCH_NAME}")
 
