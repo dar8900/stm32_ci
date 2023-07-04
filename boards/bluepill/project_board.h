@@ -57,7 +57,7 @@
 #define    P<port>_<pin>_START_LEVEL   	LOW
 */
 
-/* EXTIT */
+/* EXTI */
 #define PB_12_MODE		INPUT
 #define PB_12_PULL_TYPE	PULL_DOWN
 #define PB_12_EXTI		EXTI_ENABLE
@@ -71,7 +71,7 @@
 #define PC_13_PULL_TYPE	NO_PULL
 
 /* GPIO custom name ids */
-#define PWM_PIN			PA_0_ID
+#define IT_PIN			PB_12_ID
 #define DEBUG_LED		PC_13_ID
 
 #endif
