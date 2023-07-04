@@ -1,1 +1,2 @@
 add_subdirectory(bluepill)
+add_subdirectory(nuclef103)
