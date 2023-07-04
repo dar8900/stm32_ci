@@ -410,29 +410,29 @@ void TIM4_IRQHandler(void)
 
 void EXTI0_IRQHandler()
 {
-
+    hmt_EXTI_Handler();
 }
 void EXTI1_IRQHandler()
 {
-    
+    hmt_EXTI_Handler();
 }
 void EXTI2_IRQHandler()
 {
-    
+    hmt_EXTI_Handler();
 }
 void EXTI3_IRQHandler()
 {
-    
+    hmt_EXTI_Handler();
 }
 void EXTI4_IRQHandler()
 {
-    
+    hmt_EXTI_Handler();
 }
 void EXTI9_5_IRQHandler()
 {
-    
+    hmt_EXTI_Handler();
 }
 void EXTI15_10_IRQHandler()
 {
-    
+    hmt_EXTI_Handler();
 }
