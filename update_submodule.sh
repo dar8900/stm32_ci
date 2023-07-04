@@ -10,7 +10,7 @@ for branch in $branches; do
     git switch $branch
     
     # Aggiungi il file "hmt_hal" alla staging area
-    git add hmt_hal
+    git add hmt_hal boards_stm32
     
     # Esegui il commit con il messaggio specificato
     git commit -m "Aggiornato submodule"
