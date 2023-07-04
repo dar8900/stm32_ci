@@ -2,3 +2,6 @@
 	path = hmt_hal
 	url = git@github.com:dar8900/hmt_hal.git
 	branch = develop
+[submodule "boards_stm32"]
+	path = boards_stm32
+	url = git@github.com:dar8900/boards_stm32.git

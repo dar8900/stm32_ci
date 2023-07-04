@@ -74,7 +74,7 @@ include_directories(
     hmt_hal/input_capture/${STM32_FAMILY_LOWER}
     src
     inc
-    boards/${PROJECT_BOARD}
+    boards_stm32/${PROJECT_BOARD}
 )
 
 add_subdirectory(hmt_hal)
