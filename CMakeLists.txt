@@ -81,7 +81,6 @@ include_directories(
     hmt_hal/pwm/${STM32_FAMILY_LOWER}
     hmt_hal/input_capture
     hmt_hal/input_capture/${STM32_FAMILY_LOWER}
-    src
     inc
     boards_stm32/${PROJECT_BOARD}
 )
@@ -90,8 +89,14 @@ add_subdirectory(hmt_hal)
 
 set(SOURCES
     src/stm32${STM32_FAMILY_LOWER}xx_it.c
-    inc/stm32${STM32_FAMILY_LOWER}xx_it.h
-    inc/stm32${STM32_FAMILY_LOWER}xx_hal_conf.h
+    # inc/stm32${STM32_FAMILY_LOWER}xx_it.h
+    # inc/stm32${STM32_FAMILY_LOWER}xx_hal_conf.h
+    src/adc_test.c
+    src/i2c_test.c
+    src/interrupt_gpio_test.c
+    src/spi_test.c
+    src/timer_test.c
+    src/usart_test.c
     src/main.c
 )
 
