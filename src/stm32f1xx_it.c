@@ -1,20 +1,20 @@
 /* USER CODE BEGIN Header */
 /**
-  ******************************************************************************
-  * @file    stm32f1xx_it.c
-  * @brief   Interrupt Service Routines.
-  ******************************************************************************
-  * @attention
-  *
-  * Copyright (c) 2023 STMicroelectronics.
-  * All rights reserved.
-  *
-  * This software is licensed under terms that can be found in the LICENSE file
-  * in the root directory of this software component.
-  * If no LICENSE file comes with this software, it is provided AS-IS.
-  *
-  ******************************************************************************
-  */
+ ******************************************************************************
+ * @file    stm32f1xx_it.c
+ * @brief   Interrupt Service Routines.
+ ******************************************************************************
+ * @attention
+ *
+ * Copyright (c) 2023 STMicroelectronics.
+ * All rights reserved.
+ *
+ * This software is licensed under terms that can be found in the LICENSE file
+ * in the root directory of this software component.
+ * If no LICENSE file comes with this software, it is provided AS-IS.
+ *
+ ******************************************************************************
+ */
 /* USER CODE END Header */
 
 /* Includes ------------------------------------------------------------------*/
@@ -35,6 +35,14 @@
 
 #ifdef USE_ADC
 #define "adc_manager.h"
+#endif
+
+#ifdef USE_PWM
+#include "pwm_manager.h"
+#endif
+
+#ifdef USE_INPUT_CAPTURE
+#include "ic_manager.h"
 #endif
 
 #include "stm32f1xx_it.h"
@@ -82,122 +90,122 @@
 /*           Cortex-M3 Processor Interruption and Exception Handlers          */
 /******************************************************************************/
 /**
-  * @brief This function handles Non maskable interrupt.
-  */
+ * @brief This function handles Non maskable interrupt.
+ */
 void NMI_Handler(void)
 {
-  /* USER CODE BEGIN NonMaskableInt_IRQn 0 */
+    /* USER CODE BEGIN NonMaskableInt_IRQn 0 */
 
-  /* USER CODE END NonMaskableInt_IRQn 0 */
-  /* USER CODE BEGIN NonMaskableInt_IRQn 1 */
-  while (1)
-  {
-  }
-  /* USER CODE END NonMaskableInt_IRQn 1 */
+    /* USER CODE END NonMaskableInt_IRQn 0 */
+    /* USER CODE BEGIN NonMaskableInt_IRQn 1 */
+    while (1)
+    {
+    }
+    /* USER CODE END NonMaskableInt_IRQn 1 */
 }
 
 /**
-  * @brief This function handles Hard fault interrupt.
-  */
+ * @brief This function handles Hard fault interrupt.
+ */
 void HardFault_Handler(void)
 {
-  /* USER CODE BEGIN HardFault_IRQn 0 */
+    /* USER CODE BEGIN HardFault_IRQn 0 */
 
-  /* USER CODE END HardFault_IRQn 0 */
-  while (1)
-  {
-    /* USER CODE BEGIN W1_HardFault_IRQn 0 */
-    /* USER CODE END W1_HardFault_IRQn 0 */
-  }
+    /* USER CODE END HardFault_IRQn 0 */
+    while (1)
+    {
+        /* USER CODE BEGIN W1_HardFault_IRQn 0 */
+        /* USER CODE END W1_HardFault_IRQn 0 */
+    }
 }
 
 /**
-  * @brief This function handles Memory management fault.
-  */
+ * @brief This function handles Memory management fault.
+ */
 void MemManage_Handler(void)
 {
-  /* USER CODE BEGIN MemoryManagement_IRQn 0 */
+    /* USER CODE BEGIN MemoryManagement_IRQn 0 */
 
-  /* USER CODE END MemoryManagement_IRQn 0 */
-  while (1)
-  {
-    /* USER CODE BEGIN W1_MemoryManagement_IRQn 0 */
-    /* USER CODE END W1_MemoryManagement_IRQn 0 */
-  }
+    /* USER CODE END MemoryManagement_IRQn 0 */
+    while (1)
+    {
+        /* USER CODE BEGIN W1_MemoryManagement_IRQn 0 */
+        /* USER CODE END W1_MemoryManagement_IRQn 0 */
+    }
 }
 
 /**
-  * @brief This function handles Prefetch fault, memory access fault.
-  */
+ * @brief This function handles Prefetch fault, memory access fault.
+ */
 void BusFault_Handler(void)
 {
-  /* USER CODE BEGIN BusFault_IRQn 0 */
+    /* USER CODE BEGIN BusFault_IRQn 0 */
 
-  /* USER CODE END BusFault_IRQn 0 */
-  while (1)
-  {
-    /* USER CODE BEGIN W1_BusFault_IRQn 0 */
-    /* USER CODE END W1_BusFault_IRQn 0 */
-  }
+    /* USER CODE END BusFault_IRQn 0 */
+    while (1)
+    {
+        /* USER CODE BEGIN W1_BusFault_IRQn 0 */
+        /* USER CODE END W1_BusFault_IRQn 0 */
+    }
 }
 
 /**
-  * @brief This function handles Undefined instruction or illegal state.
-  */
+ * @brief This function handles Undefined instruction or illegal state.
+ */
 void UsageFault_Handler(void)
 {
-  /* USER CODE BEGIN UsageFault_IRQn 0 */
+    /* USER CODE BEGIN UsageFault_IRQn 0 */
 
-  /* USER CODE END UsageFault_IRQn 0 */
-  while (1)
-  {
-    /* USER CODE BEGIN W1_UsageFault_IRQn 0 */
-    /* USER CODE END W1_UsageFault_IRQn 0 */
-  }
+    /* USER CODE END UsageFault_IRQn 0 */
+    while (1)
+    {
+        /* USER CODE BEGIN W1_UsageFault_IRQn 0 */
+        /* USER CODE END W1_UsageFault_IRQn 0 */
+    }
 }
 
 /**
-  * @brief This function handles System service call via SWI instruction.
-  */
+ * @brief This function handles System service call via SWI instruction.
+ */
 void SVC_Handler(void)
 {
-  /* USER CODE BEGIN SVCall_IRQn 0 */
+    /* USER CODE BEGIN SVCall_IRQn 0 */
 
-  /* USER CODE END SVCall_IRQn 0 */
-  /* USER CODE BEGIN SVCall_IRQn 1 */
+    /* USER CODE END SVCall_IRQn 0 */
+    /* USER CODE BEGIN SVCall_IRQn 1 */
 
-  /* USER CODE END SVCall_IRQn 1 */
+    /* USER CODE END SVCall_IRQn 1 */
 }
 
 /**
-  * @brief This function handles Debug monitor.
-  */
+ * @brief This function handles Debug monitor.
+ */
 void DebugMon_Handler(void)
 {
-  /* USER CODE BEGIN DebugMonitor_IRQn 0 */
+    /* USER CODE BEGIN DebugMonitor_IRQn 0 */
 
-  /* USER CODE END DebugMonitor_IRQn 0 */
-  /* USER CODE BEGIN DebugMonitor_IRQn 1 */
+    /* USER CODE END DebugMonitor_IRQn 0 */
+    /* USER CODE BEGIN DebugMonitor_IRQn 1 */
 
-  /* USER CODE END DebugMonitor_IRQn 1 */
+    /* USER CODE END DebugMonitor_IRQn 1 */
 }
 
 /**
-  * @brief This function handles Pendable request for system service.
-  */
+ * @brief This function handles Pendable request for system service.
+ */
 void PendSV_Handler(void)
 {
-  /* USER CODE BEGIN PendSV_IRQn 0 */
+    /* USER CODE BEGIN PendSV_IRQn 0 */
 
-  /* USER CODE END PendSV_IRQn 0 */
-  /* USER CODE BEGIN PendSV_IRQn 1 */
+    /* USER CODE END PendSV_IRQn 0 */
+    /* USER CODE BEGIN PendSV_IRQn 1 */
 
-  /* USER CODE END PendSV_IRQn 1 */
+    /* USER CODE END PendSV_IRQn 1 */
 }
 
 /**
-  * @brief This function handles System tick timer.
-  */
+ * @brief This function handles System tick timer.
+ */
 void SysTick_Handler(void)
 {
     hmt_RccSysTickHandler();
@@ -209,8 +217,6 @@ void SysTick_Handler(void)
 /* For the available peripheral interrupt handler names,                      */
 /* please refer to the startup file (startup_stm32f1xx.s).                    */
 /******************************************************************************/
-
-
 
 #ifdef USE_USART
 
@@ -236,7 +242,6 @@ void USART3_IRQHandler(void)
 #endif
 
 #endif /* USE_USART */
-
 
 #ifdef USE_I2C
 
@@ -306,3 +311,128 @@ void DMA1_Channel1_IRQHandler(void)
 #endif
 
 #endif /* USE_ADC */
+
+#if defined(USE_PWM) || defined(USE_INPUT_CAPTURE)
+
+void TIM2_IRQHandler(void)
+{
+    /* Check whether CC1 interrupt is pending */
+    if (LL_TIM_IsActiveFlag_CC1(TIM2) == 1)
+    {
+        /* Clear the update interrupt flag*/
+        LL_TIM_ClearFlag_CC1(TIM2);
+    }
+    if (LL_TIM_IsActiveFlag_CC2(TIM2) == 1)
+    {
+        /* Clear the update interrupt flag*/
+        LL_TIM_ClearFlag_CC2(TIM2);
+    }
+
+    if (LL_TIM_IsActiveFlag_CC3(TIM2) == 1)
+    {
+        /* Clear the update interrupt flag*/
+        LL_TIM_ClearFlag_CC3(TIM2);
+    }
+
+    if (LL_TIM_IsActiveFlag_CC4(TIM2) == 1)
+    {
+        /* Clear the update interrupt flag*/
+        LL_TIM_ClearFlag_CC4(TIM2);
+    }
+#ifdef USE_INPUT_CAPTURE
+    hmt_IC_IT_Handler(TIM2, IC_TIMER_CHANNEL);
+#endif
+
+}
+
+void TIM3_IRQHandler(void)
+{
+    /* Check whether CC1 interrupt is pending */
+
+    if (LL_TIM_IsActiveFlag_CC1(TIM3) == 1)
+    {
+        /* Clear the update interrupt flag*/
+        LL_TIM_ClearFlag_CC1(TIM3);
+    }
+    if (LL_TIM_IsActiveFlag_CC2(TIM3) == 1)
+    {
+        /* Clear the update interrupt flag*/
+        LL_TIM_ClearFlag_CC2(TIM3);
+    }
+
+    if (LL_TIM_IsActiveFlag_CC3(TIM3) == 1)
+    {
+        /* Clear the update interrupt flag*/
+        LL_TIM_ClearFlag_CC3(TIM3);
+    }
+
+    if (LL_TIM_IsActiveFlag_CC4(TIM3) == 1)
+    {
+        /* Clear the update interrupt flag*/
+        LL_TIM_ClearFlag_CC4(TIM3);
+    }
+#ifdef USE_INPUT_CAPTURE
+    hmt_IC_IT_Handler(TIM3, IC_TIMER_CHANNEL);
+#endif    
+}
+
+void TIM4_IRQHandler(void)
+{
+    /* Check whether CC1 interrupt is pending */
+    if (LL_TIM_IsActiveFlag_CC1(TIM4) == 1)
+    {
+        /* Clear the update interrupt flag*/
+        LL_TIM_ClearFlag_CC1(TIM4);
+    }
+    if (LL_TIM_IsActiveFlag_CC2(TIM4) == 1)
+    {
+        /* Clear the update interrupt flag*/
+        LL_TIM_ClearFlag_CC2(TIM4);
+    }
+
+    if (LL_TIM_IsActiveFlag_CC3(TIM4) == 1)
+    {
+        /* Clear the update interrupt flag*/
+        LL_TIM_ClearFlag_CC3(TIM4);
+    }
+
+    if (LL_TIM_IsActiveFlag_CC4(TIM4) == 1)
+    {
+        /* Clear the update interrupt flag*/
+        LL_TIM_ClearFlag_CC4(TIM4);
+    }
+#ifdef USE_INPUT_CAPTURE
+    hmt_IC_IT_Handler(TIM4, IC_TIMER_CHANNEL);
+#endif    
+}
+
+#endif
+
+void EXTI0_IRQHandler()
+{
+    hmt_EXTI_Handler();
+}
+void EXTI1_IRQHandler()
+{
+    hmt_EXTI_Handler();
+}
+void EXTI2_IRQHandler()
+{
+    hmt_EXTI_Handler();
+}
+void EXTI3_IRQHandler()
+{
+    hmt_EXTI_Handler();
+}
+void EXTI4_IRQHandler()
+{
+    hmt_EXTI_Handler();
+}
+void EXTI9_5_IRQHandler()
+{
+    hmt_EXTI_Handler();
+}
+void EXTI15_10_IRQHandler()
+{
+    hmt_EXTI_Handler();
+}
