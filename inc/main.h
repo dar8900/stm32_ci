@@ -9,11 +9,27 @@
 #include "gpio_manager.h"
 
 #ifdef USE_USART
-#include "usart_manager.h"
+#include "usart_test.h"
 #endif
 
 #ifdef USE_SPI
-#include "spi_common.h"
+#include "spi_test.h"
+#endif
+
+#ifdef USE_I2C
+#include "i2c_test.h"
+#endif
+
+#ifdef USE_ADC
+#include "adc_test.h"
+#endif
+
+#ifdef USE_PWM
+#include "timer_test.h"
+#endif
+
+#ifdef USE_INPUT_CAPTURE
+#include "timer_test.h"
 #endif
 
 #endif

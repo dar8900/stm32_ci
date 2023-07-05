@@ -8,7 +8,8 @@
 #ifdef USE_USART
 
 
-
+void UsartTestInit();
+void UsartTestRun();
 
 #endif /* USE_USART */
 #endif

@@ -2,7 +2,15 @@
 
 #ifdef USE_ADC
 
+void AdcTestInit()
+{
 
+}
+
+void AdcTestRun()
+{
+	
+}
 
 
 #endif /* USE_ADC */

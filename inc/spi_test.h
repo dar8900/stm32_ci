@@ -7,8 +7,8 @@
 
 #ifdef USE_SPI
 
-
-
+void SpiTestInit();
+void SpiTestRun();
 
 #endif /* USE_SPI */
 #endif
