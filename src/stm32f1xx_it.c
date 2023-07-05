@@ -34,7 +34,7 @@
 #endif
 
 #ifdef USE_ADC
-#define "adc_manager.h"
+#include "adc_manager.h"
 #endif
 
 #ifdef USE_PWM
