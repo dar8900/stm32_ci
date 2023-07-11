@@ -83,7 +83,7 @@ fi
 if [ ! -f ".project.board" ]; then
     print_message "Selezionare una board per il progetto" info
     get_board "$BOARDS_FOLDER"
-    echo "PROJECT_BOARD=$PROJECT_BOARD" >>.project.board
+    echo "PROJECT_BOARD=$PROJECT_BOARD" > .project.board
 else
     source ".project.board"
 fi
@@ -96,7 +96,6 @@ if [ ! -z "$CONF_FILE" ] && [ -f "$CONF_FILE" ]; then
     fi
     STM_FAMILY=$(echo "$STM_FAMILY" | awk '{ print toupper($0) }')
     STM_TYPE=$(echo "$STM_TYPE" | awk '{ print toupper($0) }')
-    PROJECT_BOARD=$(echo "$PROJECT_BOARD" | awk '{ print tolower($0) }')
     if [ ! -d "$BOARDS_FOLDER/$PROJECT_BOARD" ]; then
         print_message "The board folder for \"$PROJECT_BOARD\" doesn't exist" error
         exit 1
