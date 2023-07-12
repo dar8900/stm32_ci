@@ -10,16 +10,12 @@ set $ADC_3 = 0x40013C00
 
 set $ADC_OFF_SR = 0x00
 set $ADC_OFF_CRy = 0x04
-<<<<<<< HEAD
 set $ADC_OFF_SMPRy = 0x0C
 set $ADC_OFF_HTR = 0x24
 set $ADC_OFF_LTR = 0x28
-set $ADC_OFF_SQRy = 0x2C
-=======
 set $ADC_OFF_SQR1 = 0x2C
 set $ADC_OFF_SQR2 = 0x30
 set $ADC_OFF_SQR3 = 0x34
->>>>>>> master
 set $ADC_OFF_DR = 0x4C
 
 define f1_ADCx_SR
@@ -71,8 +67,6 @@ document f1_ADCx_CFGR
 Print CFGR register of ADCx
 Usage: f1_ADCx_CFGR <adc number>
 end
-
-<<<<<<< HEAD
 define f1_ADCx_SMPR1
     if $arg0 >= 1 && $arg0 <= 3
         set $baseaddr = $ADC_$arg0 + $ADC_OFF_SMPR1
@@ -148,27 +142,6 @@ Print TR3 register of ADCx
 Usage: f1_ADCx_TR3 <adc number>
 end
 
-#TODO
-define f1_ADCx_SQRy
-    if $arg0 >= 1 && $arg0 <= 3
-        if $arg1 >= 1 && $arg1 <= 4
-            set $baseaddr = $ADC_$arg0 + $ADC_OFF_SQRy + (0x04 * ($arg1 - 1))
-            printf "ADC%d SQR&d:\t", $arg0, $arg1
-            x/wx $baseaddr
-        else
-            printf "Wrong <SQR number> argument\n"
-            help f1_ADCx_SQR1
-        end
-    else
-        printf "Wrong <adc number> argument\n"
-        help f1_ADCx_SQR1
-    end
-end
-document f1_ADCx_SQRy
-Print SQRy register of ADCx
-Usage: f1_ADCx_SQR1 <adc number> <SQR number>
-=======
-
 
 define f1_ADCx_SQR1
     if $arg0 >= 1 && $arg0 <= 3
@@ -213,7 +186,6 @@ end
 document f1_ADCx_SQR3
 Print SQR3 register of ADCx
 Usage: f1_ADCx_SQR3 <adc number>
->>>>>>> master
 end
 
 define f1_ADCx_DR
@@ -231,112 +203,6 @@ Print DR register of ADCx
 Usage: f1_ADCx_DR <adc number>
 end
 
-<<<<<<< HEAD
-define f1_ADCx_JSQR
-    if $arg0 >= 1 && $arg0 <= 3
-        set $baseaddr = $ADC_$arg0 + $ADC_OFF_JSQR
-        printf "ADC%d JSQR:\t", $arg0
-        x/wx $baseaddr
-    else
-        printf "Wrong <adc number> argument\n"
-        help f1_ADCx_JSQR
-    end
-end
-document f1_ADCx_JSQR
-Print JSQR register of ADCx
-Usage: f1_ADCx_JSQR <adc number>
-end
-
-define f1_ADCx_OFRy
-    if $arg0 >= 1 && $arg0 <= 3
-        if $arg1 >= 1 && $arg1 <= 4
-            set $baseaddr = $ADC_$arg0 + $ADC_OFF_OFRy + (0x04 * ($arg1 - 1))
-            printf "ADC%d OFRy:\t", $arg0
-            x/wx $baseaddr
-        else
-            printf "Wrong <OFR number> argument\n"
-            help f1_ADCx_SQR1
-        end
-    else
-        printf "Wrong <adc number> argument\n"
-        help f1_ADCx_OFRy
-    end
-end
-document f1_ADCx_OFRy
-Print OFRy register of ADCx
-Usage: f1_ADCx_OFRy <adc number> <OFR number>
-end
-
-define f1_ADCx_JFRy
-    if $arg0 >= 1 && $arg0 <= 3
-        if $arg1 >= 1 && $arg1 <= 4
-            set $baseaddr = $ADC_$arg0 + $ADC_OFF_JFRy + (0x04 * ($arg1 - 1))
-            printf "ADC%d JFR%d:\t", $arg0, $arg1
-            x/wx $baseaddr
-        else
-            printf "Wrong <JFR number> argument\n"
-            help f1_ADCx_JFRy
-        end
-    else
-        printf "Wrong <adc number> argument\n"
-        help f1_ADCx_JFRy
-    end
-end
-document f1_ADCx_JFRy
-Print JFRy register of ADCx
-Usage: f1_ADCx_JFRy <adc number> <JFR number>
-end
-
-define f1_ADCx_AWDyCR
-    if $arg0 >= 1 && $arg0 <= 3
-        if $arg1 >= 2 && $arg1 <= 3
-            set $baseaddr = $ADC_$arg0 + $ADC_OFF_AWDyCR + (0x04 * ($arg1 - 2))
-            printf "ADC%d AWDyCR:\t", $arg0
-            x/wx $baseaddr
-        else
-            printf "Wrong <AWD number> argument\n"
-            help f1_ADCx_SQR1
-        end
-    else
-        printf "Wrong <adc number> argument\n"
-        help f1_ADCx_AWDyCR
-    end
-end
-document f1_ADCx_AWDyCR
-Print AWDyCR register of ADCx
-Usage: f1_ADCx_AWDyCR <adc number> <AWD number>
-end
-
-define f1_ADCx_DIFSEL
-    if $arg0 >= 1 && $arg0 <= 3
-        set $baseaddr = $ADC_$arg0 + $ADC_OFF_DIFSEL
-        printf "ADC%d DIFSEL:\t", $arg0
-        x/wx $baseaddr
-    else
-        printf "Wrong <adc number> argument\n"
-        help f1_ADCx_DIFSEL
-    end
-end
-document f1_ADCx_DIFSEL
-Print DIFSEL register of ADCx
-Usage: f1_ADCx_DIFSEL <adc number>
-end
-
-define f1_ADCx_CALFACT
-    if $arg0 >= 1 && $arg0 <= 3
-        set $baseaddr = $ADC_$arg0 + $ADC_OFF_CALFACT
-        printf "ADC%d CALFACT:\t", $arg0
-        x/wx $baseaddr
-    else
-        printf "Wrong <adc number> argument\n"
-        help f1_ADCx_CALFACT
-    end
-end
-document f1_ADCx_CALFACT
-Print CALFACT register of ADCx
-Usage: f1_ADCx_CALFACT <adc number>
-end
-=======
 define f1_ADCx_registers
     if $arg0 >= 1 && $arg0 <= 3
         f1_ADCx_SR $arg0
@@ -357,8 +223,6 @@ Usage: f1_ADCx_registers <adc number>
 end
 
 
->>>>>>> master
-
 #USART
 set $USART_1 = 0x40013800
 set $USART_2 = 0x40004400
@@ -369,15 +233,11 @@ set $USART_5 = 0x40005000
 set $USART_OFF_SR = 0x00
 set $USART_OFF_DR = 0x04
 set $USART_OFF_BRR = 0x08
-<<<<<<< HEAD
 set $USART_OFF_CR1 = 0x0C
 set $USART_OFF_CR2 = 0x10
 set $USART_OFF_CR3 = 0x14
 set $USART_OFF_GTPR = 0x18
-=======
-set $USART_OFF_CRy = 0x0C
-set $USART_OFF_GTPR = 0x2C
->>>>>>> master
+
 
 define f1_USARTx_SR
     if $arg0 >= 1 && $arg0 <= 5
@@ -424,7 +284,6 @@ Print BRR register of USARTx
 Usage: f1_USARTx_BRR <usart number>
 end
 
-<<<<<<< HEAD
 define f1_USARTx_CR1
     if $arg0 >= 1 && $arg0 <= 5
         set $baseaddr = $USART_$arg0 + $USART_OFF_CR1
@@ -468,26 +327,6 @@ end
 document f1_USARTx_CR3
 Print CR3 register of USARTx
 Usage: f1_USARTx_CR3 <usart number>
-=======
-define f1_USARTx_CRy
-    if $arg0 >= 1 && $arg0 <= 5
-        if $arg1 >= 1 && $arg1 <= 3
-            set $baseaddr = $USART_$arg0 + $USART_OFF_CRy + (0x04 * ($arg1 - 1))
-            printf "USART%d CR%d:\t", $arg0, $arg1
-            x/wx $baseaddr
-        else
-            printf "Wrong <CRy number> argument\n"
-            help f1_USARTx_CRy
-        end
-    else
-        printf "Wrong <adc number> argument\n"
-        help f1_USARTx_CRy
-    end
-end
-document f1_USARTx_CRy
-Print CRy register of USARTx
-Usage: f1_USARTx_CRy <usart number>
->>>>>>> master
 end
 
 define f1_USARTx_GTPR
@@ -510,15 +349,9 @@ define f1_USARTx_registers
         f1_USARTx_SR $arg0
         f1_USARTx_DR $arg0
         f1_USARTx_BRR $arg0
-<<<<<<< HEAD
         f1_USARTx_CR1 $arg0
         f1_USARTx_CR2 $arg0
         f1_USARTx_CR3 $arg0
-=======
-        f1_USARTx_CRy $arg0 1
-        f1_USARTx_CRy $arg0 2
-        f1_USARTx_CRy $arg0 3
->>>>>>> master
         f1_USARTx_GTPR $arg0
     else
         printf "Wrong <usart number> argument\n"
