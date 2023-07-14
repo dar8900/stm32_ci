@@ -100,6 +100,11 @@ if [ ! -z "$CONF_FILE" ] && [ -f "$CONF_FILE" ]; then
         print_message "The board folder for \"$PROJECT_BOARD\" doesn't exist" error
         exit 1
     fi
+    if [ -z "$PROJECT_PREFIX" ]; then
+        PROJECT_PREFIX="stm32_project"
+        print_message "Project prefix missing, using default..." warning
+    fi
+    print_message "Project prefix: $PROJECT_PREFIX" info
     print_message "STM Family selected: $STM_FAMILY" info
     print_message "STM Type selected: $STM_DEVICE" info
     print_message "Board selected: $PROJECT_BOARD" info
@@ -175,6 +180,7 @@ cmake -DCMAKE_TOOLCHAIN_FILE="$CMAKE_TOOLCHAIN" \
       -DSTM32_FAMILY="$STM_FAMILY" \
       -DSTM32_DEVICE="$STM_DEVICE" \
       -DPROJECT_BOARD="$PROJECT_BOARD" \
+      -DPROJECT_PREFIX="$PROJECT_PREFIX" \
       -DCMAKE_BUILD_TYPE="$BUILD_TYPE" "$SRC_DIR"
 
 CMAKE_RET=$?

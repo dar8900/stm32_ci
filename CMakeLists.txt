@@ -68,9 +68,12 @@ if(NOT ${FOLDER_EXISTS})
     message(FATAL_ERROR "La cartella \"boards_stm32\" non esiste.")
 endif()
 
-set(PROJECT_NAME "stm32_ci_${BRANCH_NAME}")
-
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
+
+
+###############################      START PROJECT CMAKE      ###############################
+
+set(PROJECT_NAME "${PROJECT_PREFIX}_${BRANCH_NAME}")
 
 project(${PROJECT_NAME} C ASM)
 
@@ -88,48 +91,40 @@ find_package(HAL COMPONENTS STM32${STM32_FAMILY} REQUIRED)
 
 stm32_get_chip_info(STM32${STM32_DEVICE} TYPE STM32_TYPE)
 
-
-include_directories(
-    hmt_hal/common
-    hmt_hal/rcc
-    hmt_hal/rcc/${STM32_FAMILY_LOWER}
-    hmt_hal/gpio
-    hmt_hal/gpio/${STM32_FAMILY_LOWER}
-    hmt_hal/usart
-    hmt_hal/usart/${STM32_FAMILY_LOWER}
-    hmt_hal/i2c
-    hmt_hal/i2c/${STM32_FAMILY_LOWER}    
-    hmt_hal/spi
-    hmt_hal/spi/${STM32_FAMILY_LOWER}
-    hmt_hal/adc
-    hmt_hal/adc/${STM32_FAMILY_LOWER}
-    hmt_hal/pwm
-    hmt_hal/pwm/${STM32_FAMILY_LOWER}
-    hmt_hal/input_capture
-    hmt_hal/input_capture/${STM32_FAMILY_LOWER}
-    inc
-    boards_stm32/${PROJECT_BOARD}
+set(INCLUDE_FILES 
+    ${CMAKE_SOURCE_DIR}/hmt_hal/common
+    ${CMAKE_SOURCE_DIR}/hmt_hal/rcc
+    ${CMAKE_SOURCE_DIR}/hmt_hal/rcc/${STM32_FAMILY_LOWER}
+    ${CMAKE_SOURCE_DIR}/hmt_hal/gpio
+    ${CMAKE_SOURCE_DIR}/hmt_hal/gpio/${STM32_FAMILY_LOWER}
+    ${CMAKE_SOURCE_DIR}/hmt_hal/usart
+    ${CMAKE_SOURCE_DIR}/hmt_hal/usart/${STM32_FAMILY_LOWER}
+    ${CMAKE_SOURCE_DIR}/hmt_hal/i2c
+    ${CMAKE_SOURCE_DIR}/hmt_hal/i2c/${STM32_FAMILY_LOWER}    
+    ${CMAKE_SOURCE_DIR}/hmt_hal/spi
+    ${CMAKE_SOURCE_DIR}/hmt_hal/spi/${STM32_FAMILY_LOWER}
+    ${CMAKE_SOURCE_DIR}/hmt_hal/adc
+    ${CMAKE_SOURCE_DIR}/hmt_hal/adc/${STM32_FAMILY_LOWER}
+    ${CMAKE_SOURCE_DIR}/hmt_hal/pwm
+    ${CMAKE_SOURCE_DIR}/hmt_hal/pwm/${STM32_FAMILY_LOWER}
+    ${CMAKE_SOURCE_DIR}/hmt_hal/input_capture
+    ${CMAKE_SOURCE_DIR}/hmt_hal/input_capture/${STM32_FAMILY_LOWER}
+    ${CMAKE_SOURCE_DIR}/inc
+    ${CMAKE_SOURCE_DIR}/boards_stm32/${PROJECT_BOARD}
 )
-
-add_subdirectory(hmt_hal)
 
 set(SOURCES
-    src/stm32${STM32_FAMILY_LOWER}xx_it.c
-    src/adc_test.c
-    src/i2c_test.c
-    src/interrupt_gpio_test.c
-    src/spi_test.c
-    src/timer_test.c
-    src/usart_test.c
-    src/main.c
+    ${CMAKE_SOURCE_DIR}/src/stm32${STM32_FAMILY_LOWER}xx_it.c
+    ${CMAKE_SOURCE_DIR}/src/adc_test.c
+    ${CMAKE_SOURCE_DIR}/src/i2c_test.c
+    ${CMAKE_SOURCE_DIR}/src/interrupt_gpio_test.c
+    ${CMAKE_SOURCE_DIR}/src/spi_test.c
+    ${CMAKE_SOURCE_DIR}/src/timer_test.c
+    ${CMAKE_SOURCE_DIR}/src/usart_test.c
+    ${CMAKE_SOURCE_DIR}/src/main.c
 )
 
-add_executable("${PROJECT_NAME}" "${SOURCES}")
-
-# if you want to use malloc or dynamic memory allocation
-# then switch to STM32::Nano -> STM32::NoSys
-
-target_link_libraries("${PROJECT_NAME}" 
+set(PROJECT_TARGET_LIB 
     CMSIS::STM32::${STM32_TYPE}
     STM32::Nano
     common_func
@@ -141,6 +136,22 @@ target_link_libraries("${PROJECT_NAME}"
     adc_manager_${STM32_FAMILY}
     pwm_manager_${STM32_FAMILY} 
     ic_manager_${STM32_FAMILY} 
+)
+
+include_directories(
+    "${INCLUDE_FILES}"
+)
+
+
+add_subdirectory(${CMAKE_SOURCE_DIR}/hmt_hal)
+
+add_executable("${PROJECT_NAME}" "${SOURCES}")
+
+# if you want to use malloc or dynamic memory allocation
+# then switch to STM32::Nano -> STM32::NoSys
+
+target_link_libraries("${PROJECT_NAME}" 
+    "${PROJECT_TARGET_LIB}"
 )
 
 
