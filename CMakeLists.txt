@@ -10,6 +10,30 @@ function(check_folder_exists FOLDER_PATH)
     endif()
 endfunction()
 
+
+function(add_custom_linker CUSTOM_LD_FILE)
+    set(OUTPUT_LD_FILE "${CMAKE_CURRENT_BINARY_DIR}/${CUSTOM_LD_FILE}")
+    add_custom_command(OUTPUT "${OUTPUT_LD_FILE}"
+        COMMAND ${CMAKE_COMMAND}
+            -DFLASH_ORIGIN="${FLASH_ORIGIN}"
+            -DRAM_ORIGIN="${RAM_ORIGIN}"
+            -DCCRAM_ORIGIN="${CCRAM_ORIGIN}"
+            -DRAM_SHARE_ORIGIN="${RAM_SHARE_ORIGIN}"
+            -DFLASH_SIZE="${FLASH_SIZE}"
+            -DRAM_SIZE="${RAM_SIZE}"
+            -DCCRAM_SIZE="${CCRAM_SIZE}"
+            -DRAM_SHARE_SIZE="${RAM_SHARE_SIZE}"
+            -DSTACK_SIZE="${STACK_SIZE}"
+            -DHEAP_SIZE="${HEAP_SIZE}"
+            -DLINKER_SCRIPT="${OUTPUT_LD_FILE}"
+            -P "${STM32_CMAKE_DIR}/stm32/linker_ld.cmake"
+    )
+    add_custom_target(CUSTOM_LD_BL DEPENDS "${OUTPUT_LD_FILE}")
+    add_dependencies(CMSIS::STM32::${STM32_TYPE} CUSTOM_LD_BL)
+    stm32_add_linker_script(${PROJECT_NAME} PRIVATE "${OUTPUT_LD_FILE}")
+endfunction()
+
+
 find_package (Git)
 if (NOT GIT_FOUND)
     message(FATAL_ERROR "Git repo not found")
@@ -44,12 +68,12 @@ if(NOT ${FOLDER_EXISTS})
     message(FATAL_ERROR "La cartella \"boards_stm32\" non esiste.")
 endif()
 
-
-set(EXECUTABLE_NAME "stm32_ci_${BRANCH_NAME}")
+set(PROJECT_NAME "stm32_ci_${BRANCH_NAME}")
 
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
-project(stm32-ci-${BRANCH_NAME} C ASM)
+project(${PROJECT_NAME} C ASM)
+
 set(CMAKE_INCLUDE_CURRENT_DIR TRUE)
 
 add_compile_definitions("USE_FULL_LL_DRIVER")
@@ -61,6 +85,8 @@ string(TOLOWER ${STM32_FAMILY} STM32_FAMILY_LOWER)
 # Find all device specific drivers:
 find_package(CMSIS COMPONENTS STM32${STM32_FAMILY} REQUIRED)
 find_package(HAL COMPONENTS STM32${STM32_FAMILY} REQUIRED)
+
+stm32_get_chip_info(STM32${STM32_DEVICE} TYPE STM32_TYPE)
 
 
 include_directories(
@@ -89,8 +115,6 @@ add_subdirectory(hmt_hal)
 
 set(SOURCES
     src/stm32${STM32_FAMILY_LOWER}xx_it.c
-    # inc/stm32${STM32_FAMILY_LOWER}xx_it.h
-    # inc/stm32${STM32_FAMILY_LOWER}xx_hal_conf.h
     src/adc_test.c
     src/i2c_test.c
     src/interrupt_gpio_test.c
@@ -100,12 +124,13 @@ set(SOURCES
     src/main.c
 )
 
-add_executable("${EXECUTABLE_NAME}" "${SOURCES}")
+add_executable("${PROJECT_NAME}" "${SOURCES}")
 
 # if you want to use malloc or dynamic memory allocation
 # then switch to STM32::Nano -> STM32::NoSys
 
-target_link_libraries("${EXECUTABLE_NAME}" PUBLIC
+target_link_libraries("${PROJECT_NAME}" 
+    CMSIS::STM32::${STM32_TYPE}
     STM32::Nano
     common_func
     rcc_manager_${STM32_FAMILY}
@@ -119,8 +144,14 @@ target_link_libraries("${EXECUTABLE_NAME}" PUBLIC
 )
 
 
+if (EXISTS "${CMAKE_SOURCE_DIR}/boards_stm32/${PROJECT_BOARD}/Ld_variables.cmake")
+    include("${CMAKE_SOURCE_DIR}/boards_stm32/${PROJECT_BOARD}/Ld_variables.cmake")
+    add_custom_linker(${PROJECT_NAME}_FLASH.ld)
+else()
+    message(WARNING "Using default ld file")
+endif()
 
-stm32_print_size_of_target("${EXECUTABLE_NAME}")
+stm32_print_size_of_target("${PROJECT_NAME}")
 
-stm32_generate_hex_file("${EXECUTABLE_NAME}")
+stm32_generate_hex_file("${PROJECT_NAME}")
 
