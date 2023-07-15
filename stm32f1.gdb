@@ -949,70 +949,118 @@ set $I2C_OFF_CR1 = 0x00
 set $I2C_OFF_CR2 = 0x04
 set $I2C_OFF_OAR1 = 0x08
 set $I2C_OFF_OAR2 = 0x0C
+set $I2C_OFF_DR = 0x10
 set $I2C_OFF_SR1 = 0x14
 set $I2C_OFF_SR2 = 0x18
 set $I2C_OFF_CCR = 0x1C
 set $I2C_OFF_TRISE = 0x20
 
-define f1_I2Cx_CRx
+define f1_I2Cx_CR1
     if $arg0 >= 1 && $arg0 <= 2
-        if $arg1 >= 1 && $arg1 <= 2
-            set $baseaddr = $I2C_$arg0 + $I2C_OFF_CRx + (0x04 * ($arg1 - 1))
-            printf "I2C%d SR%d:\t", $arg0, $arg1
-            x/wx $baseaddr
-        else
-            printf "Wrong <CRx number> argument\n"
-            help f1_I2Cx_CRx
-        end
+        set $baseaddr = $I2C_$arg0 + $I2C_OFF_CR1
+        printf "I2C%d CR1:\t", $arg0
+        x/wx $baseaddr
     else
         printf "Wrong <i2c number> argument\n"
-        help f1_I2Cx_CRx
+        help f1_I2Cx_CR1
     end
 end
-document f1_I2Cx_CRx
+document f1_I2Cx_CR1
 Print CRx register of I2Cx
-Usage: f1_I2Cx_CRx <i2c number> <CRx number>
+Usage: f1_I2Cx_CR1 <i2c number>
 end
 
-define f1_I2Cx_OARx
+define f1_I2Cx_CR2
     if $arg0 >= 1 && $arg0 <= 2
-        if $arg1 >= 1 && $arg1 <= 2
-            set $baseaddr = $I2C_$arg0 + $I2C_OFF_OARx + (0x04 * ($arg1 - 1))
-            printf "I2C%d SR%d:\t", $arg0, $arg1
-            x/wx $baseaddr
-        else
-            printf "Wrong <OARx number> argument\n"
-            help f1_I2Cx_OARx
-        end
+        set $baseaddr = $I2C_$arg0 + $I2C_OFF_CR2
+        printf "I2C%d CR2:\t", $arg0
+        x/wx $baseaddr
     else
         printf "Wrong <i2c number> argument\n"
-        help f1_I2Cx_OARx
+        help f1_I2Cx_CR2
     end
 end
-document f1_I2Cx_OARx
+document f1_I2Cx_CR2
+Print CR2 register of I2Cx
+Usage: f1_I2Cx_CR2 <i2c number>
+end
+
+define f1_I2Cx_OAR1
+    if $arg0 >= 1 && $arg0 <= 2
+        set $baseaddr = $I2C_$arg0 + $I2C_OFF_OAR1
+        printf "I2C%d OAR1:\t", $arg0
+        x/wx $baseaddr
+    else
+        printf "Wrong <i2c number> argument\n"
+        help f1_I2Cx_OAR1
+    end
+end
+document f1_I2Cx_OAR1
 Print OARx register of I2Cx
-Usage: f1_I2Cx_OARx <i2c number> <OARx number>
+Usage: f1_I2Cx_OAR1 <i2c number>
 end
 
-define f1_I2Cx_SRx
+
+define f1_I2Cx_OAR2
     if $arg0 >= 1 && $arg0 <= 2
-        if $arg1 >= 1 && $arg1 <= 2
-            set $baseaddr = $I2C_$arg0 + $I2C_OFF_SRx + (0x04 * ($arg1 - 1))
-            printf "I2C%d SR%d:\t", $arg0, $arg1
-            x/wx $baseaddr
-        else
-            printf "Wrong <SRx number> argument\n"
-            help f1_I2Cx_SRx
-        end
+        set $baseaddr = $I2C_$arg0 + $I2C_OFF_OAR2
+        printf "I2C%d OAR2:\t", $arg0
+        x/wx $baseaddr
     else
         printf "Wrong <i2c number> argument\n"
-        help f1_I2Cx_SRx
+        help f1_I2Cx_OAR2
     end
 end
-document f1_I2Cx_SRx
-Print SRx register of I2Cx
-Usage: f1_I2Cx_SRx <i2c number> <SRx number>
+document f1_I2Cx_OAR2
+Print OARx register of I2Cx
+Usage: f1_I2Cx_OAR2 <i2c number>
 end
+
+define f1_I2Cx_DR
+    if $arg0 >= 1 && $arg0 <= 2
+        set $baseaddr = $I2C_$arg0 + $I2C_OFF_DR
+        printf "I2C%d DR:\t", $arg0
+        x/wx $baseaddr
+    else
+        printf "Wrong <i2c number> argument\n"
+        help f1_I2Cx_DR
+    end
+end
+document f1_I2Cx_DR
+Print DR register of I2Cx
+Usage: f1_I2Cx_DR <i2c number>
+end
+
+define f1_I2Cx_SR1
+    if $arg0 >= 1 && $arg0 <= 2
+        set $baseaddr = $I2C_$arg0 + $I2C_OFF_SR1
+        printf "I2C%d SR1:\t", $arg0
+        x/wx $baseaddr
+    else
+        printf "Wrong <i2c number> argument\n"
+        help f1_I2Cx_SR1
+    end
+end
+document f1_I2Cx_SR1
+Print SR1 register of I2Cx
+Usage: f1_I2Cx_SR1 <i2c number>
+end
+
+define f1_I2Cx_SR2
+    if $arg0 >= 1 && $arg0 <= 2
+        set $baseaddr = $I2C_$arg0 + $I2C_OFF_SR2
+        printf "I2C%d SR2:\t", $arg0
+        x/wx $baseaddr
+    else
+        printf "Wrong <i2c number> argument\n"
+        help f1_I2Cx_SR2
+    end
+end
+document f1_I2Cx_SR2
+Print SR2 register of I2Cx
+Usage: f1_I2Cx_SR2 <i2c number>
+end
+
 
 define f1_I2Cx_CCR
     if $arg0 >= 1 && $arg0 <= 2
@@ -1046,12 +1094,13 @@ end
 
 define f1_I2Cx_registers
     if $arg0 >= 1 && $arg0 <= 2
-        f1_I2Cx_CRx $arg0 1
-        f1_I2Cx_CRx $arg0 2
-        f1_I2Cx_OARx $arg0 1
-        f1_I2Cx_OARx $arg0 2
-        f1_I2Cx_SRx $arg0 1
-        f1_I2Cx_SRx $arg0 2
+        f1_I2Cx_CR1 $arg0
+        f1_I2Cx_CR2 $arg0
+        f1_I2Cx_OAR1 $arg0
+        f1_I2Cx_OAR2 $arg0
+        f1_I2Cx_DR $arg0
+        f1_I2Cx_SR1 $arg0
+        f1_I2Cx_SR2 $arg0
         f1_I2Cx_CCR $arg0
         f1_I2Cx_TRISE $arg0
     else
