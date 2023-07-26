@@ -1,5 +1,12 @@
 #!/bin/bash
 
+SUBMODULE=$1
+
+if [ -z "$SUBMODULE" ]; then
+    echo "Inserire il submodule"
+    exit 1
+fi
+
 ACTUAL_BRANCH=$(git rev-parse --abbrev-ref HEAD)
 # Ottieni l'elenco dei branch git nel repository attuale
 branches=$(git branch --list | cut -c 3-)
@@ -10,7 +17,7 @@ for branch in $branches; do
     git switch $branch
     
     # Aggiungi il file "hmt_hal" alla staging area
-    git add hmt_hal boards_stm32
+    git add "$SUBMODULE"
     
     # Esegui il commit con il messaggio specificato
     git commit -m "Aggiornato submodule"
