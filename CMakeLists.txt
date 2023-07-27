@@ -109,6 +109,7 @@ set(INCLUDE_FILES
     ${CMAKE_SOURCE_DIR}/hmt_hal/pwm/${STM32_FAMILY_LOWER}
     ${CMAKE_SOURCE_DIR}/hmt_hal/input_capture
     ${CMAKE_SOURCE_DIR}/hmt_hal/input_capture/${STM32_FAMILY_LOWER}
+    ${CMAKE_SOURCE_DIR}/hmt_hal/flash
     ${CMAKE_SOURCE_DIR}/inc
     ${CMAKE_SOURCE_DIR}/boards_stm32/${PROJECT_BOARD}
 )
@@ -121,6 +122,7 @@ set(SOURCES
     ${CMAKE_SOURCE_DIR}/src/spi_test.c
     ${CMAKE_SOURCE_DIR}/src/timer_test.c
     ${CMAKE_SOURCE_DIR}/src/usart_test.c
+    ${CMAKE_SOURCE_DIR}/src/flash_test.c
     ${CMAKE_SOURCE_DIR}/src/main.c
 )
 
@@ -135,7 +137,8 @@ set(PROJECT_TARGET_LIB
     spi_manager_${STM32_FAMILY}
     adc_manager_${STM32_FAMILY}
     pwm_manager_${STM32_FAMILY} 
-    ic_manager_${STM32_FAMILY} 
+    ic_manager_${STM32_FAMILY}
+    flash_manager_${STM32_FAMILY}
 )
 
 include_directories(

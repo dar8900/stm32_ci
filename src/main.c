@@ -25,6 +25,10 @@ static void CiTestInit()
 #ifdef USE_INPUT_CAPTURE
     IcTestInit();
 #endif
+
+#ifdef USE_FLASH_STORAGE
+    FlashTestInit();
+#endif
 }
 
 static void CiTestRun()
@@ -51,6 +55,10 @@ static void CiTestRun()
 
 #ifdef USE_INPUT_CAPTURE
     IcTestRun();
+#endif
+
+#ifdef USE_FLASH_STORAGE
+    FlashTestRun();
 #endif
 }
 
