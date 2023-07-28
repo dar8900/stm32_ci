@@ -25,22 +25,23 @@ void FlashTestRun()
 {
 	if(WriteOne){
 		WriteFlash();
+		WriteOne = false;
 	}
 	ReadFlash();
 }
 
 static void WriteFlash()
 {
-	hmt_Flash_WriteData(0, FIRST_DATA);
-	hmt_Flash_WriteData(hmt_Flash_GetMaxAddr() / 2, SECOND_DATA);
-	hmt_Flash_WriteData(hmt_Flash_GetMaxAddr(), THIRD_DATA);
+	hmt_Flash_WriteData(0, &DataToWrite[0], 1, sizeof(uint32_t));
+	hmt_Flash_WriteData(hmt_Flash_GetMaxAddr() / 2, &DataToWrite[1], 1, sizeof(uint32_t));
+	hmt_Flash_WriteData(hmt_Flash_GetMaxAddr(), &DataToWrite[2], 1, sizeof(uint32_t));
 }
 
 static void ReadFlash()
 {
-	hmt_Flash_ReadData(0, &DataReaded[0]);
-	hmt_Flash_ReadData(hmt_Flash_GetMaxAddr() / 2, &DataReaded[1]);
-	hmt_Flash_ReadData(hmt_Flash_GetMaxAddr(), &DataReaded[2]);
+	hmt_Flash_ReadData(0, &DataReaded[0], 1, sizeof(uint32_t));
+	hmt_Flash_ReadData(hmt_Flash_GetMaxAddr() / 2, &DataReaded[1], 1, sizeof(uint32_t));
+	hmt_Flash_ReadData(hmt_Flash_GetMaxAddr(), &DataReaded[2], 1, sizeof(uint32_t));
 }
 
 static bool MemoryClear()

@@ -32,4 +32,8 @@
 #include "timer_test.h"
 #endif
 
+#ifdef USE_FLASH_STORAGE
+#include "flash_test.h"
+#endif
+
 #endif
