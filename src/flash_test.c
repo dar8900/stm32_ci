@@ -48,8 +48,8 @@ static bool MemoryClear()
 {
 	for(int i = 0; i < 3; i++){
 		if(DataReaded[i] != DataToWrite[i]){
-			return false;
+			return true;
 		}
 	}
-	return true;
+	return false;
 }
