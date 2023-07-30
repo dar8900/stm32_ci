@@ -17,7 +17,7 @@ void I2cTestRun()
 	while(1)
 	{
 		if(hmt_SimpleTimerElapsed(&I2cTestTimer, true, 0)){
-			hmt_I2C_MasterTransmitter(I2C_USED, I2C_SLAVE_ADDR, Msg, strlen(Msg), 0);
+			hmt_I2C_MasterTransmitter(I2C_USED, I2C_SLAVE_ADDR, Msg, strlen(Msg), 1000);
 		}
 	}
 }
