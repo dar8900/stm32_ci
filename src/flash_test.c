@@ -1,4 +1,5 @@
 #include "flash_test.h"
+#include "hmt_simple_timer.h"
 
 #define FIRST_DATA	0xAABBCCDD
 #define SECOND_DATA	0xCDCDCDCD
@@ -8,6 +9,7 @@ static void WriteFlash();
 static void ReadFlash();
 static bool MemoryClear();
 
+static simple_timer_t FlashTestTimer;
 static bool WriteOne = false;
 static uint32_t DataToWrite [3] = {FIRST_DATA, SECOND_DATA, THIRD_DATA}, DataReaded[3] = {0};
 
@@ -18,16 +20,20 @@ void FlashTestInit()
 	if(MemoryClear()){
 		WriteOne = true;
 	}
+	hmt_SimpleTimerStart(&FlashTestTimer, 2000);
 }
 
 
 void FlashTestRun()
 {
-	if(WriteOne){
-		WriteFlash();
-		WriteOne = false;
+	if(hmt_SimpleTimerElapsed(&FlashTestTimer, true, 0))
+	{
+		if(WriteOne){
+			WriteFlash();
+			WriteOne = false;
+		}
+		ReadFlash();
 	}
-	ReadFlash();
 }
 
 static void WriteFlash()
