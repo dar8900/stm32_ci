@@ -5,7 +5,7 @@
 
 void UsartTestInit()
 {
-	hmt_UsartInit(USART_USED, USART_BAUD);
+	hmt_Usart_Init(USART_USED, USART_BAUD);
 }
 
 void UsartTestRun()
