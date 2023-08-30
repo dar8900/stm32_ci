@@ -1,12 +1,14 @@
 #include "timer_test.h"
 #include "hmt_simple_timer.h"
+#include "main.h"
+#include <stdio.h>
 
 #ifdef USE_PWM
 
 void PwmTestInit()
 {
 	hmt_PWM_Init(PWM_TIMER_USED, PWM_TIMER_CHANNEL);
-	hmt_PWM_SetDutyCycle(PWM_TIMER_USED, PWM_TIMER_CHANNEL, 50);
+	hmt_PWM_SetDutyCycle(PWM_TIMER_USED, PWM_TIMER_CHANNEL, 25);
 }
 
 void PwmTestRun()
@@ -27,16 +29,14 @@ void IcTestInit()
 
 void IcTestRun()
 {
-	simple_timer_t IcTestTimer;
 	uint32_t Frq = 0, FrqFiltered = 0;
-	hmt_SimpleTimerStart(&IcTestTimer, 500);
-	while(1)
+	Frq = hmt_IC_GetFrq();
+	FrqFiltered = hmt_IC_GetFrqFiltered();
+	if(FrqFiltered != 0)
 	{
-		if(hmt_SimpleTimerElapsed(&IcTestTimer, true, 0))
-		{
-			Frq = hmt_IC_GetFrq();
-			FrqFiltered = hmt_IC_GetFrqFiltered();
-		}
+		char Msg[50] = {0};
+		snprintf(Msg, 50, "Frq: %d\r\n", Frq);
+		hmt_UsartSendMsg(USART_USED, Msg, strlen(Msg));
 	}
 }
 
