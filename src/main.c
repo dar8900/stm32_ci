@@ -65,11 +65,17 @@ static void CiTestRun()
 int main(void)
 {
     simple_timer_t ToggleTimer;
+    simple_timer_t *ptrToggleTimer = &ToggleTimer;
     hmt_RccInit();
     hmt_GpioInit();
     CiTestInit();
+    hmt_SimpleTimerStart(ptrToggleTimer, 250);
     for (;;)
     {
+        if(hmt_SimpleTimerElapsed(ptrToggleTimer, true, 0))
+        {
+            hmt_GpioTogglePin(DEBUG_LED);
+        }
         CiTestRun();
     }
 
