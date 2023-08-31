@@ -128,7 +128,7 @@ set(SOURCES
 
 set(PROJECT_TARGET_LIB 
     CMSIS::STM32::${STM32_TYPE}
-    STM32::Nano
+    STM32::NoSys
     common_func
     rcc_manager_${STM32_FAMILY}
     gpio_manager_${STM32_FAMILY}
