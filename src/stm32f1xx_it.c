@@ -316,94 +316,17 @@ void DMA1_Channel1_IRQHandler(void)
 
 void TIM2_IRQHandler(void)
 {
-    /* Check whether CC1 interrupt is pending */
-    if (LL_TIM_IsActiveFlag_CC1(TIM2) == 1)
-    {
-        /* Clear the update interrupt flag*/
-        LL_TIM_ClearFlag_CC1(TIM2);
-    }
-    if (LL_TIM_IsActiveFlag_CC2(TIM2) == 1)
-    {
-        /* Clear the update interrupt flag*/
-        LL_TIM_ClearFlag_CC2(TIM2);
-    }
-
-    if (LL_TIM_IsActiveFlag_CC3(TIM2) == 1)
-    {
-        /* Clear the update interrupt flag*/
-        LL_TIM_ClearFlag_CC3(TIM2);
-    }
-
-    if (LL_TIM_IsActiveFlag_CC4(TIM2) == 1)
-    {
-        /* Clear the update interrupt flag*/
-        LL_TIM_ClearFlag_CC4(TIM2);
-    }
-#ifdef USE_INPUT_CAPTURE
-    hmt_IC_IT_Handler(TIM2, IC_TIMER_CHANNEL);
-#endif
-
+    hmt_IC_IT_Handle(TIM2);
 }
 
 void TIM3_IRQHandler(void)
 {
-    /* Check whether CC1 interrupt is pending */
-
-    if (LL_TIM_IsActiveFlag_CC1(TIM3) == 1)
-    {
-        /* Clear the update interrupt flag*/
-        LL_TIM_ClearFlag_CC1(TIM3);
-    }
-    if (LL_TIM_IsActiveFlag_CC2(TIM3) == 1)
-    {
-        /* Clear the update interrupt flag*/
-        LL_TIM_ClearFlag_CC2(TIM3);
-    }
-
-    if (LL_TIM_IsActiveFlag_CC3(TIM3) == 1)
-    {
-        /* Clear the update interrupt flag*/
-        LL_TIM_ClearFlag_CC3(TIM3);
-    }
-
-    if (LL_TIM_IsActiveFlag_CC4(TIM3) == 1)
-    {
-        /* Clear the update interrupt flag*/
-        LL_TIM_ClearFlag_CC4(TIM3);
-    }
-#ifdef USE_INPUT_CAPTURE
-    hmt_IC_IT_Handler(TIM3, IC_TIMER_CHANNEL);
-#endif    
+    hmt_IC_IT_Handle(TIM3);  
 }
 
 void TIM4_IRQHandler(void)
 {
-    /* Check whether CC1 interrupt is pending */
-    if (LL_TIM_IsActiveFlag_CC1(TIM4) == 1)
-    {
-        /* Clear the update interrupt flag*/
-        LL_TIM_ClearFlag_CC1(TIM4);
-    }
-    if (LL_TIM_IsActiveFlag_CC2(TIM4) == 1)
-    {
-        /* Clear the update interrupt flag*/
-        LL_TIM_ClearFlag_CC2(TIM4);
-    }
-
-    if (LL_TIM_IsActiveFlag_CC3(TIM4) == 1)
-    {
-        /* Clear the update interrupt flag*/
-        LL_TIM_ClearFlag_CC3(TIM4);
-    }
-
-    if (LL_TIM_IsActiveFlag_CC4(TIM4) == 1)
-    {
-        /* Clear the update interrupt flag*/
-        LL_TIM_ClearFlag_CC4(TIM4);
-    }
-#ifdef USE_INPUT_CAPTURE
-    hmt_IC_IT_Handler(TIM4, IC_TIMER_CHANNEL);
-#endif    
+    hmt_IC_IT_Handle(TIM4);
 }
 
 #endif
