@@ -36,7 +36,9 @@ void IcTestRun()
 	{
 		char Msg[50] = {0};
 		snprintf(Msg, 50, "Frq: %d\r\n", Frq);
+#ifdef USE_USART
 		hmt_UsartSendMsg(USART_USED, Msg, strlen(Msg));
+#endif
 	}
 }
 
