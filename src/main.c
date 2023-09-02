@@ -29,6 +29,8 @@ static void CiTestInit()
 #ifdef USE_FLASH_STORAGE
     FlashTestInit();
 #endif
+
+    InterruptGpioTestInit();
 }
 
 static void CiTestRun()
