@@ -316,21 +316,25 @@ void DMA1_Channel1_IRQHandler(void)
 
 void TIM2_IRQHandler(void)
 {
+    hmt_PWM_IT_Handler(TIM2);
     hmt_IC_IT_Handle(TIM2);
 }
 
 void TIM3_IRQHandler(void)
 {
+    hmt_PWM_IT_Handler(TIM3);
     hmt_IC_IT_Handle(TIM3);  
 }
 
 void TIM4_IRQHandler(void)
 {
+    hmt_PWM_IT_Handler(TIM4);
     hmt_IC_IT_Handle(TIM4);
 }
 
 #endif
 
+#ifdef USE_EXTI
 void EXTI0_IRQHandler()
 {
     hmt_EXTI_Handler();
@@ -359,3 +363,4 @@ void EXTI15_10_IRQHandler()
 {
     hmt_EXTI_Handler();
 }
+#endif
