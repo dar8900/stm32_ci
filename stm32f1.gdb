@@ -873,6 +873,94 @@ Print IDR register of GPIOx
 Usage: f1_GPIOx_IDR <gpio number>
 end
 
+#EXTI
+set $EXTI = 0x40010400
+
+set $EXTI_OFF_IMR    = 0x00
+set $EXTI_OFF_EMR    = 0x04
+set $EXTI_OFF_RTSR   = 0x08
+set $EXTI_OFF_FTSR   = 0x0C
+set $EXTI_OFF_SWIER  = 0x10
+set $EXTI_OFF_PR     = 0x14
+
+define f1_EXTI_IMR
+    set $baseaddr = $EXTI + $EXTI_OFF_IMR
+    printf "EXTI EVCR:\t"
+    x/wx $baseaddr
+end
+document f1_EXTI_IMR
+Print EVCR register of EXTI
+Usage: f1_EXTI_IMR
+end
+
+# Define EXTI EMR Register
+define f1_EXTI_EMR
+    set $baseaddr = $EXTI + $EXTI_OFF_EMR
+    printf "EXTI EMR:\t"
+    x/wx $baseaddr
+end
+document f1_EXTI_EMR
+Print EMR register of EXTI
+Usage: f1_EXTI_EMR
+end
+
+# Define EXTI RTSR Register
+define f1_EXTI_RTSR
+    set $baseaddr = $EXTI + $EXTI_OFF_RTSR
+    printf "EXTI RTSR:\t"
+    x/wx $baseaddr
+end
+document f1_EXTI_RTSR
+Print RTSR register of EXTI
+Usage: f1_EXTI_RTSR
+end
+
+# Define EXTI FTSR Register
+define f1_EXTI_FTSR
+    set $baseaddr = $EXTI + $EXTI_OFF_FTSR
+    printf "EXTI FTSR:\t"
+    x/wx $baseaddr
+end
+document f1_EXTI_FTSR
+Print FTSR register of EXTI
+Usage: f1_EXTI_FTSR
+end
+
+# Define EXTI SWIER Register
+define f1_EXTI_SWIER
+    set $baseaddr = $EXTI + $EXTI_OFF_SWIER
+    printf "EXTI SWIER:\t"
+    x/wx $baseaddr
+end
+document f1_EXTI_SWIER
+Print SWIER register of EXTI
+Usage: f1_EXTI_SWIER
+end
+
+# Define EXTI PR Register
+define f1_EXTI_PR
+    set $baseaddr = $EXTI + $EXTI_OFF_PR
+    printf "EXTI PR:\t"
+    x/wx $baseaddr
+end
+document f1_EXTI_PR
+Print PR register of EXTI
+Usage: f1_EXTI_PR
+end
+
+define f1_EXTI_registers
+    f1_EXTI_IMR
+    f1_EXTI_EMR
+    f1_EXTI_RTSR
+    f1_EXTI_FTSR
+    f1_EXTI_SWIER
+    f1_EXTI_PR
+end
+document f1_EXTI_registers
+Print EXTI registers
+Usage: f1_EXTI_registers
+end
+
 #AFIO
 set $AFIO = 0x40010000
 
