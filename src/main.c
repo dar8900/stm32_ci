@@ -30,7 +30,9 @@ static void CiTestInit()
     FlashTestInit();
 #endif
 
+#ifdef USE_EXTI
     InterruptGpioTestInit();
+#endif
 }
 
 static void CiTestRun()
