@@ -73,7 +73,7 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 ###############################      START PROJECT CMAKE      ###############################
 
-set(PROJECT_NAME "${PROJECT_PREFIX}_${BRANCH_NAME}")
+set(PROJECT_NAME "${PROJECT_BOARD}_${BRANCH_NAME}")
 
 project(${PROJECT_NAME} C ASM)
 
