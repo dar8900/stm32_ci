@@ -5,7 +5,9 @@
 static void GpioITHandler()
 {
 	hmt_GpioTogglePin(LED_TEST);
+#ifdef USE_USART
 	hmt_UsartSendMsg(USART_USED, (uint8_t *)"EXTI Attivo!\r\n", strlen("EXTI Attivo!\r\n"));
+#endif
 }
 
 void InterruptGpioTestInit()
