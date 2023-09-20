@@ -22,7 +22,7 @@
 #include "rcc_common.h"
 
 #ifdef USE_USART
-#include "usart_manager.h"
+#include "usart_common.h"
 #endif
 
 #ifdef USE_I2C
