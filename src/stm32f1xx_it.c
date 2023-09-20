@@ -26,7 +26,7 @@
 #endif
 
 #ifdef USE_I2C
-#include "i2c_manager.h"
+#include "i2c_common.h"
 #endif
 
 #ifdef USE_SPI
@@ -248,36 +248,36 @@ void USART3_IRQHandler(void)
 #ifdef I2C1
 void I2C1_EV_IRQHandler(void)
 {
-    hmt_I2C_Rx_IT_Handler(I2C1);
+    hmt_I2C_IT_Handler(I2C1);
 }
 
 void I2C1_ER_IRQHandler(void)
 {
-    hmt_I2C_ComErrorCB(I2C1);
+    hmt_I2C_ComError_Handler(I2C1);
 }
 #endif
 
 #ifdef I2C2
 void I2C2_EV_IRQHandler(void)
 {
-    hmt_I2C_Rx_IT_Handler(I2C2);
+    hmt_I2C_IT_Handler(I2C2);
 }
 
 void I2C2_ER_IRQHandler(void)
 {
-    hmt_I2C_ComErrorCB(I2C2);
+    hmt_I2C_ComError_Handler(I2C2);
 }
 #endif
 
 #ifdef I2C3
 void I2C3_EV_IRQHandler(void)
 {
-    hmt_I2C_Rx_IT_Handler(I2C3);
+    hmt_I2C_IT_Handler(I2C3);
 }
 
 void I2C3_ER_IRQHandler(void)
 {
-    hmt_I2C_ComErrorCB(I2C3);
+    hmt_I2C_ComError_Handler(I2C3);
 }
 #endif
 
