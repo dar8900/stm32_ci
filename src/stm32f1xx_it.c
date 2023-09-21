@@ -34,7 +34,7 @@
 #endif
 
 #ifdef USE_ADC
-#include "adc_manager.h"
+#include "adc_common.h"
 #endif
 
 #ifdef USE_PWM
@@ -306,7 +306,7 @@ void SPI2_IRQHandler()
 #ifdef DMA1
 void DMA1_Channel1_IRQHandler(void)
 {
-    hmt_DmaAdc_IT_Handler(DMA1);
+    hmt_AdcIt_Handler(DMA1);
 }
 #endif
 
