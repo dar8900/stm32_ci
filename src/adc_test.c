@@ -4,7 +4,7 @@
 
 void AdcTestInit()
 {
-	hmt_Adc_Init(ADC_USED, DMA_USED);
+	hmt_AdcInit(ADC_USED, DMA_USED);
 }
 
 void AdcTestRun()
