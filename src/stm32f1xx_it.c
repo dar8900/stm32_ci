@@ -30,7 +30,7 @@
 #endif
 
 #ifdef USE_SPI
-#include "spi_manager.h"
+#include "spi_common.h"
 #endif
 
 #ifdef USE_ADC
@@ -288,14 +288,14 @@ void I2C3_ER_IRQHandler(void)
 #ifdef SPI1
 void SPI1_IRQHandler()
 {
-    hmt_SPI_IT_Handler(SPI1);
+    hmt_SPI_It_Handler(SPI1);
 }
 #endif
 
 #ifdef SPI2
 void SPI2_IRQHandler()
 {
-    hmt_SPI_IT_Handler(SPI2);
+    hmt_SPI_It_Handler(SPI2);
 }
 #endif
 

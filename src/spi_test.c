@@ -5,7 +5,7 @@
 
 void SpiTestInit()
 {
-	hmt_SPIInit(SPI_USED);
+	hmt_SPI_Init(SPI_USED);
 }
 
 
