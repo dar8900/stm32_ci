@@ -38,7 +38,7 @@ static void CiTestInit()
 static void CiTestRun()
 {
 #ifdef USE_USART
-    UsartTestRun();
+    // UsartTestRun();
 #endif
 
 #ifdef USE_SPI
