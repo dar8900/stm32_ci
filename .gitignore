@@ -5,3 +5,4 @@ build_*.conf
 .vscode
 compile_commands.json
 .project.board
+.venv
